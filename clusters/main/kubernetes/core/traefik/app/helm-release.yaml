@@ -38,3 +38,14 @@ spec:
     service:
       tcp:
         loadBalancerIP: ${TRAEFIK_IP}
+    ingress:
+      main:
+        enabled: true
+        integrations:
+          traefik:
+            enabled: true
+        hosts:
+          - host: traefik.${DOMAIN_0}
+            paths:
+              - path: /
+                pathType: Prefix

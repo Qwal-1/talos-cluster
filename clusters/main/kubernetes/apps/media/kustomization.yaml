@@ -4,4 +4,3 @@ resources:
   - namespace.yaml
   - media-nfs-pvc.yaml
   - qbittorrent/ks.yaml
-  - stash/ks.yaml

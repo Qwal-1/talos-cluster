@@ -48,8 +48,6 @@ spec:
         #    hostNetwork: true
         securityContext:
             container:
-                UMASK: "0022"
-                readOnlyRootFilesystem: false
                 runAsGroup: 0
                 runAsUser: 0
         persistence:

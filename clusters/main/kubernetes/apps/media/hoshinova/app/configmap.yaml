@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: hoshinova-config-toml
+    namespace: media
+data:
+    config.toml: |
+      # hoshinova configuration file
+   
+      [ytarchive]
+      executable_path = "ytarchive"
+      working_directory = "temp"
+      args = [
+        "--vp9", "--thumbnail", "--add-metadata", "--threads", "4",
+        "--retry-stream", "30",
+        "--output", "%(upload_date)s %(title)s [%(channel)s] (%(id)s)"
+      ]
+      quality = "best"
+      # Delay between starting ytarchive processes. Increase this number if you get
+      # rate limited by YouTube.
+      delay_start = "1s"
+    
+      [scraper.rss]
+      poll_interval = "30s"
+      # Ignore videos older than this. Helps prevent hitting the rate limit on startup
+      # if a lot of older non-live videos match your filters.
+      ignore_older_than = "24h"
+    
+      # A web interface to view and manage tasks.
+      # Optional, remove this section to disable.
+      [webserver]
+      bind_address = "0.0.0.0:1104"
+      # Path to a unix socket to listen on instead of / in addition to a TCP port.
+      # unix_path = "/tmp/hoshinova.sock"
+    
+      [[channel]]
+      id = "UC554eY5jNUfDq3yDOJYirOQ"
+      name = "Destiny"
+      filters = ["."]  # Filters that match video titles.
+      match_description = false
+      outpath = "./videos/destiny"
+

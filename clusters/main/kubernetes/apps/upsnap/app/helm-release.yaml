@@ -44,6 +44,17 @@ spec:
                         protocol: http
                         targetPort: 8090
                 type: ClusterIP
+        podOptions:
+            hostNetwork: true
+        securityContext:
+            container:
+                UMASK: "0022"
+                privileged: true
+                readOnlyRootFilesystem: false
+                runAsGroup: 0
+                runAsUser: 0
+            pod:
+                fsGroupChangePolicy: OnRootMismatch
         persistence:
             data:
                 mountPath: "/app/pb_data"

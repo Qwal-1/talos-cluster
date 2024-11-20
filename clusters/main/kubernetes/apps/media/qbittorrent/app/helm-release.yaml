@@ -40,7 +40,7 @@ spec:
                       dest:
                         enabled: true
                       src:
-                        enabled: true
+                        enabled: false
             downloads:
                 enabled: true
                 existingClaim: media-nfs-pvc

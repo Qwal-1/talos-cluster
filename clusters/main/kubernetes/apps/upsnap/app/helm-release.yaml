@@ -35,15 +35,15 @@ spec:
                         - path: /
                           pathType: Prefix
         service:
-            main:
+          main:
+            enabled: true
+            type: NodePort  # or LoadBalancer if external access is required
+            ports:
+              main:
                 enabled: true
-                ports:
-                    main:
-                        enabled: true
-                        port: 8090
-                        protocol: http
-                        targetPort: 8090
-                type: ClusterIP
+                port: 8090
+                targetPort: 8090
+                protocol: http
         podOptions:
             hostNetwork: true
         securityContext:

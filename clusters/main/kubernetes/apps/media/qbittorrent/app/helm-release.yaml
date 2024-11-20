@@ -48,3 +48,5 @@ spec:
         service:
         torrent:
             loadBalancerIP: ${TRAEFIK_IP}
+        qbitportforward:
+            enabled: false

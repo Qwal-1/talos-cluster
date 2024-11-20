@@ -5,3 +5,4 @@ resources:
   - media
   - tautulli/ks.yaml
   - proxy-homeassistant/ks.yaml
+  - ghostfolio/ks.yaml

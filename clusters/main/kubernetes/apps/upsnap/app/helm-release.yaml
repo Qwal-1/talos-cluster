@@ -44,8 +44,8 @@ spec:
                         protocol: http
                         targetPort: 8090
                 type: ClusterIP
-       # podOptions:
-       #     hostNetwork: true
+        #podOptions:
+        #    hostNetwork: true
         persistence:
             data:
                 enabled: true

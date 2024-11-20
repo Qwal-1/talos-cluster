@@ -32,6 +32,6 @@ spec:
                 ports:
                     main:
                         enabled: true
-                        protocol: https
+                        protocol: http
                         port: 8123
 

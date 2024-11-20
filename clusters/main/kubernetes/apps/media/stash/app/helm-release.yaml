@@ -40,7 +40,7 @@ spec:
                       dest:
                         enabled: true
                       src:
-                        enabled: true
+                        enabled: false
             cache:
                 volsync:
                     - credentials: minio
@@ -49,7 +49,7 @@ spec:
                       dest:
                         enabled: true
                       src:
-                        enabled: true
+                        enabled: false
             config:
                 volsync:
                     - credentials: minio
@@ -58,7 +58,7 @@ spec:
                       dest:
                         enabled: true
                       src:
-                        enabled: true
+                        enabled: false
             data:
                 volsync:
                     - credentials: minio
@@ -67,7 +67,7 @@ spec:
                       dest:
                         enabled: true
                       src:
-                        enabled: true
+                        enabled: false
             generated:
                 volsync:
                     - credentials: minio
@@ -76,7 +76,7 @@ spec:
                       dest:
                         enabled: true
                       src:
-                        enabled: true
+                        enabled: false
             metadata:
                 volsync:
                     - credentials: minio
@@ -85,7 +85,7 @@ spec:
                       dest:
                         enabled: true
                       src:
-                        enabled: true
+                        enabled: false
             media:
                 enabled: true
                 existingClaim: media-nfs-pvc

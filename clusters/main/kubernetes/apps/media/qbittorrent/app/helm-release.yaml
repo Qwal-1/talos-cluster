@@ -27,7 +27,7 @@ spec:
             main:
                 enabled: true
                 hosts:
-                    - host: qbit.${DOMAIN}
+                    - host: qbit.${DOMAIN_0}
                       paths:
                         - path: /
                           pathType: Prefix

@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - kubernetes-dashboard/ks.yaml
+  - media
+  - tautulli/ks.yaml
+  - proxy-homeassistant/ks.yaml
+  - ghostfolio/ks.yaml
+  - actualserver/ks.yaml
+  - actual-http-api/ks.yaml
+  - cloudflareddns/ks.yaml
+  - upsnap/ks.yaml
+  - tailscale/ks.yaml
+  - mariadb/ks.yaml

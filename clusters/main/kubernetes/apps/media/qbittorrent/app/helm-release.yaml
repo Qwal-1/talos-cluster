@@ -16,14 +16,12 @@ spec:
     releaseName: qbittorrent
     values:
         credentials:
-            ${MINIO_NAME}:
+            minio:
                 accessKey: ${MINIO_ACCESSKEY}
                 bucket: ${MINIO_BUCKET}
                 encrKey: ${MINIO_ENCRKEY}
-                name: ${MINIO_NAME}
-                path: ${MINIO_PATH}
                 secretKey: ${MINIO_SECRETKEY}
-                type: ${MINIO_TYPE}
+                type: s3
                 url: ${MINIO_URL}
         ingress:
             main:

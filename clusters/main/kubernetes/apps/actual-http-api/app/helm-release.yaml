@@ -42,9 +42,6 @@ spec:
                     containers:
                         main:
                             env:
-                                - name: ACTUAL_SERVER_PASSWORD
-                                  value: "${ACTUAL_SERVER_PASSWORD}"
-                                - name: ACTUAL_SERVER_URL
-                                  value: "${ACTUAL_SERVER_URL}"
-                                - name: API_KEY
-                                  value: "${ACTUAL_API_KEY}"
+                                ACTUAL_SERVER_PASSWORD: "${ACTUAL_SERVER_PASSWORD}"
+                                ACTUAL_SERVER_URL: "${ACTUAL_SERVER_URL}"
+                                API_KEY: "${ACTUAL_API_KEY}"

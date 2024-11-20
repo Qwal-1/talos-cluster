@@ -33,59 +33,83 @@ spec:
                           pathType: Prefix
         persistence:
             blobs:
+                enabled: true
+                mountPath: /blobs
+                readOnly: false
+                storageClass: ""
                 volsync:
                     - credentials: minio
-                      type: restic
-                      name: config
                       dest:
                         enabled: false
+                      name: config
                       src:
                         enabled: true
+                      type: restic
             cache:
+                enabled: true
+                mountPath: /cache
+                readOnly: false
+                storageClass: ""
                 volsync:
                     - credentials: minio
-                      type: restic
-                      name: config
                       dest:
                         enabled: false
+                      name: config
                       src:
                         enabled: true
+                      type: restic
             config:
+                enabled: true
+                mountPath: /root/.stash
+                readOnly: false
+                storageClass: ""
                 volsync:
                     - credentials: minio
-                      type: restic
-                      name: config
                       dest:
                         enabled: false
+                      name: config
                       src:
                         enabled: true
+                      type: restic
             data:
+                enabled: true
+                mountPath: /data
+                readOnly: false
+                storageClass: ""
                 volsync:
                     - credentials: minio
-                      type: restic
-                      name: config
                       dest:
                         enabled: false
+                      name: config
                       src:
                         enabled: true
+                      type: restic
             generated:
+                enabled: true
+                mountPath: /generated
+                readOnly: false
+                storageClass: ""
                 volsync:
                     - credentials: minio
-                      type: restic
-                      name: config
                       dest:
                         enabled: false
+                      name: config
                       src:
                         enabled: true
+                      type: restic
             metadata:
+                enabled: true
+                mountPath: /metadata
+                readOnly: false
+                storageClass: ""
                 volsync:
                     - credentials: minio
-                      type: restic
-                      name: config
                       dest:
                         enabled: false
+                      name: config
                       src:
                         enabled: true
+                      type: restic
             media:
                 enabled: true
                 existingClaim: media-nfs-pvc

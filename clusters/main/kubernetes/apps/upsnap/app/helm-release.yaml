@@ -35,26 +35,17 @@ spec:
                         - path: /
                           pathType: Prefix
         service:
-          main:
-            enabled: true
-            type: NodePort  # or LoadBalancer if external access is required
-            ports:
-              main:
+            main:
                 enabled: true
-                port: 8090
-                targetPort: 8090
-                protocol: http
+                ports:
+                    main:
+                        enabled: true
+                        port: 8090
+                        protocol: http
+                        targetPort: 8090
+                type: ClusterIP
         podOptions:
             hostNetwork: true
-        securityContext:
-            container:
-                UMASK: "0022"
-                privileged: true
-                readOnlyRootFilesystem: false
-                runAsGroup: 0
-                runAsUser: 0
-            pod:
-                fsGroupChangePolicy: OnRootMismatch
         persistence:
             data:
                 enabled: true

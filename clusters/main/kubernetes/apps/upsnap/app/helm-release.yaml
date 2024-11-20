@@ -49,7 +49,6 @@ spec:
         securityContext:
             container:
                 UMASK: "0022"
-                privileged: true
                 readOnlyRootFilesystem: false
                 runAsGroup: 0
                 runAsUser: 0

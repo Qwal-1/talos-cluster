@@ -6,3 +6,4 @@ resources:
   - qbittorrent/ks.yaml
   - stash/ks.yaml
   - komga/ks.yaml
+  - sonarr/ks.yaml

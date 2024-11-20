@@ -57,6 +57,7 @@ spec:
                 fsGroupChangePolicy: OnRootMismatch
         persistence:
             data:
+                enabled: true
                 mountPath: "/app/pb_data"
                 volsync:
                     - credentials: minio

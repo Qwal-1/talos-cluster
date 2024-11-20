@@ -16,6 +16,11 @@ spec:
     releaseName: qbittorrent
     values:
         credentials:
+        service:
+            torrent:
+                loadBalancerIP: ${TRAEFIK_IP}
+            gluetun:
+                enabled: false
             minio:
                 accessKey: ${MINIO_ACCESSKEY}
                 bucket: ${MINIO_BUCKET}
@@ -45,10 +50,5 @@ spec:
                 enabled: true
                 existingClaim: media-nfs-pvc
                 mountPath: "/media"
-        service:
-            torrent:
-                loadBalancerIP: ${TRAEFIK_IP}
-            gluetun:
-                enabled: false
         qbitportforward:
             enabled: false

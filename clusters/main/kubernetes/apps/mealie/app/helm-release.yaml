@@ -1,0 +1,65 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: mealie
+    namespace: mealie
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: mealie
+            version: 24.1.1
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+    releaseName: mealie
+    values:
+        credentials:
+            minio:
+                accessKey: ${MINIO_ACCESSKEY}
+                bucket: ${MINIO_BUCKET}
+                encrKey: ${MINIO_ENCRKEY}
+                secretKey: ${MINIO_SECRETKEY}
+                type: s3
+                url: ${MINIO_URL}
+        ingress:
+            main:
+                enabled: true
+                hosts:
+                    - host: food.${DOMAIN_0}
+                      paths:
+                        - path: /
+                          pathType: Prefix
+                integrations:
+                    homepage:
+                        description: ""
+                        enabled: true
+                        group: Other
+                        icon: ""
+                        name: ""
+                        widget:
+                            custom:
+                                key: ${MEALIE_HOMEPAGE_KEY}
+                            enabled: true
+        persistence:
+            data:
+                volsync:
+                    - credentials: minio
+                      type: restic
+                      name: config
+                      dest:
+                        enabled: true
+                      src:
+                        enabled: true
+        cnpg:
+            main:
+                password: ${CNPG_PASSWORD}
+                mode: recovery
+                backups:
+                    enabled: true
+                    credentials: minio
+                    revision: "2"
+                recovery:
+                    credentials: minio
+                    revision: "1"

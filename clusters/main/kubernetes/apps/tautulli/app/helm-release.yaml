@@ -1,0 +1,54 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: tautulli
+    namespace: tautulli
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: tautulli
+            version: 20.2.3
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+    releaseName: tautulli
+    values:
+        credentials:
+            minio:
+                accessKey: ${MINIO_ACCESSKEY}
+                bucket: ${MINIO_BUCKET}
+                encrKey: ${MINIO_ENCRKEY}
+                secretKey: ${MINIO_SECRETKEY}
+                type: s3
+                url: ${MINIO_URL}
+        ingress:
+            main:
+                enabled: true
+                hosts:
+                    - host: tautulli.${DOMAIN_0}
+                      paths:
+                        - path: /
+                          pathType: Prefix
+                integrations:
+                    homepage:
+                        description: ""
+                        enabled: true
+                        group: Stats
+                        icon: ""
+                        name: ""
+                        widget:
+                            custom:
+                                key: ${TAUTULLI_HOMEPAGE_KEY}
+                            enabled: true
+        persistence:
+            config:
+                volsync:
+                    - credentials: minio
+                      type: restic
+                      name: config
+                      dest:
+                        enabled: true
+                      src:
+                        enabled: true

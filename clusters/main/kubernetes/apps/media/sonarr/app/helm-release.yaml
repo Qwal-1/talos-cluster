@@ -1,0 +1,58 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: sonarr
+    namespace: media
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: sonarr
+            version: 23.3.1
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+    releaseName: sonarr
+    values:
+        credentials:
+            minio:
+                accessKey: ${MINIO_ACCESSKEY}
+                bucket: ${MINIO_BUCKET}
+                encrKey: ${MINIO_ENCRKEY}
+                secretKey: ${MINIO_SECRETKEY}
+                type: s3
+                url: ${MINIO_URL}
+        ingress:
+            main:
+                enabled: true
+                hosts:
+                    - host: sonarr.${DOMAIN_0}
+                      paths:
+                        - path: /
+                          pathType: Prefix
+                integrations:
+                    homepage:
+                        description: ""
+                        enabled: true
+                        group: Media Management
+                        icon: ""
+                        name: ""
+                        widget:
+                            custom:
+                                key: ${SONARR_HOMEPAGE_KEY}
+                            enabled: true
+        persistence:
+            config:
+                volsync:
+                    - credentials: minio
+                      type: restic
+                      name: config
+                      dest:
+                        enabled: true
+                      src:
+                        enabled: true
+            media:
+                enabled: true
+                existingClaim: media-nfs-pvc
+                mountPath: "/media"

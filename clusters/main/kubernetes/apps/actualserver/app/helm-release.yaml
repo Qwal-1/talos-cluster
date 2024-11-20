@@ -1,0 +1,63 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: actualserver
+    namespace: actualserver
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: actualserver
+            version: 12.8.1
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+    releaseName: actualserver
+    values:
+        credentials:
+            minio:
+                accessKey: ${MINIO_ACCESSKEY}
+                bucket: ${MINIO_BUCKET}
+                encrKey: ${MINIO_ENCRKEY}
+                secretKey: ${MINIO_SECRETKEY}
+                type: s3
+                url: ${MINIO_URL}
+        ingress:
+            main:
+                enabled: true
+                hosts:
+                    - host: actual.${DOMAIN_0}
+                      paths:
+                        - path: /
+                          pathType: Prefix
+                integrations:
+                    homepage:
+                        description: ""
+                        enabled: true
+                        group: Finance
+                        icon: ""
+                        name: ""
+                        widget:
+                            custom:
+                                key: ""
+                            enabled: false
+        persistence:
+            server-files:
+                volsync:
+                    - credentials: minio
+                      type: restic
+                      name: config
+                      dest:
+                        enabled: true
+                      src:
+                        enabled: true
+            user-files:
+                volsync:
+                    - credentials: minio
+                      type: restic
+                      name: config
+                      dest:
+                        enabled: true
+                      src:
+                        enabled: true

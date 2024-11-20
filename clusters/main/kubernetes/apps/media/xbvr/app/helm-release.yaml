@@ -1,0 +1,105 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: xbvr
+    namespace: media
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: app-template
+            version: 14.2.2
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+    releaseName: xbvr
+    values:
+        global:
+            stopAll: false
+        image:
+            repository: ghcr.io/xbapps/xbvr
+            tag: latest
+        credentials:
+            minio:
+                accessKey: ${MINIO_ACCESSKEY}
+                bucket: ${MINIO_BUCKET}
+                encrKey: ${MINIO_ENCRKEY}
+                secretKey: ${MINIO_SECRETKEY}
+                type: s3
+                url: ${MINIO_URL}
+        ingress:
+            main:
+                enabled: true
+                hosts:
+                    - host: xbvr.${DOMAIN_0}
+                      paths:
+                        - path: /
+                          pathType: Prefix
+                integrations:
+                    homepage:
+                        description: Tool to organize and stream your VR porn library
+                        enabled: true
+                        group: Media Player
+                        icon: https://xbvr.${DOMAIN_0}/ui/favicon.ico
+                        name: XBVR
+                        widget:
+                            custom:
+                                key: ""
+                            enabled: false
+        service:
+            main:
+                enabled: true
+                ports:
+                    main:
+                        enabled: true
+                        port: 9998
+                        protocol: http
+                        targetPort: 9999
+                type: ClusterIP
+        workload:
+            main:
+                podSpec:
+                    containers:
+                        main:
+                            env:
+                                DATABASE_URL: mysql://xbvr:${MARIADB_ROOT_PASSWORD}@mariadb.mariadb.svc.cluster.local:3306/xbvr?charset=utf8mb4&parseTime=True&loc=Local
+        securityContext:
+            container:
+                advanced: true
+                runAsUser: 0
+                runAsGroup: 0
+        persistence:
+            config:
+                mountPath: "/root/.config"
+                enabled: true
+                readOnly: false
+                volsync:
+                    - credentials: minio
+                      type: restic
+                      name: config
+                      dest:
+                        enabled: true
+                      src:
+                        enabled: true
+            #config2:
+            #    mountPath: "/root/.config2"
+            #    enabled: false
+            #    readOnly: false
+            #backup:
+            #    enabled: true
+            #    existingClaim: media-nfs-pvc
+            #    mountPath: "/media2"
+            media:
+                enabled: true
+                path: "${XBVR_HOSTPATH_1} ${XBVR_HOSTPATH_2}"
+                mountPath: /videos
+                server: ${TRUENAS_IP}
+                type: nfs
+        addons:
+            codeserver:
+                enabled: false
+                ingress:
+                    enabled: true
+                    hosts:
+                      - host: xbvr-codeserver.${DOMAIN_0}

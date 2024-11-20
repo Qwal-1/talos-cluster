@@ -1,0 +1,25 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: grafana
+    namespace: metrics
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: grafana
+            version: 17.6.3
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+    releaseName: grafana
+    values:
+        ingress:
+            main:
+                enabled: true
+                hosts:
+                    - host: grafana.${DOMAIN_0}
+                      paths:
+                        - path: /
+                          pathType: Prefix

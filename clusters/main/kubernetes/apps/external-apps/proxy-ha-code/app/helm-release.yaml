@@ -1,0 +1,48 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: proxy-ha-code
+    namespace: external-apps
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: external-service
+            version: 15.2.2
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+    releaseName: proxy-ha-code
+    values:
+        ingress:
+            main:
+                enabled: true
+                hosts:
+                    - host: code-ha.${DOMAIN_0}
+                      paths:
+                        - path: /
+                          pathType: Prefix
+                integrations:
+                    homepage:
+                        description: Code Server for Raspberry Pi configuration
+                        enabled: true
+                        group: Networking
+                        icon: code-server.png
+                        name: Pi Code Server
+                        widget:
+                            custom:
+                                key: ""
+                            enabled: false
+        service:
+            main:
+                enabled: true
+                type: ExternalIP
+                externalIP: ${RASPBERRYPI_IP}
+                useSlice: false
+                ports:
+                    main:
+                        enabled: true
+                        protocol: http
+                        port: 8443
+

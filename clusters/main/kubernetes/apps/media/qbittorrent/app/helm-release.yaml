@@ -16,11 +16,6 @@ spec:
     releaseName: qbittorrent
     values:
         credentials:
-        service:
-            torrent:
-                loadBalancerIP: ${TRAEFIK_IP}
-            gluetun:
-                enabled: false
             minio:
                 accessKey: ${MINIO_ACCESSKEY}
                 bucket: ${MINIO_BUCKET}
@@ -28,6 +23,11 @@ spec:
                 secretKey: ${MINIO_SECRETKEY}
                 type: s3
                 url: ${MINIO_URL}
+        service:
+            torrent:
+                loadBalancerIP: ${TRAEFIK_IP}
+            gluetun:
+                enabled: false
         ingress:
             main:
                 enabled: true

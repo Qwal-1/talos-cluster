@@ -27,7 +27,7 @@ spec:
             main:
                 enabled: true
                 hosts:
-                    - host: ghostfolio.${DOMAIN}
+                    - host: ghostfolio.${DOMAIN_0}
                       paths:
                         - path: /
                           pathType: Prefix

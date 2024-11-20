@@ -46,6 +46,8 @@ spec:
                 existingClaim: media-nfs-pvc
                 mountPath: "/media"
         service:
+            gluetun:
+                enabled: false
         torrent:
             loadBalancerIP: ${TRAEFIK_IP}
         qbitportforward:

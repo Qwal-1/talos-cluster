@@ -27,7 +27,7 @@ spec:
             main:
                 enabled: true
                 hosts:
-                    - host: komga.${DOMAIN}
+                    - host: komga.${DOMAIN_0}
                       paths:
                         - path: /
                           pathType: Prefix

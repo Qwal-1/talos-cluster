@@ -1,0 +1,34 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: proxy-homeassistant
+    namespace: proxy-homeassistant
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: external-service
+            version: 14.1.2
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+    releaseName: proxy-homeassistant
+    values:
+        ingress:
+            main:
+                enabled: true
+                hosts:
+                    - host: ha.${DOMAIN_0}
+                      paths:
+                        - path: /
+                          pathType: Prefix
+        service:
+            main:
+                enabled: true
+                externalIP: ${RASPBERRYPI_IP}
+                ports:
+                    main:
+                        enabled: true
+                        port: 8123
+

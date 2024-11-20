@@ -4,3 +4,4 @@ resources:
   - kubernetes-dashboard/ks.yaml
   - media
   - tautulli/ks.yaml
+  - proxy-homeassistant/ks.yaml

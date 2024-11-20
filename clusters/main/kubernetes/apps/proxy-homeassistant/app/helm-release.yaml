@@ -26,9 +26,12 @@ spec:
         service:
             main:
                 enabled: true
+                type: ExternalIP
                 externalIP: ${RASPBERRYPI_IP}
+                useSlice: false
                 ports:
                     main:
                         enabled: true
+                        protocol: https
                         port: 8123
 

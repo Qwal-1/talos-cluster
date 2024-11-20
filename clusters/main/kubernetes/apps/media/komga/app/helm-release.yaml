@@ -33,10 +33,6 @@ spec:
                           pathType: Prefix
         persistence:
             config:
-                enabled: true
-                mountPath: /config
-                readOnly: false
-                storageClass: ""
                 volsync:
                     - credentials: minio
                       type: restic
@@ -46,10 +42,6 @@ spec:
                       src:
                         enabled: false
             data:
-                enabled: true
-                mountPath: /data
-                readOnly: false
-                storageClass: ""
                 volsync:
                     - credentials: minio
                       type: restic

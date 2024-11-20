@@ -8,3 +8,4 @@ resources:
   - ghostfolio/ks.yaml
   - actualserver/ks.yaml
   - actual-http-api/ks.yaml
+  - cloudflareddns/ks.yaml

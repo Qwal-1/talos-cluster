@@ -27,7 +27,7 @@ spec:
             main:
                 enabled: true
                 hosts:
-                    - host: prowlarr.${DOMAIN}
+                    - host: prowlarr.${DOMAIN_0}
                       paths:
                         - path: /
                           pathType: Prefix

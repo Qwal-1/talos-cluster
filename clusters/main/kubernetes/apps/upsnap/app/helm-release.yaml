@@ -34,6 +34,10 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+        securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
         service:
             main:
                 enabled: true

@@ -47,7 +47,7 @@ spec:
             config: 
                 enabled: true
                 mountPath: /app/config.toml
-                type: ConfigMap
+                type: configmap
                 configMap:
                     name: hoshinova-config-toml
 

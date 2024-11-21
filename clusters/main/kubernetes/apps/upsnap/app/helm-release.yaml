@@ -54,6 +54,8 @@ spec:
             data:
                 enabled: true
                 mountPath: "/app/pb_data"
+                readOnly: false
+                type: pvc
                 volsync:
                     - credentials: minio
                       type: restic

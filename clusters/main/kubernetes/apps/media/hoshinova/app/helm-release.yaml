@@ -16,14 +16,14 @@ spec:
     releaseName: hoshinova
     values:
         image:
-        repository: alpine
-        tag: latest
-        command: ["/bin/sh", "-c", "sleep 3600"]  # Keeps the container running
+            repository: alpine
+            tag: latest
+            command: ["/bin/sh", "-c", "sleep 3600"]  # Keeps the container running
         service:
-        main:  # Explicitly define the service structure as a map
-            enabled: false  # Disable the service
-            port: 9104
-            targetPort: 1104
-            type: ClusterIP
+            main:  # Explicitly define the service structure as a map
+                enabled: false  # Disable the service
+                port: 9104
+                targetPort: 1104
+                type: ClusterIP
         livenessProbe: {}  # Disable liveness probe (or configure as needed)
         readinessProbe: {}  # Disable readiness probe (or configure as needed)

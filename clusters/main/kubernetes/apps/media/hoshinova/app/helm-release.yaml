@@ -44,11 +44,10 @@ spec:
                 enabled: true
                 mountPath: /app/temp
                 type: pvc
-            config: 
+            config:
                 enabled: true
                 mountPath: /app/config.toml
                 type: configmap
                 configMap:
                     name: hoshinova-config-toml
                     objectName: config.toml
-

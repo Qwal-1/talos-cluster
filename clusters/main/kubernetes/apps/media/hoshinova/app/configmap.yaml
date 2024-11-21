@@ -41,9 +41,7 @@ data:
       [[channel]]
       id = "UC554eY5jNUfDq3yDOJYirOQ"
       name = "Destiny"
-      filters = ["."]
-      # By default, filters will only match the video title. Set this to true if you
-      # want them to also match the video description.
+      filters = ["."]  # Filters that match video titles.
       match_description = false
       outpath = "./videos/destiny"
     

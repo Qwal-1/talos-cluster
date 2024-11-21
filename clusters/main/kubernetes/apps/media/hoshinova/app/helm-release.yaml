@@ -19,11 +19,32 @@ spec:
             repository: alpine
             tag: latest
             command: ["/bin/sh", "-c", "sleep 3600"]  # Keeps the container running
-        service:
-            main:  # Explicitly define the service structure as a map
-                enabled: false  # Disable the service
-                port: 9104
-                targetPort: 1104
-                type: ClusterIP
-        livenessProbe: {}  # Disable liveness probe (or configure as needed)
-        readinessProbe: {}  # Disable readiness probe (or configure as needed)
+        livenessProbe:
+            exec:
+                command:
+                    - "sh"
+                    - "-c"
+                    - "echo ok"  # Replace with a meaningful command
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            failureThreshold: 5
+            successThreshold: 1
+        readinessProbe:
+            exec:
+                command:
+                    - "sh"
+                    - "-c"
+                    - "echo ok"  # Replace with a meaningful command
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 4
+            successThreshold: 2
+        startupProbe:
+            exec:
+                command:
+                    - "sh"
+                    - "-c"
+                    - "echo ok"  # Replace with a meaningful command
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 5

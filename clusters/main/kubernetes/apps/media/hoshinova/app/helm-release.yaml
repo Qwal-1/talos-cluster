@@ -19,6 +19,7 @@ spec:
             repository: alpine
             #repository: ghcr.io/holoarchivists/hoshinova
             tag: latest
+            command: ["/bin/sh", "-c", "sleep 3600"] 
         ingress:
             main:
                 enabled: true
@@ -63,5 +64,17 @@ spec:
                 items:
                   - key: config.toml
                     path: config.toml
-        livenessProbe: null
-        readinessProbe: null
+        livenessProbe:
+                tcpSocket:
+                    port: 1104
+                initialDelaySeconds: 15
+                periodSeconds: 20
+                failureThreshold: 5
+                successThreshold: 1
+            readinessProbe:
+                tcpSocket:
+                    port: 1104
+                initialDelaySeconds: 10
+                periodSeconds: 10
+                failureThreshold: 4
+                successThreshold: 2

@@ -35,9 +35,9 @@ spec:
                         - path: /
                           pathType: Prefix
         securityContext:
+            privileged: true
             runAsUser: 0
             runAsGroup: 0
-            runAsNonRoot: true
         service:
             main:
                 enabled: true

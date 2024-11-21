@@ -20,26 +20,4 @@ spec:
             tag: latest
         service:
             main:
-                enabled: true
-                ports:
-                  - port: 80       # Make sure a valid port number is set here
-                    protocol: tcp  # Set the correct protocol (usually TCP)
-                    targetPort: 80  # Same as above or change if necessary
-                type: ClusterIP
-        livenessProbe:
-            httpGet:
-                path: /   # Health check URL for NGINX
-                port: 80  # Port 80 for NGINX
-            initialDelaySeconds: 10   # Wait 10 seconds after the container starts
-            periodSeconds: 20         # Check every 20 seconds
-            failureThreshold: 5       # Mark as failed after 5 failed attempts
-            successThreshold: 1       # 1 successful attempt to pass the check
-        readinessProbe:
-            httpGet:
-                path: /   # Health check URL for NGINX
-                port: 80  # Port 80 for NGINX
-            initialDelaySeconds: 10   # Wait 10 seconds after the container starts
-            periodSeconds: 10         # Check every 10 seconds
-            failureThreshold: 3       # Fail after 3 attempts
-            successThreshold: 1       # 1 successful attempt to pass the check
-        startupProbe: null  # Optionally, you can leave this out or configure it later
+                port: 80

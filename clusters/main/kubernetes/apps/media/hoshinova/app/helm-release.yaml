@@ -19,8 +19,11 @@ spec:
         repository: alpine
         tag: latest
         command: ["/bin/sh", "-c", "sleep 3600"]  # Keeps the container running
-        livenessProbe: {}  # Disable liveness probe
-        readinessProbe: {}  # Disable readiness probe
         service:
         main:
-            enabled: false  # Disable the default service
+            enabled: false  # Disable the main service
+            port: 9104
+            targetPort: 1104
+            type: ClusterIP
+        livenessProbe: {}  # Disable liveness probe
+        readinessProbe: {}  # Disable readiness probe

@@ -51,6 +51,7 @@ spec:
                 expandObjectName: false
                 optional: false
                 defaultMode: "0777"
+                mountPath: /app/config.toml
                 items:
                   - key: config.toml
                     path: /app/config.toml

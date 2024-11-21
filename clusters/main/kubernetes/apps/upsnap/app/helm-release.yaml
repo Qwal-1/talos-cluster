@@ -44,12 +44,12 @@ spec:
                         protocol: http
                         targetPort: 8090
                 type: ClusterIP
-        podOptions:
-            hostNetwork: true
-        securityContext:
-            container:
-                runAsGroup: 1000
-                runAsUser: 1000
+        #podOptions:
+        #    hostNetwork: true
+        #securityContext:
+        #    container:
+        #        runAsGroup: 1000
+        #        runAsUser: 1000
         persistence:
             data:
                 enabled: true

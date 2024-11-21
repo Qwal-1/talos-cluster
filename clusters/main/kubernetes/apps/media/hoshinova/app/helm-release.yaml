@@ -17,12 +17,49 @@ spec:
     values:
         image:
             repository: nginx
+            #repository: ghcr.io/holoarchivists/hoshinova
             tag: latest
+        ingress:
+            main:
+                enabled: true
+                hosts:
+                    - host: ytlive.${DOMAIN_0}
+                      paths:
+                        - path: /
+                          pathType: Prefix
         service:
-            service-clusterip:
-                default-port:
-                    enabled: true
-                    port: 80
-                    protocol: http
-                    targetPort: 80
-                    type: ClusterIP
+            main:
+                enabled: true
+                ports:
+                    main:
+                        enabled: true
+                        port: 80
+                        protocol: http
+                        targetPort: 80
+                type: ClusterIP
+        persistence:
+            #videos:
+            #    enabled: true
+            #    path: /mnt/main_vault/media/YouTube/livestream
+            #    mountPath: /app/videos
+            #    server: ${TRUENAS_IP}
+            #    type: nfs
+            video:
+                enabled: true
+                mountPath: /app/videos
+                type: pvc
+            temp:
+                enabled: true
+                mountPath: /app/temp
+                type: pvc
+            configmap-vol:
+                enabled: true
+                type: configmap
+                objectName: hoshinova-config-toml
+                expandObjectName: false
+                optional: false
+                defaultMode: "0777"
+                mountPath: /app/config.toml
+                items:
+                  - key: config.toml
+                    path: config.toml

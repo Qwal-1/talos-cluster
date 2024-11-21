@@ -48,8 +48,7 @@ spec:
         #    hostNetwork: true
         securityContext:
             container:
-                runAsGroup: 1000
-                runAsUser: 1000
+                privileged: true
         persistence:
             data:
                 enabled: true

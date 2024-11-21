@@ -27,6 +27,16 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+        service:
+            main:
+                enabled: true
+                ports:
+                    main:
+                        enabled: true
+                        port: 80
+                        protocol: http
+                        targetPort: 80
+                type: ClusterIP
         persistence:
             #videos:
             #    enabled: true

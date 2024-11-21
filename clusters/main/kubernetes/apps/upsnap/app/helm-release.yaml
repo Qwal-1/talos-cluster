@@ -34,8 +34,6 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
-        podOptions: 
-            hostNetwork: true
         service:
             main:
                 enabled: true

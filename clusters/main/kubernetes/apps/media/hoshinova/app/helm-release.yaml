@@ -25,7 +25,7 @@ spec:
                     main:
                         enabled: true
                         port: 80       # Make sure a valid port number is set here
-                        protocol: TCP  # Set the correct protocol (usually TCP)
+                        protocol: tcp  # Set the correct protocol (usually TCP)
                         targetPort: 80  # Same as above or change if necessary
                 type: ClusterIP
         livenessProbe:

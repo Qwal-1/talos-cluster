@@ -10,3 +10,4 @@ resources:
   - actual-http-api/ks.yaml
   - cloudflareddns/ks.yaml
   - upsnap/ks.yaml
+  - tailscale/ks.yaml

@@ -16,7 +16,7 @@ spec:
     releaseName: hoshinova
     values:
         image:
-            repository: alpine/linux
+            repository: alpine
             #repository: ghcr.io/holoarchivists/hoshinova
             tag: latest
         ingress:

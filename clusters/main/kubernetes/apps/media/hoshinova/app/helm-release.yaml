@@ -57,4 +57,4 @@ spec:
                 mountPath: /app/config.toml
                 items:
                   - key: config.toml
-                    path: ""
+                    path: config.toml

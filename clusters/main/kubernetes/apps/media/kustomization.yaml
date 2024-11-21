@@ -10,4 +10,3 @@ resources:
   - radarr/ks.yaml
   - prowlarr/ks.yaml
   - plex/ks.yaml
-  - hoshinova/ks.yaml

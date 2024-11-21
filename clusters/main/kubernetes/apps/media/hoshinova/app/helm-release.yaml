@@ -36,10 +36,9 @@ spec:
         persistence:
             videos:
                 enabled: true
-                readOnly: false
-                mountPath: /app/videos
                 path: /mnt/main_vault/media/YouTube/livestream
-                server: "${TRUENAS_IP}"
+                mountPath: /app/videos
+                server: ${TRUENAS_IP}
                 type: nfs
             temp:
                 enabled: true

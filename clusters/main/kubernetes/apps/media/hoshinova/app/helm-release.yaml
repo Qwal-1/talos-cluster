@@ -33,13 +33,10 @@ spec:
                         protocol: http
                         targetPort: 1104
                 type: ClusterIP
-        securityContext:
-            container:
-                runAsUser: 0
-                runAsGroup: 0
         persistence:
             videos:
                 enabled: true
+                readOnly: false
                 mountPath: /app/videos
                 path: /mnt/main_vault/media/YouTube/livestream
                 server: "${TRUENAS_IP}"

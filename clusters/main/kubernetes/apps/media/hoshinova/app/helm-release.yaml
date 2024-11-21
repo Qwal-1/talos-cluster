@@ -37,6 +37,8 @@ spec:
                         protocol: http
                         targetPort: 80
                 type: ClusterIP
+        securityContext:
+            readOnlyRootFilesystem: false
         persistence:
             #videos:
             #    enabled: true

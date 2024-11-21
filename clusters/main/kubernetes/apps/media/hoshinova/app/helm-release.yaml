@@ -65,16 +65,16 @@ spec:
                   - key: config.toml
                     path: config.toml
         livenessProbe:
-                tcpSocket:
-                    port: 1104
-                initialDelaySeconds: 15
-                periodSeconds: 20
-                failureThreshold: 5
-                successThreshold: 1
-            readinessProbe:
-                tcpSocket:
-                    port: 1104
-                initialDelaySeconds: 10
-                periodSeconds: 10
-                failureThreshold: 4
-                successThreshold: 2
+            tcpSocket:
+                port: 1104
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            failureThreshold: 5
+            successThreshold: 1
+        readinessProbe:
+            tcpSocket:
+                port: 1104
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 4
+            successThreshold: 2

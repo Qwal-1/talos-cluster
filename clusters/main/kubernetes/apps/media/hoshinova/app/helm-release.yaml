@@ -16,8 +16,8 @@ spec:
     releaseName: hoshinova
     values:
         image:
-            repository: hello-world
-            #repository: ghcr.io/holoarchivists/hoshinova
+            #repository: hello-world
+            repository: ghcr.io/holoarchivists/hoshinova
             tag: latest
         ingress:
             main:
@@ -27,16 +27,16 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
-        service:
-            main:
-                enabled: true
-                ports:
-                    main:
-                        enabled: true
-                        port: 80
-                        protocol: http
-                        targetPort: 80
-                type: ClusterIP
+        #service:
+        #    main:
+        #        enabled: true
+        #        ports:
+        #            main:
+        #                enabled: true
+        #                port: 80
+        #                protocol: http
+        #                targetPort: 80
+        #        type: ClusterIP
         persistence:
             #videos:
             #    enabled: true

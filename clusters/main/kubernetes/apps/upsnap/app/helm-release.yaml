@@ -36,18 +36,13 @@ spec:
                           pathType: Prefix
         podOptions: 
             hostNetwork: true
-        securityContext:
-            container:
-                privileged: true
-                runAsGroup: 0
-                runAsUser: 0
         service:
             main:
                 enabled: true
                 ports:
                     main:
                         enabled: true
-                        port: 8090
+                        port: 9790
                         protocol: http
                         targetPort: 8090
                 type: ClusterIP

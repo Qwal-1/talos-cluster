@@ -1,0 +1,80 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: upsnap
+    namespace: upsnap
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: app-template
+            version: 14.2.2
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+    releaseName: upsnap
+    values:
+        image:
+            repository: ghcr.io/seriousm4x/upsnap
+            tag: latest
+        credentials:
+            minio:
+                accessKey: ${MINIO_ACCESSKEY}
+                bucket: ${MINIO_BUCKET}
+                encrKey: ${MINIO_ENCRKEY}
+                secretKey: ${MINIO_SECRETKEY}
+                type: s3
+                url: ${MINIO_URL}
+        ingress:
+            main:
+                enabled: true
+                hosts:
+                    - host: up.${DOMAIN_0}
+                      paths:
+                        - path: /
+                          pathType: Prefix
+        podOptions: 
+            dnsConfig:
+                options:
+                    - ndots: "1"
+            hostNetwork: true
+        release_name: upsnap
+        resources: {}
+        securityContext:
+            container:
+                UMASK: "0022"
+                privileged: true
+                readOnlyRootFilesystem: false
+                runAsGroup: 0
+                runAsUser: 0
+            pod:
+                fsGroupChangePolicy: OnRootMismatch
+        service:
+            main:
+                enabled: true
+                ports:
+                    main:
+                        enabled: true
+                        port: 8090
+                        protocol: http
+                        targetPort: 8090
+                type: ClusterIP
+        workload:
+            main:
+                podSpec:
+                    containers:
+                        main:
+                            probes:
+                                liveness:
+                                    enabled: true
+                                    path: /
+                                    type: tcp
+                                readiness:
+                                    enabled: true
+                                    path: /
+                                    type: tcp
+                                startup:
+                                    enabled: true
+                                    path: /
+                                    type: tcp

@@ -44,6 +44,7 @@ spec:
                 enabled: true
                 mountPath: /app/temp
                 type: pvc
+        volumes:
             config:
                 enabled: true
                 mountPath: /app/config.toml

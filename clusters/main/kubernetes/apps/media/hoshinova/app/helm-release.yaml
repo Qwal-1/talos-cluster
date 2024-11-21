@@ -48,6 +48,7 @@ spec:
             configmap-vol:
                 enabled: true
                 type: configmap
+                objectName: hoshinova-config-toml
                 expandObjectName: false
                 optional: false
                 defaultMode: "0777"

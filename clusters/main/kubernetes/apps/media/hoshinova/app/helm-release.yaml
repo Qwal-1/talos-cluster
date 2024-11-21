@@ -63,3 +63,5 @@ spec:
                 items:
                   - key: config.toml
                     path: config.toml
+        livenessProbe: null
+        readinessProbe: null

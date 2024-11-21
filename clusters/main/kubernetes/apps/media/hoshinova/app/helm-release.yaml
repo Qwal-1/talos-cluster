@@ -16,35 +16,32 @@ spec:
     releaseName: hoshinova
     values:
         image:
-            repository: alpine
+            repository: nginx
             tag: latest
-            command: ["/bin/sh", "-c", "sleep 3600"]  # Keeps the container running
+        service:
+            main:
+                enabled: true
+                ports:
+                    main:
+                        enabled: true
+                        port: 80       # Make sure a valid port number is set here
+                        protocol: TCP  # Set the correct protocol (usually TCP)
+                        targetPort: 80  # Same as above or change if necessary
+                type: ClusterIP
         livenessProbe:
-            exec:
-                command:
-                    - "sh"
-                    - "-c"
-                    - "echo ok"  # Replace with a meaningful command
-            initialDelaySeconds: 15
-            periodSeconds: 20
-            failureThreshold: 5
-            successThreshold: 1
+            httpGet:
+                path: /   # Health check URL for NGINX
+                port: 80  # Port 80 for NGINX
+            initialDelaySeconds: 10   # Wait 10 seconds after the container starts
+            periodSeconds: 20         # Check every 20 seconds
+            failureThreshold: 5       # Mark as failed after 5 failed attempts
+            successThreshold: 1       # 1 successful attempt to pass the check
         readinessProbe:
-            exec:
-                command:
-                    - "sh"
-                    - "-c"
-                    - "echo ok"  # Replace with a meaningful command
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            failureThreshold: 4
-            successThreshold: 2
-        startupProbe:
-            exec:
-                command:
-                    - "sh"
-                    - "-c"
-                    - "echo ok"  # Replace with a meaningful command
-            initialDelaySeconds: 5
-            periodSeconds: 5
-            failureThreshold: 5
+            httpGet:
+                path: /   # Health check URL for NGINX
+                port: 80  # Port 80 for NGINX
+            initialDelaySeconds: 10   # Wait 10 seconds after the container starts
+            periodSeconds: 10         # Check every 10 seconds
+            failureThreshold: 3       # Fail after 3 attempts
+            successThreshold: 1       # 1 successful attempt to pass the check
+        startupProbe: null  # Optionally, you can leave this out or configure it later

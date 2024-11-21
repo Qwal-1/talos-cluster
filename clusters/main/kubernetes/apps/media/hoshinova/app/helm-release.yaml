@@ -33,6 +33,10 @@ spec:
                         protocol: http
                         targetPort: 1104
                 type: ClusterIP
+        securityContext:
+            container:
+                runAsUser: 0
+                runAsGroup: 0
         persistence:
             videos:
                 enabled: true

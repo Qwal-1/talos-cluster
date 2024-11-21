@@ -38,8 +38,8 @@ spec:
             hostNetwork: true
         securityContext:
             privileged: true
-            runAsUser: 0
-            runAsGroup: 0
+            runAsUser: 1000
+            runAsGroup: 1000
         service:
             main:
                 enabled: true

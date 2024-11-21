@@ -34,6 +34,22 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+        podOptions: 
+            dnsConfig:
+                options:
+                    - ndots: "1"
+            hostNetwork: true
+        release_name: upsnap
+        resources: {}
+        securityContext:
+            container:
+                UMASK: "0022"
+                privileged: true
+                readOnlyRootFilesystem: false
+                runAsGroup: 0
+                runAsUser: 0
+            pod:
+                fsGroupChangePolicy: OnRootMismatch
         service:
             main:
                 enabled: true
@@ -44,23 +60,21 @@ spec:
                         protocol: http
                         targetPort: 8090
                 type: ClusterIP
-        podOptions:
-            hostNetwork: true
-        securityContext:
-            container:
-                privileged: true
-                readOnlyRootFilesystem: false
-                runAsGroup: 0
-                runAsUser: 0
-        persistence:
-            data:
-                enabled: true
-                mountPath: "/app/pb_data"
-                volsync:
-                    - credentials: minio
-                      type: restic
-                      name: config
-                      dest:
-                        enabled: true
-                      src:
-                        enabled: false
+        workload:
+            main:
+                podSpec:
+                    containers:
+                        main:
+                            probes:
+                                liveness:
+                                    enabled: true
+                                    path: /
+                                    type: tcp
+                                readiness:
+                                    enabled: true
+                                    path: /
+                                    type: tcp
+                                startup:
+                                    enabled: true
+                                    path: /
+                                    type: tcp

@@ -37,10 +37,16 @@ spec:
         podOptions:
             hostNetwork: true
         securityContext:
-            privileged: true
-            runAsUser: 0
-            runAsGroup: 0
-            runAsNonRoot: false
+            container:
+                PUID: 568
+                UMASK: "0022"
+                privileged: true
+                advanced: true
+                readOnlyRootFilesytem: false
+                runAsUser: 0
+                runAsGroup: 0
+            pod:
+                fsGroupChangePolicy: OnRootMismatch
         service:
             main:
                 enabled: true

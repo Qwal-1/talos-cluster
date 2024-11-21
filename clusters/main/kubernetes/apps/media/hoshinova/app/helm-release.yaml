@@ -50,4 +50,5 @@ spec:
                 type: configmap
                 configMap:
                     name: hoshinova-config-toml
+                    objectName: config.toml
 

@@ -16,8 +16,9 @@ spec:
     releaseName: hoshinova
     values:
         image:
-            repository: ghcr.io/holoarchivists/hoshinova
-            tag: main
+            repository: alpine/linux
+            #repository: ghcr.io/holoarchivists/hoshinova
+            tag: latest
         ingress:
             main:
                 enabled: true

@@ -16,7 +16,7 @@ spec:
     releaseName: hoshinova
     values:
         image:
-            repository": ghcr.io/holoarchivists/hoshinova
+            repository: ghcr.io/holoarchivists/hoshinova
             tag: main
         ingress:
             main:

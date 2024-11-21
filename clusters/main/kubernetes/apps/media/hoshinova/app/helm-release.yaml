@@ -43,7 +43,7 @@ spec:
             temp:
                 enabled: true
                 mountPath: /app/temp
-                type: pvc¨
+                type: pvc
             configmap-vol:
                 enabled: true
                 type: configmap

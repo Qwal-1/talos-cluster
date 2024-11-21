@@ -37,12 +37,16 @@ spec:
                         targetPort: 1104
                 type: ClusterIP
         persistence:
-            videos:
+            #videos:
+            #    enabled: true
+            #    path: /mnt/main_vault/media/YouTube/livestream
+            #    mountPath: /app/videos
+            #    server: ${TRUENAS_IP}
+            #    type: nfs
+            video:
                 enabled: true
-                path: /mnt/main_vault/media/YouTube/livestream
                 mountPath: /app/videos
-                server: ${TRUENAS_IP}
-                type: nfs
+                type: pvc
             temp:
                 enabled: true
                 mountPath: /app/temp

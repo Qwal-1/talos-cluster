@@ -43,9 +43,52 @@ spec:
         enabled: true
         integrations:
           traefik:
-            enabled: true
+              enabled: true
+              middlewares:
+                  - name: traefik-dashboard-redirect
         hosts:
           - host: traefik.${DOMAIN_0}
             paths:
               - path: /
                 pathType: Prefix
+    middlewares:
+        redirectRegex:
+            - name: traefik-dashboard-redirect
+              permanent: true
+              regex: ^https://traefik\.${SECOND_LEVEL_DOMAIN}\.${TOP_LEVEL_DOMAIN}/?$
+              replacement: https://traefik.${DOMAIN}/dashboard/
+            - name: pihole-admin-redirect
+              permanent: true
+              regex: ^https://pihole\.${SECOND_LEVEL_DOMAIN}\.${TOP_LEVEL_DOMAIN}/?$
+              replacement: https://pihole.${DOMAIN}/admin/
+        themePark:
+            - addons: []
+              appName: sonarr
+              baseUrl: https://theme-park.dev
+              name: sonarr-theme
+              themeName: overseerr
+            - addons: []
+              appName: radarr
+              baseUrl: https://theme-park.dev
+              name: radarr-theme
+              themeName: overseerr
+            - addons: []
+              appName: prowlarr
+              baseUrl: https://theme-park.dev
+              name: prowlarr-theme
+              themeName: overseerr
+            - addons: []
+              appName: plex
+              baseUrl: https://theme-park.dev
+              name: plex-theme
+              themeName: overseerr
+            - addons: []
+              appName: tautulli
+              baseUrl: https://theme-park.dev
+              name: tautulli-theme
+              themeName: overseerr
+            - addons: []
+              appName: qbittorrent
+              baseUrl: https://theme-park.dev
+              name: qbittorrent-theme
+              themeName: overseerr

@@ -23,6 +23,11 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+                integrations:
+                    traefik:
+                        enabled: true
+                        middlewares:
+                            - name: pihole-admin-redirect
         service:
             main:
                 enabled: true

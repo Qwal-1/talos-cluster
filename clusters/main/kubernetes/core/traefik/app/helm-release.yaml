@@ -43,7 +43,7 @@ spec:
         enabled: true
         integrations:
           traefik:
-              enabled: true
+              enabled: false
               middlewares:
                   - name: traefik-dashboard-redirect
         hosts:

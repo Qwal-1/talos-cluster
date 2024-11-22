@@ -22,7 +22,7 @@ spec:
 
         service:
           main:
-            type: LoadBalancer
+        #    type: LoadBalancer
         #ingress:
         #    main:
         #        enabled: true

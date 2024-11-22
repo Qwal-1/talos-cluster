@@ -16,3 +16,4 @@ resources:
   - proxy-pihole/ks.yaml
   - proxy-router/ks.yaml
   - proxy-truenas/ks.yaml
+  - mealie/ks.yaml

@@ -56,11 +56,11 @@ spec:
             - name: traefik-dashboard-redirect
               permanent: true
               regex: ^https://traefik\.${SECOND_LEVEL_DOMAIN}\.${TOP_LEVEL_DOMAIN}/?$
-              replacement: https://traefik.${DOMAIN}/dashboard/
+              replacement: https://traefik.${DOMAIN_0}/dashboard/
             - name: pihole-admin-redirect
               permanent: true
               regex: ^https://pihole\.${SECOND_LEVEL_DOMAIN}\.${TOP_LEVEL_DOMAIN}/?$
-              replacement: https://pihole.${DOMAIN}/admin/
+              replacement: https://pihole.${DOMAIN_0}/admin/
         themePark:
             - addons: []
               appName: sonarr

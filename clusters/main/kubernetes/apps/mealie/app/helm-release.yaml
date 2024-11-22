@@ -27,7 +27,7 @@ spec:
             main:
                 enabled: true
                 hosts:
-                    - host: food.${DOMAIN}
+                    - host: food.${DOMAIN_0}
                       paths:
                         - path: /
                           pathType: Prefix

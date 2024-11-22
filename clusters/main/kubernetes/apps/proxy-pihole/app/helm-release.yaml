@@ -1,0 +1,37 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: proxy-pihole
+    namespace: proxy-pihole
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: external-service
+            version: 14.1.2
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+    releaseName: proxy-pihole
+    values:
+        ingress:
+            main:
+                enabled: true
+                hosts:
+                    - host: pihole.${DOMAIN_0}
+                      paths:
+                        - path: /
+                          pathType: Prefix
+        service:
+            main:
+                enabled: true
+                type: ExternalIP
+                externalIP: ${RASPBERRYPI_IP}
+                useSlice: false
+                ports:
+                    main:
+                        enabled: true
+                        protocol: http
+                        port: 80
+

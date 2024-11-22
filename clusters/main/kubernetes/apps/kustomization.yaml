@@ -12,3 +12,7 @@ resources:
   - upsnap/ks.yaml
   - tailscale/ks.yaml
   - mariadb/ks.yaml
+  - proxy-ha-code/ks.yaml
+  - proxy-pihole/ks.yaml
+  - proxy-router/ks.yaml
+  - proxy-truenas/ks.yaml

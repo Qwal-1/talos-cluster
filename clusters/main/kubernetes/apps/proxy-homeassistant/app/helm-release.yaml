@@ -27,7 +27,7 @@ spec:
                     homepage:
                         description: Home Automation
                         enabled: true
-                        group: ""
+                        group: Other
                         icon: home-assistant.png
                         name: Home Assistant
                         widget:

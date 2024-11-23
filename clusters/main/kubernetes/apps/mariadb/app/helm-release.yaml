@@ -20,12 +20,4 @@ spec:
         password: ${MARIADB_ROOT_PASSWORD}
         rootPassword: ${MARIADB_ROOT_PASSWORD}
 
-        service:
-          main:
-        #    type: LoadBalancer
-        #ingress:
-        #    main:
-        #        enabled: true
-        #        hosts:
-        #            - host: mariadb.${DOMAIN_0}
 

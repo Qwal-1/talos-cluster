@@ -54,7 +54,7 @@ spec:
                 mountPath: "/media"
         plex:
             serverIP: ${PLEX_IP}
-            requireHTTPS: true
+            requireHTTPS: false
         workload:
             main:
                 podSpec:

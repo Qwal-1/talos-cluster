@@ -37,3 +37,11 @@ spec:
         ports:
           main:
             port: 80
+        ingress:
+            main:
+                enabled: true
+                hosts:
+                    - host: kube.${DOMAIN_0}
+                      paths:
+                        - path: /
+                          pathType: Prefix

@@ -77,7 +77,7 @@ spec:
                 mountPath: "/media2"
             media:
                 enabled: true
-                path: "/mnt/main_vault/media/Other Stuff/Virtual Reality"
+                path: "${XBVR_HOSTPATH_1} ${XBVR_HOSTPATH_2}"
                 mountPath: /videos
                 server: ${TRUENAS_IP}
                 type: nfs

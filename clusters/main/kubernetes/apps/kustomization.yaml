@@ -19,3 +19,4 @@ resources:
   - mealie/ks.yaml
   - minio/ks.yaml
   - muse/ks.yaml
+  - homepage/ks.yaml

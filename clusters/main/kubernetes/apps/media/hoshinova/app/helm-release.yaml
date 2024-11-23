@@ -34,7 +34,7 @@ spec:
                         description: garbage youtube livestream download manager
                         enabled: true
                         group: Media Management
-                        icon: https://ytlive.${DOMAIN}/star.png
+                        icon: https://ytlive.${DOMAIN_0}/star.png
                         name: YTLive (Hoshinova)
                         widget:
                             custom:

@@ -34,6 +34,21 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+                integrations:
+                    homepage:
+                        enabled: true
+                        group: Media Management
+                        widget:
+                            customkv:
+                                - key: username
+                                  value: QBIT_USERNAME
+                                - key: password
+                                  value: ${QBIT_PASSWORD}
+                            enabled: true
+                    traefik:
+                        enabled: true
+                        middlewares:
+                            - name: qbittorrent-theme
         persistence:
             config:
                 volsync:

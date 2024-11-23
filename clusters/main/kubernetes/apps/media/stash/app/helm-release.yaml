@@ -41,9 +41,7 @@ spec:
                         widget:
                             custom:
                                 key: ${STASH_HOMEPAGE_KEY}
-                            enabled: false
-                    traefik:
-                        enabled: false
+                            enabled: true
         persistence:
             blobs:
                 volsync:

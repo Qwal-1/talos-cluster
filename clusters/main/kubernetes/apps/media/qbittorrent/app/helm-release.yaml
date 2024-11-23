@@ -36,9 +36,14 @@ spec:
                           pathType: Prefix
                 integrations:
                     homepage:
+                        description: ""
                         enabled: true
                         group: Media Management
+                        icon: ""
+                        name: ""
                         widget:
+                            custom:
+                                key: ""
                             customkv:
                                 - key: username
                                   value: ${QBIT_USERNAME}

@@ -47,8 +47,6 @@ spec:
                             custom:
                                 key: ""
                             enabled: false
-                    traefik:
-                        enabled: false
         service:
             main:
                 enabled: true

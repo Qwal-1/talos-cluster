@@ -31,6 +31,17 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+                integrations:
+                    homepage:
+                        description: ""
+                        enabled: true
+                        group: Finance
+                        icon: ""
+                        name: ""
+                        widget:
+                            custom:
+                                key: ""
+                            enabled: false
         persistence:
             server-files:
                 volsync:

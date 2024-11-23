@@ -34,6 +34,17 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+                integrations:
+                    homepage:
+                        description: A simple wake on lan web app written with SvelteKit, Go and PocketBase.
+                        enabled: true
+                        group: Networking
+                        icon: upsnap.png
+                        name: UpSnap
+                        widget:
+                            custom:
+                                key: ""
+                            enabled: false
         podOptions:
             hostNetwork: true
         securityContext:

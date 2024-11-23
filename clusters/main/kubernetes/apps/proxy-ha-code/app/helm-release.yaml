@@ -23,6 +23,17 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+                integrations:
+                    homepage:
+                        description: Code Server for Raspberry Pi configuration
+                        enabled: true
+                        group: Networking
+                        icon: code-server.png
+                        name: Pi Code Server
+                        widget:
+                            custom:
+                                key: ""
+                            enabled: false
         service:
             main:
                 enabled: true

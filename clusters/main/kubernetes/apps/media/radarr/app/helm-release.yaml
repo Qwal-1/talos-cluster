@@ -31,6 +31,17 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+                integrations:
+                    homepage:
+                        description: ""
+                        enabled: true
+                        group: Media Management
+                        icon: ""
+                        name: ""
+                        widget:
+                            custom:
+                                key: ${RADARR_HOMEPAGE_KEY}
+                            enabled: true
         persistence:
             config:
                 volsync:

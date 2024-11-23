@@ -23,6 +23,17 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+                integrations:
+                    homepage:
+                        description: A router is a computer and networking device that forwards data packets between computer networks
+                        enabled: true
+                        group: Networking
+                        icon: router.png
+                        name: Router
+                        widget:
+                            custom:
+                                key: ""
+                            enabled: false
         service:
             main:
                 enabled: true

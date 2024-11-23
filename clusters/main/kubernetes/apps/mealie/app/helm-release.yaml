@@ -31,7 +31,17 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
-                ingressClassName: ""
+                integrations:
+                    homepage:
+                        description: ""
+                        enabled: true
+                        group: Other
+                        icon: ""
+                        name: ""
+                        widget:
+                            custom:
+                                key: ${MEALIE_HOMEPAGE_KEY}
+                            enabled: true
         persistence:
             data:
                 volsync:

@@ -36,6 +36,19 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+                integrations:
+                    homepage:
+                        description: Tool to organize and stream your VR porn library
+                        enabled: true
+                        group: Media Player
+                        icon: https://xbvr.${DOMAIN}/ui/favicon.ico
+                        name: XBVR
+                        widget:
+                            custom:
+                                key: ""
+                            enabled: false
+                    traefik:
+                        enabled: false
         service:
             main:
                 enabled: true

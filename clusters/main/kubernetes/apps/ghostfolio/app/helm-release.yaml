@@ -31,6 +31,17 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+                integrations:
+                    homepage:
+                        description: ""
+                        enabled: true
+                        group: Finance
+                        icon: ""
+                        name: ""
+                        widget:
+                            custom:
+                                key: ${GHOSTFOLIO_HOMEPAGE_APIKEY}
+                            enabled: true
         workload:
             main:
                 podSpec:

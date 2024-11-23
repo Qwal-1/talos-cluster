@@ -46,6 +46,16 @@ spec:
               enabled: true
               middlewares:
                   - name: traefik-dashboard-redirect
+          homepage:
+              description: ""
+              enabled: true
+              group: Networking
+              icon: ""
+              name: ""
+              widget:
+                  custom:
+                      key: ""
+                  enabled: true
         hosts:
           - host: traefik.${DOMAIN_0}
             paths:

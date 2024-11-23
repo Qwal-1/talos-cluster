@@ -31,6 +31,17 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+                integrations:
+                    homepage:
+                        description: ""
+                        enabled: true
+                        group: Stats
+                        icon: ""
+                        name: ""
+                        widget:
+                            custom:
+                                key: ${TAUTULLI_HOMEPAGE_KEY}
+                            enabled: true
         persistence:
             config:
                 volsync:

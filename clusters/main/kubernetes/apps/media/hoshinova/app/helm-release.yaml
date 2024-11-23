@@ -29,6 +29,17 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+                integrations:
+                    homepage:
+                        description: garbage youtube livestream download manager
+                        enabled: true
+                        group: Media Management
+                        icon: https://ytlive.${DOMAIN}/star.png
+                        name: YTLive (Hoshinova)
+                        widget:
+                            custom:
+                                key: ""
+                            enabled: false
         service:
             main:
                 enabled: true

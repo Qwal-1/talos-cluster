@@ -23,6 +23,17 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+                integrations:
+                    homepage:
+                        description: Home Automation
+                        enabled: true
+                        group: ""
+                        icon: home-assistant.png
+                        name: Home Assistant
+                        widget:
+                            custom:
+                                key: ""
+                            enabled: false
         service:
             main:
                 enabled: true

@@ -31,6 +31,22 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+                integrations:
+                    homepage:
+                        description: ""
+                        enabled: true
+                        group: Media Player
+                        icon: ""
+                        name: ""
+                        widget:
+                            custom:
+                                key: ""
+                            customkv:
+                                - key: username
+                                  value: ${EMAIL}
+                                - key: password
+                                  value: ${KOMGA_PASSWORD}
+                            enabled: true
         persistence:
             config:
                 volsync:

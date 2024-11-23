@@ -25,6 +25,10 @@ spec:
                 secretKey: ${MINIO_SECRETKEY}
                 type: s3
                 url: ${MINIO_URL}
+        service:
+            main:   
+                type: LoadBalancer
+                loadBalancerIP:  ${PLEX_IP}
         ingress:
             main:
                 enabled: true
@@ -49,7 +53,7 @@ spec:
                 existingClaim: media-nfs-pvc
                 mountPath: "/media"
         plex:
-            serverIP: ${TRAEFIK_IP}
+            serverIP: ${PLEX_IP}
             requireHTTPS: true
         workload:
             main:

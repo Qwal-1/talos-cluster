@@ -16,7 +16,7 @@ spec:
     releaseName: hoshinova
     values:
         global:
-            stopAll: true
+            stopAll: false
         image:
             #repository: hello-world
             repository: ghcr.io/holoarchivists/hoshinova
@@ -42,7 +42,7 @@ spec:
         persistence:
             videos:
                 enabled: true
-                path: /mnt/main_vault/media/YouTube/livestream
+                path: ${HOSHINOVA_PATH}
                 mountPath: /app/videos
                 server: ${TRUENAS_IP}
                 type: nfs

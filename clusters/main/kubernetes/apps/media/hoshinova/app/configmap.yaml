@@ -6,8 +6,7 @@ metadata:
 data:
     config.toml: |
       # hoshinova configuration file
-      # Copy this file to config.toml and update it as needed.
-    
+   
       [ytarchive]
       executable_path = "ytarchive"
       working_directory = "temp"
@@ -27,10 +26,6 @@ data:
       # if a lot of older non-live videos match your filters.
       ignore_older_than = "24h"
     
-      #[notifier.discord]
-      #webhook_url = "https://discordapp.com/api/webhooks/123456789012345678/abcdefghijklmnopqrstuvwxyz"
-      #notify_on = ["waiting", "recording", "done", "failed"]
-    
       # A web interface to view and manage tasks.
       # Optional, remove this section to disable.
       [webserver]
@@ -44,20 +39,4 @@ data:
       filters = ["."]  # Filters that match video titles.
       match_description = false
       outpath = "./videos/destiny"
-    
-      #[[channel]]
-      #id = "UCSNBahoyPlMUz-3U2e_Czcw"
-      #name = "Bridges Podcast"
-      #filters = ["."]
-      # By default, filters will only match the video title. Set this to true if you
-      # want them to also match the video description.
-      #match_description = false
-      #outpath = "./videos/bridgespodcast"
-    
-      # Add more channels...
-      # [[channel]]
-      # id = "..."
-      # name = "..."
-      # filters = [...]
-      # match_description = ...
-      # outpath = "..."
+

@@ -41,7 +41,7 @@ spec:
                         description: Tool to organize and stream your VR porn library
                         enabled: true
                         group: Media Player
-                        icon: https://xbvr.${DOMAIN}/ui/favicon.ico
+                        icon: https://xbvr.${DOMAIN_0}/ui/favicon.ico
                         name: XBVR
                         widget:
                             custom:

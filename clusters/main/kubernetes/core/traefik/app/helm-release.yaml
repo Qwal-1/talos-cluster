@@ -63,31 +63,6 @@ spec:
               replacement: https://pihole.${DOMAIN_0}/admin/
         themePark:
             - addons: []
-              appName: sonarr
-              baseUrl: https://theme-park.dev
-              name: sonarr-theme
-              themeName: overseerr
-            - addons: []
-              appName: radarr
-              baseUrl: https://theme-park.dev
-              name: radarr-theme
-              themeName: overseerr
-            - addons: []
-              appName: prowlarr
-              baseUrl: https://theme-park.dev
-              name: prowlarr-theme
-              themeName: overseerr
-            - addons: []
-              appName: plex
-              baseUrl: https://theme-park.dev
-              name: plex-theme
-              themeName: overseerr
-            - addons: []
-              appName: tautulli
-              baseUrl: https://theme-park.dev
-              name: tautulli-theme
-              themeName: overseerr
-            - addons: []
               appName: qbittorrent
               baseUrl: https://theme-park.dev
               name: qbittorrent-theme

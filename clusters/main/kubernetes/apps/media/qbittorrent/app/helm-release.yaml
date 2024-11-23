@@ -41,7 +41,7 @@ spec:
                         widget:
                             customkv:
                                 - key: username
-                                  value: QBIT_USERNAME
+                                  value: ${QBIT_USERNAME}
                                 - key: password
                                   value: ${QBIT_PASSWORD}
                             enabled: true

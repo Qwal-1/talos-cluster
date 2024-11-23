@@ -43,7 +43,7 @@ spec:
                                 key: ""
                             customkv:
                                 - key: username
-                                  value: ${EMAIL}
+                                  value: ${DOMAIN_0_EMAIL}
                                 - key: password
                                   value: ${KOMGA_PASSWORD}
                             enabled: true

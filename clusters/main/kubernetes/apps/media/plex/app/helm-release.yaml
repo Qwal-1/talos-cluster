@@ -28,6 +28,7 @@ spec:
         service:
             main:   
                 type: LoadBalancer
+                loadBalancerIP:  ${TRAEFIK_IP}
         ingress:
             main:
                 enabled: true
@@ -53,6 +54,7 @@ spec:
                 mountPath: "/media"
         plex:
             serverIP: ${TRAEFIK_IP}
+            requireHTTPS: true
         workload:
             main:
                 podSpec:

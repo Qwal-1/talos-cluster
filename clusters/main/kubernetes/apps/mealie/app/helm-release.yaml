@@ -55,3 +55,7 @@ spec:
         cnpg:
             main:
                 password: ${CNPG_PASSWORD}
+                cluster:
+                    initdb:
+                        postInitApplicationSQL:
+                            - ALTER USER mealie WITH SUPERUSER

@@ -20,12 +20,12 @@ spec:
             tag: latest
         credentials:
             minio:
-                accessKey: ${MINIO_ACCESSKEY}
-                bucket: ${MINIO_BUCKET}
-                encrKey: ${MINIO_ENCRKEY}
-                secretKey: ${MINIO_SECRETKEY}
+                accessKey: ${MINIO2_ACCESSKEY}
+                bucket: ${MINIO2_BUCKET}
+                encrKey: ${MINIO2_ENCRKEY}
+                secretKey: ${MINIO2_SECRETKEY}
                 type: s3
-                url: ${MINIO_URL}
+                url: ${MINIO2_URL}
         ingress:
             main:
                 enabled: true
@@ -81,4 +81,4 @@ spec:
                       dest:
                         enabled: true
                       src:
-                        enabled: false
+                        enabled: true

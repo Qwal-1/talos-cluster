@@ -94,7 +94,7 @@ spec:
                 type: nfs
         addons:
             codeserver:
-                enabled: false
+                enabled: true
                 ingress:
                     enabled: true
                     hosts:

@@ -71,7 +71,7 @@ spec:
                 runAsGroup: 0
         persistence:
             config:
-                mountPath: "/root/.config2"
+                mountPath: "/root/.config"
                 enabled: true
                 readOnly: false
                 volsync:
@@ -83,8 +83,8 @@ spec:
                       src:
                         enabled: false
             config2:
-                mountPath: "/root/.config"
-                enabled: true
+                mountPath: "/root/.config2"
+                enabled: false
                 readOnly: false
             backup:
                 enabled: true

@@ -39,7 +39,7 @@ spec:
                           pathType: Prefix
         persistence:
             config:
-                mountPath: /config2
+                mountPath: /config
                 volsync:
                     - credentials: minio
                       type: restic
@@ -49,8 +49,8 @@ spec:
                       src:
                         enabled: false
             config2:
-                mountPath: /config
-                enabled: true
+                mountPath: /config2
+                enabled: false
             media:
                 enabled: true
                 existingClaim: media-nfs-pvc

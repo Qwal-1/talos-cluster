@@ -52,3 +52,6 @@ spec:
                         enabled: true
                       src:
                         enabled: false
+        cnpg:
+            main:
+                password: ${CNPG_PASSWORD}

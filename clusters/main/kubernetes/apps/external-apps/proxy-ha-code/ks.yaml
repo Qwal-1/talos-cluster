@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  path: clusters/main/kubernetes/apps/proxy-ha-code/app
+  path: clusters/main/kubernetes/apps/external-apps/proxy-ha-code/app
   prune: true
   sourceRef:
     kind: GitRepository

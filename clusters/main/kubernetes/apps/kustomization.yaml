@@ -4,7 +4,6 @@ resources:
   - kubernetes-dashboard/ks.yaml
   - media
   - tautulli/ks.yaml
-  - proxy-homeassistant/ks.yaml
   - ghostfolio/ks.yaml
   - actualserver/ks.yaml
   - actual-http-api/ks.yaml

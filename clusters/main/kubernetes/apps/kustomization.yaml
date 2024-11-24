@@ -21,3 +21,4 @@ resources:
   - muse/ks.yaml
   - homepage/ks.yaml
   - pgadmin/ks.yaml
+  - plex-auto-languages/ks.yaml

@@ -29,5 +29,5 @@ spec:
             containers:
               main:
                 env:
-                  PGADMIN_DEFAULT_EMAIL: ${DOMAIN_0_EMAIL:}
+                  PGADMIN_DEFAULT_EMAIL: ${DOMAIN_0_EMAIL}
                   PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}

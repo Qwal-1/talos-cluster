@@ -49,4 +49,13 @@ spec:
                         main:
                             env:
                                 ALPHA_VANTAGE_API_KEY: ${GHOSTFOLIO_ALPHA_VANTAGE_API_KEY}
-
+        cnpg:
+            main:
+                #password: ${CNPG_PASSWORD}
+                mode: recovery
+                backups:
+                    enabled: true
+                    credentials: minio
+                recovery:
+                    method: object_store
+                    credentials: minio

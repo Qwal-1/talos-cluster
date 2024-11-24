@@ -49,54 +49,54 @@ spec:
                       type: restic
                       name: config
                       dest:
-                        enabled: true
-                      src:
                         enabled: false
+                      src:
+                        enabled: true
             cache:
                 volsync:
                     - credentials: minio
                       type: restic
                       name: config
                       dest:
-                        enabled: true
-                      src:
                         enabled: false
+                      src:
+                        enabled: true
             config:
                 volsync:
                     - credentials: minio
                       type: restic
                       name: config
                       dest:
-                        enabled: true
-                      src:
                         enabled: false
+                      src:
+                        enabled: true
             data:
                 volsync:
                     - credentials: minio
                       type: restic
                       name: config
                       dest:
-                        enabled: true
-                      src:
                         enabled: false
+                      src:
+                        enabled: true
             generated:
                 volsync:
                     - credentials: minio
                       type: restic
                       name: config
                       dest:
-                        enabled: true
-                      src:
                         enabled: false
+                      src:
+                        enabled: true
             metadata:
                 volsync:
                     - credentials: minio
                       type: restic
                       name: config
                       dest:
-                        enabled: true
-                      src:
                         enabled: false
+                      src:
+                        enabled: true
             media:
                 enabled: true
                 existingClaim: media-nfs-pvc

@@ -15,9 +15,34 @@ spec:
                 namespace: flux-system
     releaseName: mariadb
     values:
+        credentials:
+            minio:
+                accessKey: ${MINIO_ACCESSKEY}
+                bucket: ${MINIO_BUCKET}
+                encrKey: ${MINIO_ENCRKEY}
+                secretKey: ${MINIO_SECRETKEY}
+                type: s3
+                url: ${MINIO_URL}
         mariadbDatabase: ${MARIADB_DB}
         mariadbUsername: ${MARIADB_USERNAME}
         password: ${MARIADB_ROOT_PASSWORD}
         rootPassword: ${MARIADB_ROOT_PASSWORD}
-
-
+        persistence:
+            data:
+                volsync:
+                    - credentials: minio
+                      type: restic
+                      name: config
+                      dest:
+                        enabled: false
+                      src:
+                        enabled: true
+            passinit:
+                volsync:
+                    - credentials: minio
+                      type: restic
+                      name: config
+                      dest:
+                        enabled: false
+                      src:
+                        enabled: true

@@ -49,15 +49,15 @@ spec:
                       type: restic
                       name: config
                       dest:
-                        enabled: true
-                      src:
                         enabled: false
+                      src:
+                        enabled: true
             user-files:
                 volsync:
                     - credentials: minio
                       type: restic
                       name: config
                       dest:
-                        enabled: true
-                      src:
                         enabled: false
+                      src:
+                        enabled: true

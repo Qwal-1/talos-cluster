@@ -49,9 +49,9 @@ spec:
                       type: restic
                       name: config
                       dest:
-                        enabled: true
-                      src:
                         enabled: false
+                      src:
+                        enabled: true
             media:
                 enabled: true
                 existingClaim: media-nfs-pvc

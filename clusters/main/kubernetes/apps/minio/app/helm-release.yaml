@@ -16,7 +16,7 @@ spec:
     releaseName: minio
     value:
       global:
-        stopAll: true
+        stopAll: false
       ingress:
           main:
               enabled: true
@@ -25,3 +25,27 @@ spec:
                     paths:
                       - path: /
                         pathType: Prefix
+          api:
+              enabled: true
+              hosts:
+                  - host: bucket.minio.${DOMAIN_0}
+                    paths:
+                      - path: /
+                        pathType: Prefix
+      persistence:
+        config:
+          enabled: true
+          path: ${MINIO_DATA_PATH}
+          mountPath: "/data"
+          server: ${TRUENAS_IP}
+          type: nfs
+      workload:
+        main:
+          podSpec:
+            containers:
+              main:
+                env:
+                  MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+                  MINIO_BROWSER_REDIRECT_URL: ""
+                  MINIO_SERVER_URL: ""
+                  MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}

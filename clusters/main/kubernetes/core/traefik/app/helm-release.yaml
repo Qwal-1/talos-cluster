@@ -40,10 +40,10 @@ spec:
         loadBalancerIP: ${TRAEFIK_IP}
     ingress:
       main:
-        enabled: true
+        enabled: false
         integrations:
           traefik:
-              enabled: false
+              enabled: true
               middlewares:
                   - name: traefik-dashboard-redirect
           homepage:

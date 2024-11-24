@@ -71,7 +71,7 @@ spec:
                 runAsGroup: 0
         persistence:
             config:
-                mountPath: "/root/.config"
+                mountPath: "/root/.config2"
                 enabled: true
                 readOnly: false
                 volsync:
@@ -82,6 +82,10 @@ spec:
                         enabled: false
                       src:
                         enabled: false
+            config2:
+                mountPath: "/root/.config"
+                enabled: true
+                readOnly: false
             backup:
                 enabled: true
                 existingClaim: media-nfs-pvc

@@ -28,10 +28,7 @@ spec:
           api:
               enabled: true
               hosts:
-                  - host: backup.minio.${DOMAIN_0}
-                    paths:
-                      - path: /
-                        pathType: Prefix
+                  - host: api-minio.${DOMAIN_0}
       persistence:
         config:
           enabled: true

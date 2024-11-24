@@ -28,7 +28,7 @@ spec:
           api:
               enabled: true
               hosts:
-                  - host: bucket.minio.${DOMAIN_0}
+                  - host: backup.minio.${DOMAIN_0}
                     paths:
                       - path: /
                         pathType: Prefix

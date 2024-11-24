@@ -33,7 +33,7 @@ spec:
     adminUser:
       create: true
       username: admin
-      passwordHash: ${WEAVE_GITOPS_PASSWORD}
+      passwordHash: "$2y$10$akNMjDFHvrWNIXtrlYGFp.uuz8fNxnV6wXmsVf9Vqqdifi5S0kO2m"
     ingress:
       enabled: true
       annotations:

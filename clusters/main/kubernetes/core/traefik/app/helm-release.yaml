@@ -40,7 +40,7 @@ spec:
         loadBalancerIP: ${TRAEFIK_IP}
     ingress:
       main:
-        enabled: false
+        enabled: true
         integrations:
           traefik:
               enabled: true

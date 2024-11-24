@@ -20,3 +20,4 @@ resources:
   - minio/ks.yaml
   - muse/ks.yaml
   - homepage/ks.yaml
+  - pgadmin/ks.yaml

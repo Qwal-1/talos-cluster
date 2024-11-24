@@ -50,6 +50,7 @@ spec:
                         enabled: false
             config2:
                 mountPath: /config
+                enabled: true
             media:
                 enabled: true
                 existingClaim: media-nfs-pvc

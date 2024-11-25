@@ -18,3 +18,4 @@ resources:
   - pgadmin/ks.yaml
   - plex-auto-languages/ks.yaml
   - external-apps
+  - grafana/ks.yaml

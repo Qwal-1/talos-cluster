@@ -56,16 +56,16 @@ spec:
                       dest:
                         enabled: false
                       src:
-                        enabled: true
+                        enabled: false
             data:
                 volsync:
                     - credentials: minio
                       type: restic
                       name: config
                       dest:
-                        enabled: true
+                        enabled: false
                       src:
-                        enabled: true
+                        enabled: false
             media:
                 enabled: true
                 existingClaim: media-nfs-pvc

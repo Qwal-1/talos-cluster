@@ -81,7 +81,7 @@ spec:
                       dest:
                         enabled: false
                       src:
-                        enabled: true
+                        enabled: false
             config2:
                 mountPath: "/root/.config2"
                 enabled: false

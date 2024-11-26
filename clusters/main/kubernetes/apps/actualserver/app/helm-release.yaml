@@ -51,7 +51,7 @@ spec:
                       dest:
                         enabled: false
                       src:
-                        enabled: true
+                        enabled: false
             user-files:
                 volsync:
                     - credentials: minio
@@ -60,4 +60,4 @@ spec:
                       dest:
                         enabled: false
                       src:
-                        enabled: true
+                        enabled: false

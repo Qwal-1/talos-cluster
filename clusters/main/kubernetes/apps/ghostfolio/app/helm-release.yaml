@@ -52,7 +52,7 @@ spec:
         cnpg:
             main:
                 #password: ${CNPG_PASSWORD}
-                mode: recovery
+                mode: standalone
                 backups:
                     enabled: true
                     credentials: minio

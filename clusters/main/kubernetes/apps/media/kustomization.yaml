@@ -13,3 +13,4 @@ resources:
   - sonarr/ks.yaml
   - stash/ks.yaml
   - xbvr/ks.yaml
+  - komga2/ks.yaml

@@ -14,3 +14,6 @@ spec:
                 name: truecharts
                 namespace: flux-system
     releaseName: prometheus
+    values:
+        global:
+            stopAll: true

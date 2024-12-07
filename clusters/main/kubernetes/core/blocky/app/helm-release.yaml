@@ -38,26 +38,6 @@ spec:
         externalTrafficPolicy: Local
         loadBalancerIP: ${BLOCKY_IP}
         type: LoadBalancer
-
-    blocking:
-      # --  Add blocky whitelists
-      whitelist: 
-       - name: ads
-         lists: []
-
-      # -- Blocky blacklists
-      blacklist: 
-        - name: ads
-          lists:
-             - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/pro.txt
- 
-            # -- Blocky clientGroupsBlock
-      clientGroupsBlock:
-        - name: default
-          groups:
-            - default
-            - ads
-
     k8sgateway:
       # -- list of processed domains
       domains:
@@ -84,14 +64,10 @@ spec:
 
     configmap:
       dashboard:
-        enabled: true
+        enabled: false
       datasource:
-        enabled: true
+        enabled: false
 
     cnpg:
       main:
-        enabled: true
-
-    prometheus:
-      enable: true
-      path: /metrics
+        enabled: false

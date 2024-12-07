@@ -37,17 +37,3 @@ spec:
         ports:
           main:
             port: 80
-    ingress:
-        main:
-            enabled: true
-            hosts:
-                - host: kube.${DOMAIN_0}
-                  paths:
-                    - path: /
-                      pathType: Prefix
-    configmap:
-      kubernetes-dashboard-settings:
-        expandObjectName: false
-        enabled: true
-        data:
-          settings: '{"itemsPerPage":100,"defaultNamespace":"_all"}'

@@ -64,6 +64,8 @@ spec:
                         enabled: true
                       src:
                         enabled: true
+                        trigger:
+                          schedule: 20 0 * * *
             downloads:
                 enabled: true
                 existingClaim: media-nfs-pvc

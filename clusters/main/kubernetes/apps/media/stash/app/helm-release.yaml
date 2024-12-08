@@ -52,6 +52,8 @@ spec:
                         enabled: true
                       src:
                         enabled: true
+                        trigger:
+                          schedule: 25 0 * * *
             cache:
                 volsync:
                     - credentials: minio
@@ -61,6 +63,8 @@ spec:
                         enabled: true
                       src:
                         enabled: true
+                        trigger:
+                          schedule: 25 0 * * *
             config:
                 volsync:
                     - credentials: minio
@@ -70,6 +74,8 @@ spec:
                         enabled: true
                       src:
                         enabled: true
+                        trigger:
+                          schedule: 25 0 * * *
             data:
                 volsync:
                     - credentials: minio
@@ -79,6 +85,8 @@ spec:
                         enabled: true
                       src:
                         enabled: true
+                        trigger:
+                          schedule: 25 0 * * *
             generated:
                 volsync:
                     - credentials: minio
@@ -88,6 +96,8 @@ spec:
                         enabled: true
                       src:
                         enabled: true
+                        trigger:
+                          schedule: 25 0 * * *
             metadata:
                 volsync:
                     - credentials: minio
@@ -97,6 +107,8 @@ spec:
                         enabled: true
                       src:
                         enabled: true
+                        trigger:
+                          schedule: 25 0 * * *
             media:
                 enabled: true
                 existingClaim: media-nfs-pvc

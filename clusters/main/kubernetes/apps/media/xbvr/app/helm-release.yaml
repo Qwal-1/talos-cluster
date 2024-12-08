@@ -82,6 +82,8 @@ spec:
                         enabled: true
                       src:
                         enabled: true
+                        trigger:
+                          schedule: 35 0 * * *
             #config2:
             #    mountPath: "/root/.config2"
             #    enabled: false

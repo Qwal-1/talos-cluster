@@ -37,6 +37,8 @@ spec:
                         enabled: true
                       src:
                         enabled: true
+                        trigger:
+                          schedule: 10 0 * * *
             passinit:
                 volsync:
                     - credentials: minio
@@ -46,3 +48,5 @@ spec:
                         enabled: true
                       src:
                         enabled: true
+                        trigger:
+                          schedule: 10 0 * * *

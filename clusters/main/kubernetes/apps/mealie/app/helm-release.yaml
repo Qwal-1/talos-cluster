@@ -41,8 +41,9 @@ spec:
                         widget:
                             custom:
                                 key: ${MEALIE_HOMEPAGE_KEY}
+                            customkv:
+                                - version: 2
                             enabled: true
-                            version: 2
         persistence:
             data:
                 volsync:
@@ -62,7 +63,7 @@ spec:
                 backups:
                     enabled: true
                     credentials: minio
-                    revision: "2"
+                    revision: "3"
                 recovery:
                     credentials: minio
-                    revision: "1"
+                    revision: "2"

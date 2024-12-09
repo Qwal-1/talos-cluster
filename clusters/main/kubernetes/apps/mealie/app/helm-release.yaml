@@ -43,7 +43,7 @@ spec:
                                 key: ${MEALIE_HOMEPAGE_KEY}
                             customkv:
                                 - key: version
-                                  value: "1"
+                                  value: "2"
                             enabled: true
         persistence:
             data:

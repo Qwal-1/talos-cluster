@@ -42,6 +42,7 @@ spec:
                             custom:
                                 key: ${MEALIE_HOMEPAGE_KEY}
                             enabled: true
+                            version: 2
         persistence:
             data:
                 volsync:

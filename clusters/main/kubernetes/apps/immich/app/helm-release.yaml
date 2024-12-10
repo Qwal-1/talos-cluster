@@ -34,5 +34,8 @@ spec:
                             custom:
                                 key: ${IMMICH_API_KEY}
                             enabled: true
+                            customkv:
+                                - key: version
+                                  value: "2"
         immich:
           enable_ml: false  

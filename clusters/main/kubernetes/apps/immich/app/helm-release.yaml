@@ -32,7 +32,7 @@ spec:
                         name: ""
                         widget:
                             custom:
-                                key: ${SONARR_HOMEPAGE_KEY}
+                                key: ${IMMICH_API_KEY}
                             enabled: true
         immich:
           enable_ml: false  

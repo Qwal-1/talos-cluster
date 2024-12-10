@@ -41,9 +41,6 @@ spec:
                         widget:
                             custom:
                                 key: ${MEALIE_HOMEPAGE_KEY}
-                            customkv:
-                                - key: version
-                                  value: "2"
                             enabled: true
         persistence:
             data:

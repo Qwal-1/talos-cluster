@@ -1,0 +1,38 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: immich
+    namespace: immich
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: immich
+            version: 17.26.0
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+    releaseName: immich
+    values:
+        ingress:
+            main:
+                enabled: true
+                hosts:
+                    - host: immich.${DOMAIN_0}
+                      paths:
+                        - path: /
+                          pathType: Prefix
+                integrations:
+                    homepage:
+                        description: ""
+                        enabled: true
+                        group: Media Management
+                        icon: ""
+                        name: ""
+                        widget:
+                            custom:
+                                key: ${SONARR_HOMEPAGE_KEY}
+                            enabled: true
+        immich:
+          enable_ml: false  

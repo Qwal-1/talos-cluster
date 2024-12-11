@@ -41,7 +41,6 @@ spec:
                         widget:
                             custom:
                                 key: ${MEALIE_HOMEPAGE_KEY}
-                                version: "2"
                             enabled: true
         persistence:
             data:

@@ -49,9 +49,9 @@ spec:
                       type: restic
                       name: config
                       dest:
-                        enabled: false
+                        enabled: true
                       src:
-                        enabled: false
+                        enabled: true
                         trigger:
                           schedule: 5 0 * * *
             user-files:
@@ -60,8 +60,8 @@ spec:
                       type: restic
                       name: config
                       dest:
-                        enabled: false
+                        enabled: true
                       src:
-                        enabled: false
+                        enabled: true
                         trigger:
                           schedule: 5 0 * * *

@@ -23,14 +23,4 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
-        addons:
-            codeserver:
-                enabled: true
-                ingress:
-                    enabled: true
-                    hosts:
-                        - host: actual-test-codeserver.${DOMAIN_0}
-                          paths:
-                            - path: /
-                              pathType: Prefix
 

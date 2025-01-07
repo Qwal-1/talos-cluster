@@ -23,4 +23,11 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
-
+        persistence:
+            data:
+                mountPath: /data
+                enabled: true
+            server-files:
+                enabled: false
+            user-files:
+                enabled: false

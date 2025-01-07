@@ -33,6 +33,4 @@ spec:
                           paths:
                             - path: /
                               pathType: Prefix
-        persistence:
-            server-files:
-            user-files:
+

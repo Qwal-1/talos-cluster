@@ -55,6 +55,7 @@ spec:
         persistence:
             data:
                 mountPath: /data
+                enabled: true
                 volsync:
                     - credentials: minio
                       type: restic
@@ -65,6 +66,10 @@ spec:
                         enabled: false
                         trigger:
                           schedule: 5 0 * * *
+            server-files:
+                enabled: false
+            user-files:
+                enabled: false
             #server-files:
             #    volsync:
             #        - credentials: minio

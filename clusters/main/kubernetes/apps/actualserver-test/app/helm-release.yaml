@@ -1,0 +1,38 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: actualserver-test
+    namespace: actualserver-test
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: actualserver
+            version: 12.11.0
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+    releaseName: actualserver
+    values:
+        ingress:
+            main:
+                enabled: true
+                hosts:
+                    - host: actual-test.${DOMAIN_0}
+                      paths:
+                        - path: /
+                          pathType: Prefix
+        addons:
+            codeserver:
+                enabled: true
+                ingress:
+                    enabled: true
+                    hosts:
+                        - host: actual-test-codeserver.${DOMAIN_0}
+                          paths:
+                            - path: /
+                              pathType: Prefix
+        persistence:
+            server-files:
+            user-files:

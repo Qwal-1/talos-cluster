@@ -19,3 +19,4 @@ resources:
   - plex-auto-languages/ks.yaml
   - external-apps
   - metrics
+  - actualserver-test/ks.yaml

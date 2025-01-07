@@ -53,7 +53,8 @@ spec:
                             - path: /
                               pathType: Prefix
         persistence:
-            server-files:
+            data:
+                mountPath: /data
                 volsync:
                     - credentials: minio
                       type: restic
@@ -64,14 +65,25 @@ spec:
                         enabled: false
                         trigger:
                           schedule: 5 0 * * *
-            user-files:
-                volsync:
-                    - credentials: minio
-                      type: restic
-                      name: config
-                      dest:
-                        enabled: false
-                      src:
-                        enabled: false
-                        trigger:
-                          schedule: 5 0 * * *
+            #server-files:
+            #    volsync:
+            #        - credentials: minio
+            #          type: restic
+            #          name: config
+            #          dest:
+            #            enabled: false
+            #          src:
+            #            enabled: false
+            #            trigger:
+            #              schedule: 5 0 * * *
+            #user-files:
+            #    volsync:
+            #        - credentials: minio
+            #          type: restic
+            #          name: config
+            #          dest:
+            #            enabled: false
+            #          src:
+            #            enabled: false
+            #            trigger:
+            #              schedule: 5 0 * * *

@@ -1,0 +1,33 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: qdirstat
+    namespace: qdirstat
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: qdirstat
+            version: 11.7.0
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+    releaseName: qdirstat
+    values:
+        service:
+            vnc:
+                enabled: false
+        ingress:
+            main:
+                enabled: true
+                hosts:
+                    - host: qdirstat.${DOMAIN_0}
+                      paths:
+                        - path: /
+                          pathType: Prefix
+        persistence:
+            storage:
+              path: ${DEFAULT_STORAGE_PATH}"
+              server: ${TRUENAS_IP}
+              type: nfs

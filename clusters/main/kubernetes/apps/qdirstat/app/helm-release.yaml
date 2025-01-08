@@ -28,6 +28,6 @@ spec:
                           pathType: Prefix
         persistence:
             storage:
-              path: ${DEFAULT_STORAGE_PATH}"
+              path: ${DEFAULT_STORAGE_PATH}
               server: ${TRUENAS_IP}
               type: nfs

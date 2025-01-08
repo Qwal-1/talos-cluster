@@ -18,5 +18,5 @@ resources:
   - pgadmin/ks.yaml
   - plex-auto-languages/ks.yaml
   - external-apps
-  - metrics  - qdirstat
+  - metrics  
   - qdirstat/ks.yaml

@@ -42,16 +42,6 @@ spec:
                             custom:
                                 key: ""
                             enabled: false
-        addons:
-            codeserver:
-                enabled: true
-                ingress:
-                    enabled: true
-                    hosts:
-                        - host: actual-codeserver.${DOMAIN_0}
-                          paths:
-                            - path: /
-                              pathType: Prefix
         persistence:
             data:
                 mountPath: /data

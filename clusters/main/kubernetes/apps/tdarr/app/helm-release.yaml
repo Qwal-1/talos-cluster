@@ -26,5 +26,6 @@ spec:
         persistence:
             media:
                 enabled: true
-                existingClaim: media-nfs-pvc
-                mountPath: "/media"
+                path: ${DEFAULT_STORAGE_PATH}
+                server: ${TRUENAS_IP}
+                type: nfs

@@ -13,4 +13,4 @@ resources:
   - stash/ks.yaml
   - xbvr/ks.yaml
   - komga/ks.yaml
-  - tdarr
+  - tdarr/ks.yaml

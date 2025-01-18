@@ -25,7 +25,7 @@ spec:
             id: ${SPOTIFY_CLIENT_ID}
             secret: ${SPOTIFY_SECRIT}
         youtube:
-          key: faksdlasdkasd #${YOUTUBE_API_KEY}
+          key: ${YOUTUBE_API_KEY}
         bot: 
           status: "online"
           activity:

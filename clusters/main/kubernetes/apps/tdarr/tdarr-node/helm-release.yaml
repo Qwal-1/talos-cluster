@@ -30,5 +30,5 @@ spec:
                             env:
                                 # User Defined
                                 nodeID: "TalosTdarrNode"
-                                serverIP: "tdarr-comm.tdarr.svc.local.cluster"
+                                serverIP: "tdarr-comm.tdarr.svc.cluster.local"
                                 serverPort: 8266

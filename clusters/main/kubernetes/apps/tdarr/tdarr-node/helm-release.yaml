@@ -22,6 +22,9 @@ spec:
                 path: ${DEFAULT_STORAGE_PATH}
                 server: ${TRUENAS_IP}
                 type: nfs
+            transcode-cache:
+                enabled: true
+                mountPath: "/temp/cache"
         workload:
             main:
                 podSpec:

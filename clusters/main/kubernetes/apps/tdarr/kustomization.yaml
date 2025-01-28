@@ -3,4 +3,3 @@ kind: Kustomization
 resources:
   - tdarr-node
   - tdarr/ks.yaml
-  - tdarr-exporter/ks.yaml

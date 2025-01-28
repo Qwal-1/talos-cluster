@@ -26,6 +26,7 @@ spec:
               metrics:
                 enabled: true
                 port: 9090
+                targetPort: 9090
         workload:
             main:
                 podSpec:

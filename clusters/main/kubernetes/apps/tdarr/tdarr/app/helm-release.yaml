@@ -30,3 +30,11 @@ spec:
                 path: ${DEFAULT_STORAGE_PATH}
                 server: ${TRUENAS_IP}
                 type: nfs
+        workload:
+            main:
+                podSpec:
+                    containers:
+                        main:
+                            env:
+                                # User Defined
+                                internalNode: false

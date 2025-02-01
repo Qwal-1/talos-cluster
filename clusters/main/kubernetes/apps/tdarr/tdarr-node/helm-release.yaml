@@ -31,4 +31,11 @@ spec:
                                 # User Defined
                                 nodeID: "TalosTdarrNode"
                                 serverIP: "tdarr-comm.tdarr.svc.cluster.local"
-                                serverPort: 8266
+                                serverPort: 8266      
+        resources:
+            requests:
+                cpu: 10m
+                memory: 50Mi
+            limits:
+                cpu: 4
+                memory: 16Gi

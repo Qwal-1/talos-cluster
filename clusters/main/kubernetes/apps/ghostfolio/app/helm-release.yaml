@@ -8,7 +8,7 @@ spec:
     chart:
         spec:
             chart: ghostfolio
-            version: 6.48.2
+            version: 6.48.3
             sourceRef:
                 kind: HelmRepository
                 name: truecharts

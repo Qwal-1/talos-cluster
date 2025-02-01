@@ -38,4 +38,4 @@ spec:
                 memory: 50Mi
             limits:
                 cpu: 4
-                memory: 16Gi
+                memory: 24Gi

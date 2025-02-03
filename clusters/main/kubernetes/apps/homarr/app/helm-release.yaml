@@ -46,7 +46,6 @@ spec:
                 type: ClusterIP
         securityContext:
             container:
-                advanced: true
                 readOnlyRootFilesytem: false
                 runAsUser: 0
                 runAsGroup: 0

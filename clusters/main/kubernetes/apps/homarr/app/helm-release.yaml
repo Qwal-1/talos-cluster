@@ -44,11 +44,6 @@ spec:
                         protocol: http
                         targetPort: 7575
                 type: ClusterIP
-        securityContext:
-            container:
-                readOnlyRootFilesytem: false
-                runAsUser: 0
-                runAsGroup: 0
         workload:
             main:
                 podSpec:

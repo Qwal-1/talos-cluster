@@ -21,3 +21,4 @@ resources:
   - metrics  
   - qdirstat/ks.yaml
   - tdarr
+  - homarr/ks.yaml

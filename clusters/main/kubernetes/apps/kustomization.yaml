@@ -22,3 +22,4 @@ resources:
   - qdirstat/ks.yaml
   - tdarr
   - homarr/ks.yaml
+  - ai-tagger-server/ks.yaml

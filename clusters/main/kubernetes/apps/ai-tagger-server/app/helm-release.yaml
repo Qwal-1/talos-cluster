@@ -48,7 +48,5 @@ spec:
                 type: nfs
             logs:
                 enabled: true
-                mountPath: "/logs"
-            logs2:
-                enabled: true
                 mountPath: "/app/logs"
+       

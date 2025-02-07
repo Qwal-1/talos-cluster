@@ -18,7 +18,6 @@ resources:
   - pgadmin/ks.yaml
   - plex-auto-languages/ks.yaml
   - external-apps
-  - metrics  
   - qdirstat/ks.yaml
   - tdarr
   - homarr/ks.yaml

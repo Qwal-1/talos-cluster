@@ -46,3 +46,6 @@ spec:
                 path: ${DEFAULT_STORAGE_PATH}
                 server: ${TRUENAS_IP}
                 type: nfs
+            logs:
+                enabled: true
+                mountPath: "./logs"

@@ -18,8 +18,7 @@ spec:
         global:
             stopAll: false
         image:
-            repository: globinfo/globimp_db
-            #repository: qwal/ai_model_server
+            repository: qwal/ai_model_server
             tag: latest
         imagePullSecrets:
             dockerhub-secret:

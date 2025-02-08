@@ -49,4 +49,8 @@ spec:
             logs:
                 enabled: true
                 mountPath: "/app/logs"
+        resources:
+            limits:
+                cpu: 4
+                memory: 16Gi
        

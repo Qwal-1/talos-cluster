@@ -19,7 +19,7 @@ spec:
             stopAll: false
         image:
             repository: qwal/ai_model_server
-            tag: v1.0.2
+            tag: v1.0.3
         imagePullSecret:
             dockerhub-secret:
               enabled: true

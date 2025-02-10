@@ -37,6 +37,17 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+                integrations:
+                    homepage:
+                        description: ""
+                        enabled: true
+                        group: Media Player
+                        icon: ""
+                        name: ""
+                        widget:
+                            custom:
+                                key: ${PLEX_HOMEPAGE_KEY}
+                            enabled: true
         persistence:
             config:
                 mountPath: /config

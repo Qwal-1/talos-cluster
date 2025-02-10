@@ -26,6 +26,15 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+                integrations:
+                    homepage:
+                        description: ""
+                        enabled: true
+                        group: Stats
+                        icon: ""
+                        name: ""
+                        widget:
+                            enabled: false
         persistence:
             storage:
               path: ${DEFAULT_STORAGE_PATH}

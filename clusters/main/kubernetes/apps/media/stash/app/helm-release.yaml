@@ -113,3 +113,6 @@ spec:
                 enabled: true
                 existingClaim: media-nfs-pvc
                 mountPath: "/media"
+            venv:
+                enabled: true
+                mountPath: "/venv"

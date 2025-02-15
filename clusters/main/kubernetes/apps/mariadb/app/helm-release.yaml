@@ -15,6 +15,13 @@ spec:
                 namespace: flux-system
     releaseName: mariadb
     values:
+        service:
+          main:
+            type: LoadBalancer
+            ports:
+              main:
+                port: 3306
+                targetPort: 3306
         credentials:
             minio:
                 accessKey: ${MINIO_ACCESSKEY}

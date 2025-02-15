@@ -1,8 +1,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-    name: xbvr
-    namespace: media
+    name: xbvr-test
+    namespace: xbvr-test
 spec:
     interval: 15m
     chart:
@@ -13,7 +13,7 @@ spec:
                 kind: HelmRepository
                 name: truecharts
                 namespace: flux-system
-    releaseName: xbvr
+    releaseName: xbvr-test
     values:
         global:
             stopAll: false

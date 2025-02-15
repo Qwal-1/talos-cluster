@@ -44,7 +44,7 @@ spec:
                     containers:
                         main:
                             env:
-                                #DATABASE_URL: mysql://xbvr:${MARIADB_ROOT_PASSWORD}@mariadb.mariadb.svc.cluster.local:3306/xbvr?charset=utf8mb4&parseTime=True&loc=Local
+                                DATABASE_URL: mysql://xbvr:${MARIADB_ROOT_PASSWORD}@mariadb.mariadb.svc.cluster.local:3306/xbvr?charset=utf8mb4&parseTime=True&loc=Local
         securityContext:
             container:
                 advanced: true

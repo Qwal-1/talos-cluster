@@ -116,3 +116,6 @@ spec:
             venv:
                 enabled: true
                 mountPath: "/venv"
+        resources:
+            limits:
+                memory: 16Gi

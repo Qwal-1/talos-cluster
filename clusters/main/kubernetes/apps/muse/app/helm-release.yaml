@@ -32,3 +32,7 @@ spec:
             type: "Spielt"
             detail: "Mol isch en musigg bot"
             url: "destiny.gg/bigscreen"
+      resources:
+        limits:
+          cpu: 4
+          memory: 16Gi

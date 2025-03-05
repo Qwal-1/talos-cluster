@@ -17,7 +17,7 @@ spec:
     values:
         image:
             repository: ghcr.io/homarr-labs/homarr
-            tag: v1.8.0
+            tag: v1.9.0
         credentials:
             minio:
                 accessKey: ${MINIO_ACCESSKEY}

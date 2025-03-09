@@ -92,5 +92,5 @@ spec:
         enabled: true
 
     prometheus:
-      enable: false
+      enable: true
       path: /metrics

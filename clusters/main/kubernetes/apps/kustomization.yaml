@@ -20,4 +20,5 @@ resources:
   - external-apps
   - qdirstat/ks.yaml
   - tdarr
-  - homarr/ks.yaml  - metrics
+  - homarr/ks.yaml  
+  - metrics

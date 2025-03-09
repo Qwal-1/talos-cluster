@@ -16,4 +16,4 @@ spec:
     releaseName: prometheus
     values:
         global:
-            stopAll: true
+            stopAll: false

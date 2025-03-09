@@ -16,7 +16,7 @@ spec:
     releaseName: grafana
     values:
         global:
-            stopAll: true
+            stopAll: false
         ingress:
             main:
                 enabled: true

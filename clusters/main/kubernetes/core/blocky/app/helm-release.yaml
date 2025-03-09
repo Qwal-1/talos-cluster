@@ -41,9 +41,9 @@ spec:
 
     blocking:
       # --  Add blocky whitelists
-      whitelist: 
-       - name: ads
-         lists: []
+      #whitelist: 
+      # - name: ads
+      #   lists: []
 
       # -- Blocky blacklists
       blacklist: 
@@ -55,7 +55,6 @@ spec:
       clientGroupsBlock:
         - name: default
           groups:
-            - default
             - ads
 
     k8sgateway:
@@ -93,5 +92,5 @@ spec:
         enabled: true
 
     prometheus:
-      enable: true
+      enable: false
       path: /metrics

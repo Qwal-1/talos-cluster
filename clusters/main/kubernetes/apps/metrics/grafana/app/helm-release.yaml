@@ -26,3 +26,10 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+        workload:
+            main:
+                podSpec:
+                    containers:
+                        main:
+                            env:    
+                                GF_PANELS_DISABLE_SANITIZE_HTML: true

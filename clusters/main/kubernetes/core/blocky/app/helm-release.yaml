@@ -55,6 +55,7 @@ spec:
       clientGroupsBlock:
         - name: default
           groups:
+            - default
             - ads
 
     k8sgateway:

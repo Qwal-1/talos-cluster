@@ -60,6 +60,7 @@ spec:
             - default-malicious
             - default-suspicious
             - default-tracking
+            - aggressive-ads
 
     k8sgateway:
       # -- list of processed domains

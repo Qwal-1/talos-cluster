@@ -51,7 +51,7 @@ spec:
           lists:
              - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/pro.plus.txt
  
-            # -- Blocky clientGroupsBlock
+      # -- Blocky clientGroupsBlock
       #clientGroupsBlock:
       #  - name: default
       #    groups:

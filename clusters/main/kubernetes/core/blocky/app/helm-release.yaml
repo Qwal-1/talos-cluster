@@ -49,7 +49,7 @@ spec:
       blacklist: 
         - name: ads
           lists:
-             - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/pro.txt
+             - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/pro.plus.txt
  
             # -- Blocky clientGroupsBlock
       clientGroupsBlock:

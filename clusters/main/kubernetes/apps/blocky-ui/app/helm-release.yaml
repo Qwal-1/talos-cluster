@@ -1,0 +1,47 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: blocky-ui
+    namespace: blocky
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: app-template
+            version: 14.5.3
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+    releaseName: blocky-ui
+    values:
+        global:
+            stopAll: false
+        image:
+            repository: ghcr.io/ivvija/blocky-ui
+            tag: v0.1
+        ingress:
+            main:
+                enabled: true
+                hosts:
+                    - host: blocky.${DOMAIN_0}
+                      paths:
+                        - path: /
+                          pathType: Prefix
+        service:
+            main:
+                enabled: true
+                ports:
+                    main:
+                        enabled: true
+                        port: 3000
+                        protocol: http
+                        targetPort: 3000
+                type: ClusterIP
+        workload:
+            main:
+                podSpec:
+                    containers:
+                        main:
+                            env:
+                                API_BASE_URL: http://blocky.blocky.svc.cluster.local:4000/api

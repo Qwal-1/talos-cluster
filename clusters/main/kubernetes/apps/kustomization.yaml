@@ -22,3 +22,4 @@ resources:
   - tdarr
   - homarr/ks.yaml  
   - metrics
+  - blocky-ui/ks.yaml

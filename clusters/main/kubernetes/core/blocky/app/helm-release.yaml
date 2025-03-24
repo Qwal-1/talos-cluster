@@ -47,7 +47,7 @@ spec:
 
       # -- Blocky blacklists
       blacklist: 
-        - name: ads
+        - name: aggressive-ads
           lists:
              - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/pro.plus.txt
  

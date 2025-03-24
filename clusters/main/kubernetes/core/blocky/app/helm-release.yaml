@@ -52,11 +52,13 @@ spec:
              - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/pro.plus.txt
  
             # -- Blocky clientGroupsBlock
-      clientGroupsBlock:
-        - name: default
-          groups:
-            - default
-            - ads
+      #clientGroupsBlock:
+      #  - name: default
+      #    groups:
+      #      - default
+      #      - default-ads
+      #      - default-malicious
+      #      - ads
 
     k8sgateway:
       # -- list of processed domains

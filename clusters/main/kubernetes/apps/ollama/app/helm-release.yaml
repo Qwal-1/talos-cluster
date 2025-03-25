@@ -24,3 +24,11 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+        workload:
+            main:
+                podSpec:
+                    containers:
+                        main:
+                            resources:
+                                limits:
+                                    memory: 16Gi

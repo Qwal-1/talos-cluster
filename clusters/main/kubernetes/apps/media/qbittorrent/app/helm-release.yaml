@@ -25,7 +25,8 @@ spec:
                 url: ${MINIO_URL}
         service:
             torrent:
-                loadBalancerIP: ${TRAEFIK_IP}
+                type: LoadBalancer
+                loadBalancerIP: ${QBIT_IP}
         ingress:
             main:
                 enabled: true

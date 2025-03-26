@@ -25,7 +25,7 @@ spec:
                 url: ${MINIO_URL}
         service:
             torrent:
-                #type: LoadBalancer
+                type: LoadBalancer
                 loadBalancerIP: ${QBIT_IP}
         ingress:
             main:

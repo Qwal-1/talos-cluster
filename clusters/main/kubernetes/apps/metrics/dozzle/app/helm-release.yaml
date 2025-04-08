@@ -17,6 +17,7 @@ spec:
     values:
         replicaCount: 1
         serviceAccount:
+            enabled: true
             name: pod-viewer
         image:
             repository: amir20/dozzle

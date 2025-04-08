@@ -4,4 +4,3 @@ resources:
   - namespace.yaml
   - grafana/ks.yaml
   - prometheus/ks.yaml
-  - dozzle/ks.yaml

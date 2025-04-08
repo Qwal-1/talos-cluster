@@ -1,3 +1,36 @@
+## deployment.yaml
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: dozzle
+#  namespace: default
+#spec:
+#  replicas: 1
+#  selector:
+#    matchLabels:
+#      app: dozzle
+#  template:
+#    metadata:
+#      labels:
+#        app: dozzle
+#    spec:
+#      serviceAccountName: pod-viewer
+#      containers:
+#        - name: dozzle
+#          image: amir20/dozzle:latest
+#          ports:
+#            - containerPort: 8080
+#          env:
+#            - name: DOZZLE_MODE
+#              value: "k8s"
+#          resources:
+#            limits:
+#              memory: "1Gi"
+#              cpu: "500m"
+#            requests:
+#              memory: "64Mi"
+#              cpu: "250m"
+
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -14,11 +47,9 @@ spec:
                 name: truecharts
                 namespace: flux-system
     releaseName: dozzle
+    serviceAccountName: pod-viewer
     values:
         replicaCount: 1
-        serviceAccount:
-            enabled: true
-            name: pod-viewer
         image:
             repository: amir20/dozzle
             tag: v8.12.4
@@ -31,13 +62,13 @@ spec:
                 hosts:
                     - host: dozzle.${DOMAIN_0}
                       paths:
-                        - path: /
-                          pathType: Prefix
+                          - path: /
+                            pathType: Prefix
         service:
             main:
                 enabled: true
                 ports:
-                    http:
+                    main:
                         enabled: true
                         port: 8080
                         protocol: http

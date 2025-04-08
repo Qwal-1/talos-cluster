@@ -52,7 +52,7 @@ spec:
         replicaCount: 1
         image:
             repository: amir20/dozzle
-            tag: v8.12.4
+            tag: v8.12.5
         env:
             - name: DOZZLE_MODE
               value: "k8s"

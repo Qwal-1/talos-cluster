@@ -57,3 +57,8 @@ spec:
                         enabled: true
                         trigger:
                           schedule: 10 0 * * *
+        resources:
+            requests:
+                memory: 2Gi
+            limits:
+                memory: 24Gi

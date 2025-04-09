@@ -1,6 +1,0 @@
-# rbac.yaml
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: pod-viewer
-  namespace: default

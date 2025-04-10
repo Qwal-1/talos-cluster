@@ -25,6 +25,7 @@ spec:
         workload:
             main:
                 podSpec:
+                    runtimeClassName: "nvidia"
                     containers:
                         main:
                             env:
@@ -32,6 +33,10 @@ spec:
                                 nodeID: "TalosTdarrNode"
                                 serverIP: "tdarr-comm.tdarr.svc.cluster.local"
                                 serverPort: 8266      
+                            resources:
+                                limits:
+                                    memory: 48Gi
+                                    nvidia.com/gpu: 1
         resources:
             requests:
                 cpu: 10m
@@ -39,4 +44,3 @@ spec:
             limits:
                 cpu: 4
                 memory: 24Gi
-                nvidia.com/gpu: 1

@@ -119,8 +119,12 @@ spec:
         resources:
             limits:
                 memory: 16Gi
-                nvidia.com/gpu: 1
         workload:
             main:
                 podSpec:
                     runtimeClassName: "nvidia"
+                    containers:
+                        main:      
+                            resources:
+                                limits:
+                                    nvidia.com/gpu: 1

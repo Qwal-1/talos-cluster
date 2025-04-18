@@ -46,6 +46,9 @@ spec:
                   paths:
                     - path: /
                       pathType: Prefix
+            integrations:
+                traefik:
+                    enabled: false
     configmap:
       kubernetes-dashboard-settings:
         expandObjectName: false

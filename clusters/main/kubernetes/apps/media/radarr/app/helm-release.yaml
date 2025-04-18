@@ -43,6 +43,8 @@ spec:
                             custom:
                                 key: ${RADARR_HOMEPAGE_KEY}
                             enabled: true
+                    traefik:
+                        enabled: false
         persistence:
             config:
                 volsync:

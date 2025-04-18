@@ -52,6 +52,8 @@ spec:
                                 - key: password
                                   value: ${QBIT_PASSWORD}
                             enabled: true
+                    traefik:
+                        enabled: false
                     #traefik:
                     #    enabled: true
                     #    middlewares:

@@ -18,16 +18,15 @@ spec:
         ingress:
             main:
                 enabled: true
+                ingressClassName: internal
+                annotations:
+                    nginx.ingress.kubernetes.io/configuration-snippet: |
+                        rewrite ^/$ /admin permanent;
                 hosts:
                     - host: pihole.${DOMAIN_0}
                       paths:
                         - path: /
                           pathType: Prefix
-                integrations:
-                    traefik:
-                        enabled: true
-                        middlewares:
-                            - name: pihole-admin-redirect
         service:
             main:
                 enabled: true

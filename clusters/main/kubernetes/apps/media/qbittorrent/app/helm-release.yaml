@@ -30,6 +30,7 @@ spec:
         ingress:
             main:
                 enabled: true
+                ingressClassName: internal
                 hosts:
                     - host: qbit.${DOMAIN_0}
                       paths:
@@ -51,10 +52,10 @@ spec:
                                 - key: password
                                   value: ${QBIT_PASSWORD}
                             enabled: true
-                    traefik:
-                        enabled: true
-                        middlewares:
-                            - name: qbittorrent-theme
+                    #traefik:
+                    #    enabled: true
+                    #    middlewares:
+                    #        - name: qbittorrent-theme
         persistence:
             config:
                 volsync:

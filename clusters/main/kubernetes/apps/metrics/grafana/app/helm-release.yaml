@@ -21,6 +21,7 @@ spec:
         ingress:
             main:
                 enabled: true
+                ingressClassName: internal
                 hosts:
                     - host: grafana.${DOMAIN_0}
                       paths:

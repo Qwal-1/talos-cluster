@@ -23,6 +23,7 @@ spec:
         ingress:
             main:
                 enabled: true
+                ingressClassName: internal
                 hosts:
                     - host: blocky.${DOMAIN_0}
                       paths:

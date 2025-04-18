@@ -19,6 +19,7 @@ spec:
         ingress:
             main:
                 enabled: true
+                ingressClassName: internal
                 hosts:
                     - host: tdarr.${DOMAIN_0}
                       paths:

@@ -26,6 +26,7 @@ spec:
         ingress:
             main:
                 enabled: true
+                ingressClassName: internal
                 hosts:
                     - host: komga.${DOMAIN_0}
                       paths:

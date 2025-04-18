@@ -43,7 +43,7 @@ spec:
                             custom:
                                 key: ${MEALIE_HOMEPAGE_KEY}
                             enabled: true
-                    treafik:
+                    traefik:
                         enabled: false
         persistence:
             data:
@@ -64,7 +64,7 @@ spec:
                 backups:
                     enabled: true
                     credentials: minio
-                    revision: "4"
+                    revision: "3"
                 recovery:
                     credentials: minio
-                    revision: "3"
+                    revision: "2"

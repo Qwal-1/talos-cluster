@@ -21,7 +21,7 @@ resources:
   - qdirstat/ks.yaml
   - tdarr
   - homarr/ks.yaml  
-  - metrics
+  - grafana/ks.yaml
   - blocky-ui/ks.yaml
   - anything-llm/ks.yaml
   - ollama/ks.yaml

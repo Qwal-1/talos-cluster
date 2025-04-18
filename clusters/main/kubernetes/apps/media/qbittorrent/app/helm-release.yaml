@@ -30,6 +30,7 @@ spec:
         ingress:
             main:
                 enabled: true
+                ingressClassName: internal
                 hosts:
                     - host: qbit.${DOMAIN_0}
                       paths:

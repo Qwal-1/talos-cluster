@@ -18,6 +18,7 @@ spec:
         ingress:
             main:
                 enabled: true
+                ingressClassName: external
                 hosts:
                     - host: code-ha.${DOMAIN_0}
                       paths:

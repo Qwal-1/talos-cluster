@@ -29,6 +29,7 @@ spec:
         ingress:
             main:
                 enabled: true
+                ingressClassName: internal
                 hosts:
                     - host: homarr.${DOMAIN_0}
                       paths:

@@ -27,6 +27,10 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+                integrations:
+                    traefik:
+                        enabled: false
+
         workload:
             main:
                 podSpec:

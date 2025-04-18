@@ -26,6 +26,9 @@ spec:
                           paths:
                             - path: /
                               pathType: Prefix
+                    integrations:
+                        traefik:
+                            enabled: false
         credentials:
             minio:
                 accessKey: ${MINIO_ACCESSKEY}

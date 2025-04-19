@@ -80,6 +80,14 @@ spec:
               enabled: true
               trigger:
                 schedule: 10 0 * * *
+    workload:
+      main:
+        replicas: 1
+        podSpec:
+          containers:
+            main:
+              env:
+                X_AUTHELIA_CONFIG_FILTERS: template
     authelia:
       theme: auto
       totp:

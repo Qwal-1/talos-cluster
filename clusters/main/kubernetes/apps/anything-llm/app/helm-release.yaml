@@ -25,6 +25,6 @@ spec:
                         - path: /
                           pathType: Prefix
             integrations:
-                enabled: false
+                enabled: true
                 traefik:
                     enabled: false

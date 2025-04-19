@@ -53,7 +53,7 @@ spec:
                   pathType: Prefix
     cnpg:
       main:
-        mode: full
+        mode: standalone
         cluster:
           singleNode: true
         backups:

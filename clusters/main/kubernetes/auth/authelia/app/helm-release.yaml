@@ -53,7 +53,7 @@ spec:
                   pathType: Prefix
     cnpg:
       main:
-        mode: recovery
+        mode: standalone
         cluster:
           singleNode: true
         backups:
@@ -75,7 +75,7 @@ spec:
             type: restic
             credentials: minio
             dest:
-              enabled: true
+              enabled: false
             src:
               enabled: true
               trigger:

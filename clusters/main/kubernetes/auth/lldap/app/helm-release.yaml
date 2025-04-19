@@ -75,7 +75,7 @@ spec:
                 LLDAP_key_file: /data/private_key
     cnpg:
       main:
-        mode: standalone
+        mode: recovery
         cluster:
           singleNode: true
         backups:
@@ -98,7 +98,7 @@ spec:
             type: restic
             credentials: minio
             dest:
-              enabled: false
+              enabled: true
             src:
               enabled: true
               trigger:

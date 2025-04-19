@@ -53,7 +53,7 @@ spec:
                   pathType: Prefix
     cnpg:
       main:
-        mode: standalone
+        mode: recovery
         cluster:
           singleNode: true
         backups:
@@ -75,7 +75,7 @@ spec:
             type: restic
             credentials: minio
             dest:
-              enabled: false
+              enabled: true
             src:
               enabled: true
               trigger:
@@ -121,26 +121,24 @@ spec:
             server_name: smtp.gmail.com
             minimum_version: TLS1.2
             skip_verify: false
-      identity_providers:
-        oidc:
-          ## The other portions of the mandatory OpenID Connect 1.0 configuration go here.
-          ## See: https://www.authelia.com/c/oidc
-          hmac_secret: ${OIDC_HMAC_KEY}
-          jwks:
-            - key: auto
-          clients:
-            - client_id: 'mealie'
-              client_name: 'Mealie'
-              client_secret: ${MEALIE_OIDC_SECRET}
-              public: false
-              authorization_policy: 'two_factor'
-              require_pkce: true
-              pkce_challenge_method: 'S256'
-              redirect_uris:
-                - 'https://mealie.${DOMAIN_0}/login'
-              scopes:
-                - 'openid'
-                - 'email'
-                - 'profile'
-                - 'groups'
-              userinfo_signed_response_alg: 'none'
+      #identity_providers:
+      #  oidc:
+      #    hmac_secret: ${OIDC_HMAC_KEY}
+      #    jwks:
+      #      - key: auto
+      #    clients:
+      #      - client_id: 'mealie'
+      #        client_name: 'Mealie'
+      #        client_secret: ${MEALIE_OIDC_SECRET}
+      #        public: false
+      #        authorization_policy: 'two_factor'
+      #        require_pkce: true
+      #        pkce_challenge_method: 'S256'
+      #        redirect_uris:
+      #          - 'https://mealie.${DOMAIN_0}/login'
+      #        scopes:
+      #          - 'openid'
+      #          - 'email'
+      #          - 'profile'
+      #          - 'groups'
+      #        userinfo_signed_response_alg: 'none'

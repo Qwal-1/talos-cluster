@@ -82,6 +82,7 @@ spec:
                     containers:
                         main:
                             env:
+                                OPENAI_BASE_URL: https://api.openai.com/v1
                                 OPENAI_API_KEY: ${OPENAI_API_KEY}
                                 #OPENAI_BASE_URL: http://ollama-api.ollama:11434/v1
                                 #OPENAI_API_KEY: filler

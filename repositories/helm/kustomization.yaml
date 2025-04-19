@@ -15,4 +15,4 @@ resources:
   - truecharts.yaml
 # more goes here!
   - nvdp.yaml
-  - nvidia-charts.yaml
+  - nvidia-dcgm.yaml

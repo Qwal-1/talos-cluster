@@ -1,8 +1,8 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: nvidia-charts
+  name: nvidia-dcgm
   namespace: flux-system
 spec:
   interval: 5m
-  url: https://nvidia.github.io/gpu-monitoring-tools/helm-charts
+  url: https://nvidia.github.io/dcgm-exporter/helm-charts

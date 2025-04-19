@@ -127,8 +127,7 @@ spec:
           ## See: https://www.authelia.com/c/oidc
           hmac_secret: ${OIDC_HMAC_KEY}
           jwks:
-            - key: |
-                {{- fileContent "/config/jwks/rsa.2048.cert" | nindent 8 }}
+            - key: auto
           clients:
             - client_id: 'mealie'
               client_name: 'Mealie'

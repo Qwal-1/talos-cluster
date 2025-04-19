@@ -8,10 +8,10 @@ spec:
   chart:
     spec:
       chart: dcgm-exporter
-      version: 3.1.7
+      version: 4.1.0
       sourceRef:
         kind: HelmRepository
-        name: nvidia-charts
+        name: nvidia-dcgm
         namespace: flux-system
       interval: 5m
   install:

@@ -1,0 +1,123 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: authelia
+  namespace: authelia
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: authelia
+      version: 27.1.5
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 15m
+  timeout: 5m
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    credentials:
+      minio:
+        accessKey: ${MINIO_ACCESSKEY}
+        bucket: ${MINIO_BUCKET}
+        encrKey: ${MINIO_ENCRKEY}
+        secretKey: ${MINIO_SECRETKEY}
+        type: s3
+        url: ${MINIO_URL}
+    ingress:
+        main:
+          enabled: true
+          ingressClassName: external
+          integrations:
+            traefik:
+              enabled: false
+            certManager:
+              enabled: true
+              certificateIssuer: domain-0-le-prod
+          hosts:
+            - host: auth.${DOMAIN_0}
+              paths:
+                - path: /
+                  pathType: Prefix
+    cnpg:
+      main:
+        mode: full
+        cluster:
+          singleNode: true
+        backups:
+          enabled: true
+          credentials: minio
+          scheduledBackups:
+            - name: daily-backup
+              schedule: "0 5 0 * * *"
+              backupOwnerReference: self
+              immediate: true
+              suspend: false
+        recovery:
+          method: object_store
+          credentials: minio
+    persistence:
+      config:
+        volsync:
+          - name: config
+            type: restic
+            credentials: minio
+            dest:
+              enabled: false
+            src:
+              enabled: true
+              trigger:
+                schedule: 10 0 * * *
+    authelia:
+      theme: auto
+      totp:
+        issuer: ${DOMAIN_0}
+      authentication_backend:
+        ldap:
+          address: ldap://lldap-ldap.lldap.svc.cluster.local:3890
+          tls:
+            server_name: lldap.${DOMAIN_1}
+          base_dn: DC=${DN},DC=${DC}
+          attributes:
+            username: uid
+          additional_users_dn: ou=people
+          users_filter: (&(|({username_attribute}={input})({mail_attribute}={input}))(objectClass=person))
+          additional_groups_dn: ou=groups
+          groups_filter: (member={dn})
+          user: uid=admin,ou=people,dc=${DN},dc=${DC}
+          password: ${LLDAP_PASSWORD}
+      access_control:
+        rules:
+        - domain:
+            - ${DOMAIN_0}
+            - '*.${DOMAIN_0}'
+          policy: two_factor
+          subject:
+            - 'group:admin'
+      session:
+        cookies:
+          - domain: '${DOMAIN_0}'
+            authelia_url: 'https://auth.${DOMAIN_0}'
+          #  default_redirection_url: 'https://www.${DOMAIN_0}'
+      notifier:
+        smtp:
+          address: submission://smtp.gmail.com:587
+          username: ${SMTP_USER}
+          password: ${SMTP_PASSWORD_AUTHELIA}
+          sender: no-reply@${DOMAIN_0}
+          tls:
+            server_name: smtp.gmail.com
+            minimum_version: TLS1.2
+            skip_verify: false

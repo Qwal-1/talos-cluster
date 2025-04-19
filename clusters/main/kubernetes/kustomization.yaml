@@ -8,3 +8,4 @@ resources:
   - system
   - flux-system
   - networking
+  - auth

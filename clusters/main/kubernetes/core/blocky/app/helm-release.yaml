@@ -99,3 +99,9 @@ spec:
     prometheus:
       enable: true
       path: /metrics
+
+    
+    customDNS:
+      mapping:
+        ${WEBSITE1_NAME}: ${WEBSITE1_IP}
+        ${WEBSITE2_NAME}: ${WEBSITE2_IP}

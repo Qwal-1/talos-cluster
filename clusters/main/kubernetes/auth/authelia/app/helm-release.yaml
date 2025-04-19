@@ -144,7 +144,7 @@ spec:
               require_pkce: true
               pkce_challenge_method: 'S256'
               redirect_uris:
-                - 'https://mealie.${DOMAIN_0}/login'
+                - 'https://food.${DOMAIN_0}/login'
               scopes:
                 - 'openid'
                 - 'email'

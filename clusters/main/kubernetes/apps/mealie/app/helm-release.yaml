@@ -88,3 +88,11 @@ spec:
                                 #OPENAI_API_KEY: filler
                                 #OPENAI_MODEL: gemma3:latest
                                 #OPENAI_REQUEST_TIMEOUT: 600 #doesn't work
+                                OIDC_AUTH_ENABLED: true
+                                OIDC_SIGNUP_ENABLED: true
+                                OIDC_CONFIGURATION_URL: https://auth.${DOMAIN_0}/.well-known/openid-configuration
+                                OIDC_CLIENT_ID: mealie
+                                OIDC_CLIENT_SECRET: insecure_secret
+                                OIDC_AUTO_REDIRECT: false
+                                OIDC_ADMIN_GROUP: mealie-admins
+                                OIDC_USER_GROUP: mealie-users

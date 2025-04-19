@@ -85,4 +85,4 @@ spec:
                                 OPENAI_BASE_URL: http://ollama-api.ollama:11434/v1
                                 OPENAI_API_KEY: filler
                                 OPENAI_MODEL: gemma3:latest
-                                OPENAI_REQUEST_TIMEOUT: 600
+                                OPENAI_REQUEST_TIMEOUT: 300

@@ -138,7 +138,7 @@ spec:
           clients:
             - client_id: 'mealie'
               client_name: 'Mealie'
-              client_secret: ${MEALIE_OIDC_SECRET}
+              client_secret: '${MEALIE_OIDC_SECRET}'
               public: false
               authorization_policy: 'two_factor'
               require_pkce: true

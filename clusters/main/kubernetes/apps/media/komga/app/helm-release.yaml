@@ -94,7 +94,7 @@ spec:
                 registration:
                   authelia:
                     client-id: 'komga'
-                    client-secret: 'insecure_secret'
+                    client-secret: ${OIDC_KOMGA_INSECURE_SECRET}
                     client-name: 'Authelia'
                     scope: 'openid,profile,email'
                     authorization-grant-type: 'authorization_code'

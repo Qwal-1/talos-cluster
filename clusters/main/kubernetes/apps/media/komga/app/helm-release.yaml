@@ -78,22 +78,22 @@ spec:
                 existingClaim: media-nfs-pvc
                 mountPath: "/media"
 
-        komga:
-          ## Comment if you don't want automatic account creation.
-          oauth2-account-creation: true
         spring:
           security:
             oauth2:
               client:
                 registration:
-                  authelia:
-                    client-id: 'komga'
-                    client-secret: ${OIDC_KOMGA_INSECURE_SECRET}
-                    client-name: 'Authelia'
-                    scope: 'openid,profile,email'
-                    authorization-grant-type: 'authorization_code'
+                  authelia:  # Match this to the provider name below
+                    provider: authelia  # This must match the provider configuration below
+                    client-id: komga  
+                    client-secret: ${OIDC_KOMGA_INSECURE_SECRET}  
+                    client-name: Authelia  
+                    scope: openid,profile,email 
+                    authorization-grant-type: authorization_code
+                    # The placeholders will be replaced automatically
                     redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
-                provider:
-                  authelia:
-                    issuer-uri: 'https://auth.${DOMAIN_0}'
-                    user-name-attribute: 'preferred_username'
+        
+              provider:
+                authelia:  # This must match the provider name above
+                  user-name-attribute: preferred_username  # The attribute you want to use from the token
+                  issuer-uri: https://auth.${DOMAIN_0}  

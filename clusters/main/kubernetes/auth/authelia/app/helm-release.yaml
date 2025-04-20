@@ -157,7 +157,7 @@ spec:
               public: false
               authorization_policy: 'two_factor'
               redirect_uris:
-                - 'https://komga.example.com/login/oauth2/code/authelia'
+                - 'https://komga.${DOMAIN_0}/login/oauth2/code/authelia'
               scopes:
                 - 'openid'
                 - 'profile'

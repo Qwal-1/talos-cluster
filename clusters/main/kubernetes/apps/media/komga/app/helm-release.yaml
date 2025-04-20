@@ -54,6 +54,8 @@ spec:
                                 - key: password
                                   value: ${KOMGA_PASSWORD}
                             enabled: true
+                    traefik:
+                        enabled: false
         persistence:
             config:
                 volsync:

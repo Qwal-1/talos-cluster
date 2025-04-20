@@ -92,7 +92,7 @@ spec:
                     client-name: 'Authelia'
                     scope: 'openid,profile,email'
                     authorization-grant-type: 'authorization_code'
-                    redirect-uri: "{baseScheme}://{baseHost}{basePort}{basePath}/login/oauth2/code/authelia"
+                    redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
                 provider:
                   authelia:
                     issuer-uri: 'https://auth.${DOMAIN_0}'

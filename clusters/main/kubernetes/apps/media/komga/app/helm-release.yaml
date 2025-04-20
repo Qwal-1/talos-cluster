@@ -78,23 +78,41 @@ spec:
                 existingClaim: media-nfs-pvc
                 mountPath: "/media"
 
-        komga:
-          spring:
-            security:
-              oauth2:
-                client:
-                  registration:
-                    authelia:  # Match this to the provider name below
-                      provider: authelia  # This must match the provider configuration below
-                      client-id: komga  
-                      client-secret: ${OIDC_KOMGA_INSECURE_SECRET}  
-                      client-name: Authelia  
-                      scope: openid,profile,email 
-                      authorization-grant-type: authorization_code
-                      # The placeholders will be replaced automatically
-                      redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
-          
-                provider:
-                  authelia:  # This must match the provider name above
-                    user-name-attribute: preferred_username  # The attribute you want to use from the token
-                    issuer-uri: https://auth.${DOMAIN_0}  
+        workload:
+          main:
+            podSpec:
+              containers:
+                main:
+                  env:
+                    KOMGA_OAUTH2_ACCOUNT_CREATION: true
+
+                    SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_AUTHELIA_CLIENT_ID: komga
+                    SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_AUTHELIA_CLIENT_SECRET: ${OIDC_KOMGA_INSECURE_SECRET}
+                    SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_AUTHELIA_CLIENT_NAME: "Authelia"
+                    SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_AUTHELIA_SCOPE: "openid,profile,email"
+                    SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_AUTHELIA_AUTHORIZATION_GRANT_TYPE: "authorization_code"
+                    SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_AUTHELIA_REDIRECT_URI: "{baseScheme}://{baseHost}{basePort}{basePath}/login/oauth2/code/authelia"
+
+                    SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_AUTHELIA_ISSUER_URI: "https://auth.${DOMAIN_0}.ch"
+                    SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_AUTHELIA_USER_NAME_ATTRIBUTE: "preferred_username"
+
+        #komga:
+        #  spring:
+        #    security:
+        #      oauth2:
+        #        client:
+        #          registration:
+        #            authelia:  # Match this to the provider name below
+        #              provider: authelia  # This must match the provider configuration below
+        #              client-id: komga  
+        #              client-secret: ${OIDC_KOMGA_INSECURE_SECRET}  
+        #              client-name: Authelia  
+        #              scope: openid,profile,email 
+        #              authorization-grant-type: authorization_code
+        #              # The placeholders will be replaced automatically
+        #              redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
+        #  
+        #        provider:
+        #          authelia:  # This must match the provider name above
+        #            user-name-attribute: preferred_username  # The attribute you want to use from the token
+        #            issuer-uri: https://auth.${DOMAIN_0}  

@@ -27,6 +27,12 @@ spec:
             main:
                 enabled: true
                 ingressClassName: internal
+                annotations:
+                    nginx.ingress.kubernetes.io/auth-method: 'GET'
+                    nginx.ingress.kubernetes.io/auth-url: 'http://authelia.authelia.svc.cluster.local:9091/api/verify'
+                    nginx.ingress.kubernetes.io/auth-signin: 'https://auth.${DOMAIN_0}?rm=$request_method'
+                    nginx.ingress.kubernetes.io/auth-response-headers: 'Remote-User,Remote-Name,Remote-Groups,Remote-Email'
+
                 hosts:
                     - host: komga.${DOMAIN_0}
                       paths:
@@ -75,3 +81,23 @@ spec:
                 enabled: true
                 existingClaim: media-nfs-pvc
                 mountPath: "/media"
+
+        komga:
+          ## Comment if you don't want automatic account creation.
+          oauth2-account-creation: true
+        spring:
+          security:
+            oauth2:
+              client:
+                registration:
+                  authelia:
+                    client-id: 'komga'
+                    client-secret: 'insecure_secret'
+                    client-name: 'Authelia'
+                    scope: 'openid,profile,email'
+                    authorization-grant-type: 'authorization_code'
+                    redirect-uri: "{baseScheme}://{baseHost}{basePort}{basePath}/login/oauth2/code/authelia"
+                provider:
+                  authelia:
+                    issuer-uri: 'https://auth.${DOMAIN_0}'
+                    user-name-attribute: 'preferred_username'

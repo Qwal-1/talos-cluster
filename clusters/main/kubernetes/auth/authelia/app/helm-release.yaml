@@ -151,3 +151,17 @@ spec:
                 - 'profile'
                 - 'groups'
               userinfo_signed_response_alg: 'none'
+            - client_id: 'komga'
+              client_name: 'Komga'
+              client_secret: ${OIDC_KOMGA_SECRET}
+              public: false
+              authorization_policy: 'two_factor'
+              redirect_uris:
+                - 'https://komga.example.com/login/oauth2/code/authelia'
+              scopes:
+                - 'openid'
+                - 'profile'
+                - 'email'
+              grant_types:
+                - 'authorization_code'
+              userinfo_signed_response_alg: 'none'

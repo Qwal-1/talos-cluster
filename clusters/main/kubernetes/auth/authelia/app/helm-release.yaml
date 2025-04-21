@@ -151,6 +151,7 @@ spec:
                 - 'profile'
                 - 'groups'
               userinfo_signed_response_alg: 'none'
+              consent_mode: 'implicit'
             - client_id: 'komga'
               client_name: 'Komga'
               client_secret: ${OIDC_KOMGA_SECRET}
@@ -165,3 +166,4 @@ spec:
               grant_types:
                 - 'authorization_code'
               userinfo_signed_response_alg: 'none'
+              consent_mode: 'implicit'

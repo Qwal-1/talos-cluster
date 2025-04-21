@@ -104,9 +104,3 @@ spec:
       mapping:
         - domain: ${WEBSITE1_NAME}
           dnsserver: ${WEBSITE1_IP}
-        - domain: ${WEBSITE2_NAME}
-          dnsserver: ${WEBSITE2_IP}
-        - domain: ${WEBSITE4_NAME}
-          dnsserver: ${WEBSITE4_IP}
-        - domain: ${WEBSITE5_NAME}
-          dnsserver: ${WEBSITE5_IP}

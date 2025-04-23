@@ -75,28 +75,16 @@ spec:
                 existingClaim: media-nfs-pvc
                 mountPath: "/media"
         podSpec:
-            containers:
-                - name: qbittorrent
-                  volumeMounts:
-                    - name: custom-hosts
-                      mountPath: /etc/hosts
-                      subPath: hosts
-            volumes:
-                - name: custom-hosts
-                  configMap:
-                    name: custom-hosts-config
-        configMap:
-            custom-hosts-config:
-                data:
-                    hosts: |
-                        # Kubernetes-managed hosts file.
-                        127.0.0.1       localhost
-                        ::1     localhost ip6-localhost ip6-loopback
-                        fe00::0 ip6-localnet
-                        fe00::0 ip6-mcastprefix
-                        fe00::1 ip6-allnodes
-                        fe00::2 ip6-allrouters
-                        172.16.0.238    qbittorrent-6fff7d49c9-r8scl
-                        ${WEBSITE1_IP}   ${WEBSITE1_NAME} ${WEBSITE2_NAME}
-                        ${WEBSITE2_IP}   ${WEBSITE3_NAME} ${WEBSITE4_NAME}
-                        ${WEBSITE3_IP}   ${WEBSITE3_NAME} ${WEBSITE4_NAME}
+            hostAliases:
+                - ip: "${WEBSITE1_IP}"
+                  hostnames:
+                    - "${WEBSITE1_NAME}"
+                    - "${WEBSITE2_NAME}"
+                - ip: "${WEBSITE2_IP}"
+                  hostnames:
+                    - "${WEBSITE3_NAME}"
+                    - "${WEBSITE4_NAME}"
+                - ip: "${WEBSITE3_IP}"
+                  hostnames:
+                    - "${WEBSITE3_NAME}"
+                    - "${WEBSITE4_NAME}"

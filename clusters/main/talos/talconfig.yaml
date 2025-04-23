@@ -88,6 +88,7 @@ controlPlane:
 worker:
     patches:
         - '@./patches/worker.yaml'
+        - '@./patches/hosts.yaml'
     kernelModules:
      - name: nvme_tcp
      - name: vfio_pci

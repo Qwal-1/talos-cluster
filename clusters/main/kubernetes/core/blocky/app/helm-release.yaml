@@ -102,13 +102,15 @@ spec:
 
     customDNS:
       mapping:
-        ${WEBSITE1_NAME}:
-          - ${WEBSITE1_IP}
-        ${WEBSITE2_NAME}:
-          - ${WEBSITE1_IP}
-        ${WEBSITE3_NAME}:
-          - ${WEBSITE2_IP}
-          - ${WEBSITE3_IP}
-        ${WEBSITE4_NAME}:
-          - ${WEBSITE2_IP}
-          - ${WEBSITE3_IP}
+        - domain: "${WEBSITE3_NAME}"
+          dnsserver: "${WEBSITE2_IP}"
+        - domain: "${WEBSITE3_NAME}"
+          dnsserver: "${WEBSITE3_IP}"
+        - domain: "${WEBSITE4_NAME}"
+          dnsserver: "${WEBSITE2_IP}"
+        - domain: "${WEBSITE4_NAME}"
+          dnsserver: "${WEBSITE3_IP}"
+        - domain: "${WEBSITE1_NAME}"
+          dnsserver: "${WEBSITE1_IP}"
+        - domain: "${WEBSITE2_NAME}"
+          dnsserver: "${WEBSITE1_IP}"

@@ -74,17 +74,19 @@ spec:
                 enabled: true
                 existingClaim: media-nfs-pvc
                 mountPath: "/media"
-        podSpec:
-            hostAliases:
-                - ip: "${WEBSITE1_IP}"
-                  hostnames:
-                    - "${WEBSITE1_NAME}"
-                    - "${WEBSITE2_NAME}"
-                - ip: "${WEBSITE2_IP}"
-                  hostnames:
-                    - "${WEBSITE3_NAME}"
-                    - "${WEBSITE4_NAME}"
-                - ip: "${WEBSITE3_IP}"
-                  hostnames:
-                    - "${WEBSITE3_NAME}"
-                    - "${WEBSITE4_NAME}"
+        workload:
+            main:
+                podSpec:
+                    hostAliases:
+                    - ip: "${WEBSITE1_IP}"
+                      hostnames:
+                        - "${WEBSITE1_NAME}"
+                        - "${WEBSITE2_NAME}"
+                    - ip: "${WEBSITE2_IP}"
+                      hostnames:
+                        - "${WEBSITE3_NAME}"
+                        - "${WEBSITE4_NAME}"
+                    - ip: "${WEBSITE3_IP}"
+                      hostnames:
+                        - "${WEBSITE3_NAME}"
+                        - "${WEBSITE4_NAME}"

@@ -38,6 +38,8 @@ spec:
                         - path: /
                           pathType: Prefix
                 integrations:
+                    traefik:
+                        enabled: false
                     homepage:
                         description: ""
                         enabled: true

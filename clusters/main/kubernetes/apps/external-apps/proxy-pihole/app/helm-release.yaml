@@ -34,6 +34,12 @@ spec:
                         if ($allow_bypass = 1) {
                             set $upstream_auth "";
                         }
+
+                        # Redirect the root path to /admin permanently
+                        if ($request_uri = "/") {
+                            return 301 /admin;
+                        }
+
                 hosts:
                     - host: pihole.${DOMAIN_0}
                       paths:

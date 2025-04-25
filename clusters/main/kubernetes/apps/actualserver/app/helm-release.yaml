@@ -45,6 +45,18 @@ spec:
                             enabled: false
                     traefik:
                         enabled: false
+        persistence:
+            data:
+                #volsync:
+                #    - credentials: minio
+                #      type: restic
+                #      name: config
+                #      dest:
+                #        enabled: true
+                #      src:
+                #        enabled: true
+                #        trigger:
+                #          schedule: 5 0 * * *
         workload:
           main:
             podSpec:
@@ -55,15 +67,3 @@ spec:
                     ACTUAL_OPENID_CLIENT_ID: actual-budget
                     ACTUAL_OPENID_CLIENT_SECRET: ${OIDC_ACTUAL_INSECURE_SECRET}
                     ACTUAL_OPENID_CLIENT_SERVER_HOSTNAME: "https://actual.${DOMAIN_0}"
-        persistence:
-            data:
-                volsync:
-                    - credentials: minio
-                      type: restic
-                      name: config
-                      dest:
-                        enabled: true
-                      src:
-                        enabled: true
-                        trigger:
-                          schedule: 5 0 * * *

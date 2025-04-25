@@ -51,11 +51,10 @@ spec:
               containers:
                 main:
                   env:
-                    TEST: TEST
-                    #ACTUAL_OPENID_DISCOVERY_URL: "https://auth.${DOMAIN_0}/.well-known/openid-configuration"
-                    #ACTUAL_OPENID_CLIENT_ID: actual-budget
-                    #ACTUAL_OPENID_CLIENT_SECRET: ${OIDC_ACTUAL_INSECURE_SECRET}
-                    #ACTUAL_OPENID_CLIENT_SERVER_HOSTNAME: "https://actual.${DOMAIN_0}"
+                    ACTUAL_OPENID_DISCOVERY_URL: "https://auth.${DOMAIN_0}/.well-known/openid-configuration"
+                    ACTUAL_OPENID_CLIENT_ID: actual-budget
+                    ACTUAL_OPENID_CLIENT_SECRET: ${OIDC_ACTUAL_INSECURE_SECRET}
+                    ACTUAL_OPENID_CLIENT_SERVER_HOSTNAME: "https://actual.${DOMAIN_0}"
         persistence:
             data:
                 volsync:

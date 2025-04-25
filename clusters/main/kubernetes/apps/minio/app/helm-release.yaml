@@ -50,7 +50,7 @@ spec:
               main:
                 env:
                   MINIO_ROOT_USER: ${MINIO_ROOT_USER}
-                  MINIO_BROWSER_REDIRECT_URL: ""
+                  MINIO_BROWSER_REDIRECT_URL: https://minio.${DOMAIN_0}
                   MINIO_SERVER_URL: ""
                   MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
                   MINIO_IDENTITY_OPENID_CONFIG_URL: 'https://auth.${DOMAIN_0}/.well-known/openid-configuration'
@@ -60,5 +60,5 @@ spec:
                   MINIO_IDENTITY_OPENID_CLAIM_USERINFO: 'on'
                   MINIO_IDENTITY_OPENID_CLAIM_NAME: 'groups'
                   MINIO_IDENTITY_OPENID_SCOPES: 'openid,profile,email,groups'
-                  MINIO_IDENTITY_OPENID_REDIRECT_URI: 'https://minio.auth.${DOMAIN_0}/oauth_callback'
+                  #MINIO_IDENTITY_OPENID_REDIRECT_URI: 'https://minio.auth.${DOMAIN_0}/oauth_callback'
                   MINIO_IDENTITY_OPENID_REDIRECT_URI_DYNAMIC: 'off'

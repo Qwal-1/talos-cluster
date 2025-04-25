@@ -45,7 +45,7 @@ spec:
                     - host: pihole.${DOMAIN_0}
                       paths:
                         - path: /api(/|$)(.*)
-                          pathType: Prefix
+                          pathType: ImplementationSpecific
                 integrations:
                     traefik:
                         enabled: false

@@ -41,14 +41,14 @@ spec:
             api:
                 enabled: true
                 ingressClassName: internal
-                annotations:
-                nginx.ingress.kubernetes.io/configuration-snippet: |
-                    # This ingress has no auth annotations and allows unauthenticated access to /api
                 hosts:
                     - host: pihole.${DOMAIN_0}
                       paths:
                         - path: /api(/|$)(.*)
                           pathType: Prefix
+                integrations:
+                    traefik:
+                        enabled: false
         service:
             main:
                 enabled: true

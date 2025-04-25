@@ -42,17 +42,6 @@ spec:
                 integrations:
                     traefik:
                         enabled: false
-            api:
-                enabled: true
-                ingressClassName: internal
-                hosts:
-                    - host: pihole.${DOMAIN_0}
-                      paths:
-                        - path: /api(/|$)(.*)
-                          pathType: ImplementationSpecific
-                integrations:
-                    traefik:
-                        enabled: false
         service:
             main:
                 enabled: true

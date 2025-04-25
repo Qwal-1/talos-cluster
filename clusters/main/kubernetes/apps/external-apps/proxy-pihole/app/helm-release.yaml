@@ -25,16 +25,6 @@ spec:
                     nginx.ingress.kubernetes.io/auth-signin: 'https://auth.${DOMAIN_0}?rm=$request_method'
                     nginx.ingress.kubernetes.io/auth-response-headers: 'Remote-User,Remote-Name,Remote-Groups,Remote-Email'
                     nginx.ingress.kubernetes.io/configuration-snippet: |
-                        # Skip authentication for /api paths and subpaths
-                        if ($request_uri ~ ^/api/) {
-                            set $allow_bypass 1;
-                        }
-
-                        # If $allow_bypass is set to 1, disable authentication
-                        if ($allow_bypass = 1) {
-                            set $upstream_auth "";
-                        }
-
                         # Redirect the root path to /admin permanently
                         if ($request_uri = "/") {
                             return 301 /admin;
@@ -48,6 +38,17 @@ spec:
                 integrations:
                     traefik:
                         enabled: false
+            api:
+                enabled: true
+                ingressClassName: internal
+                annotations:
+                nginx.ingress.kubernetes.io/configuration-snippet: |
+                    # This ingress has no auth annotations and allows unauthenticated access to /api
+                hosts:
+                    - host: pihole.${DOMAIN_0}
+                      paths:
+                        - path: /api(/|$)(.*)
+                          pathType: Prefix
         service:
             main:
                 enabled: true

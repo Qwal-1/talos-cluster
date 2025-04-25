@@ -26,10 +26,16 @@ spec:
                     paths:
                       - path: /
                         pathType: Prefix
+              integrations:
+                  traefik:
+                    enabled: false
           api:
               enabled: true
               hosts:
                   - host: api-minio.${DOMAIN_0}
+              integrations:
+                  traefik:
+                    enabled: false
       persistence:
         config:
           enabled: true

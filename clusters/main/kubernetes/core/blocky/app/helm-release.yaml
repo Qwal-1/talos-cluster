@@ -100,7 +100,7 @@ spec:
       enable: true
       path: /metrics
 
-    customDNS:
-      #mapping:
-      #  - domain: "${WEBSITE1_NAME}"
-      #    dnsserver: "${WEBSITE1_IP}"
+    #customDNS:
+    #   mapping:
+    #     - domain: "${WEBSITE1_NAME}"
+    #       dnsserver: "${WEBSITE1_IP}"

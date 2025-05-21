@@ -79,3 +79,5 @@ spec:
       replicas: 1
       rollOutPods: true
     rollOutCiliumPods: true
+    image:
+      pullPolicy: Always

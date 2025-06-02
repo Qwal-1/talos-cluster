@@ -1,7 +1,7 @@
 apiVersion: longhorn.io/v1beta2
 kind: RecurringJob
 metadata:
-  name: trim
+  name: trim-2
   namespace: longhorn-system
 spec:
   concurrency: 1

@@ -6,8 +6,8 @@ metadata:
 spec:
   concurrency: 1
   cron: 30 22 * * *
-  #groups:
-  #- default
+  groups:
+  - default
   name: cleanup
   retain: 0
   task: snapshot-cleanup

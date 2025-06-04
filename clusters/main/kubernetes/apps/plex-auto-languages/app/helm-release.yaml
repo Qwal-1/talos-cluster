@@ -23,4 +23,7 @@ spec:
                             env:
                                 PLEX_TOKEN: ${PLEX_AL_PLEX_TOKEN}
                                 PLEX_URL: ${PLEX_AL_PLEX_URL}
+        persistence:
+            config:
+                size: 10Gi
 

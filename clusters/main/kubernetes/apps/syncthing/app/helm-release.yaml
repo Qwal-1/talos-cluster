@@ -30,6 +30,7 @@ spec:
         persistence:
             data:
                 enabled: true
+                mountPath: /data
                 path: ${DEFAULT_STORAGE_PATH}
                 server: ${TRUENAS_IP}
                 type: nfs

@@ -28,12 +28,9 @@ spec:
                     traefik:
                         enabled: false
         persistence:
-            data:
+            config:
                 enabled: true
-                type: nfs
-                path: ${SYNCTHING_STORAGE_PATH}
-                server: ${TRUENAS_IP}
+                path: ${MINIO_DATA_PATH}
                 mountPath: "/data"
-                readOnly: false
-                mountOptions:
-                    - nfsvers=4.1
+                server: ${TRUENAS_IP}
+                type: nfs

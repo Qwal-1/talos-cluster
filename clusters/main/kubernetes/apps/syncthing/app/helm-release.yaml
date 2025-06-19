@@ -27,10 +27,3 @@ spec:
                 integrations:
                     traefik:
                         enabled: false
-        persistence:
-            config:
-                enabled: true
-                path: ${MINIO_DATA_PATH}
-                mountPath: "/data"
-                server: ${TRUENAS_IP}
-                type: nfs

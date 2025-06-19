@@ -30,7 +30,10 @@ spec:
         persistence:
             data:
                 enabled: true
-                path: ${DEFAULT_STORAGE_PATH}
-                mountPath: "/data"
-                server: ${TRUENAS_IP}
                 type: nfs
+                path: ${SYNCTHING_STORAGE_PATH}
+                server: ${TRUENAS_IP}
+                mountPath: "/data"
+                readOnly: false
+                mountOptions:
+                    - nfsvers=4.1

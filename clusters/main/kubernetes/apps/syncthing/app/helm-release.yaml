@@ -30,6 +30,6 @@ spec:
         persistence:
             data:
                 enabled: true
-                path: ${DEFAULT_STORAGE_PATH}/Syncthing/
+                path: ${DEFAULT_STORAGE_PATH}
                 server: ${TRUENAS_IP}
                 type: nfs

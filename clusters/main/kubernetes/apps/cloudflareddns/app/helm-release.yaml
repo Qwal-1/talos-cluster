@@ -40,6 +40,9 @@ spec:
                 - domain: flux-webhook.${DOMAIN_0}
                   record: A
                   zone: ${DOMAIN_0}
+                - domain: sync.${DOMAIN_0}
+                  record: A
+                  zone: ${DOMAIN_0}
             interval: 3600
             log_level: 3
             user: ${DOMAIN_0_EMAIL}

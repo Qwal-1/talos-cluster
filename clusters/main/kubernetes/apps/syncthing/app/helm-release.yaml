@@ -27,3 +27,9 @@ spec:
                 integrations:
                     traefik:
                         enabled: false
+        persistence:
+            media:
+                enabled: true
+                path: ${DEFAULT_STORAGE_PATH}/Syncthing
+                server: ${TRUENAS_IP}
+                type: nfs

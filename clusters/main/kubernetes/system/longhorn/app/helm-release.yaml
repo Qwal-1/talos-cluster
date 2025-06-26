@@ -24,6 +24,15 @@ spec:
     remediation:
       retries: 3
   values:
+    # Temporary fix
+    image:
+      longhorn:
+        manager:
+          tag: v1.9.0-hotfix-1
+    preUpgradeChecker:
+      jobEnabled: true
+      upgradeVersionCheck: false
+    # End of Temp fix
     defaultSettings:
       # Increase to 3 for a multi-node cluster
       defaultReplicaCount: 1

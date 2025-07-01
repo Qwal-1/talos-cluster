@@ -41,7 +41,7 @@ spec:
                         name: ""
                         widget:
                             custom:
-                                key: ${GHOSTFOLIO_HOMEPAGE_APIKEY}
+                                key: d #${GHOSTFOLIO_HOMEPAGE_APIKEY}
                             enabled: true
                     traefik:
                         enabled: false

@@ -78,6 +78,10 @@ spec:
         mode: recovery
         cluster:
           singleNode: true
+          bootstrap:
+            recovery:
+              source: backup
+              target: latest
         backups:
           enabled: true
           credentials: minio

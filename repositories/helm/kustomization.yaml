@@ -14,5 +14,3 @@ resources:
   - spegel.yaml
   - truecharts.yaml
 # more goes here!
-  - nvdp.yaml
-  - nvidia-dcgm.yaml

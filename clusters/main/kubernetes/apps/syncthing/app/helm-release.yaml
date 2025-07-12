@@ -24,9 +24,6 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
-                integrations:
-                    traefik:
-                        enabled: false
         persistence:
             media:
                 enabled: true

@@ -26,9 +26,6 @@ spec:
                           paths:
                             - path: /
                               pathType: Prefix
-                    integrations:
-                        traefik:
-                            enabled: false
         credentials:
             minio:
                 accessKey: ${MINIO_ACCESSKEY}
@@ -51,9 +48,6 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
-                integrations:
-                    traefik:
-                        enabled: false
         persistence:
             config:
                 volsync:

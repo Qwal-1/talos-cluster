@@ -43,8 +43,6 @@ spec:
                             custom:
                                 key: ""
                             enabled: false
-                    traefik:
-                        enabled: false
         persistence:
             data:
                 volsync:

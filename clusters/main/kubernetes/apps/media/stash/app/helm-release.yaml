@@ -43,8 +43,6 @@ spec:
                             custom:
                                 key: ${STASH_HOMEPAGE_KEY}
                             enabled: true
-                    traefik:
-                        enabled: false
         persistence:
             blobs:
                 volsync:

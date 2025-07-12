@@ -54,8 +54,6 @@ spec:
                             custom:
                                 key: ${PLEX_HOMEPAGE_KEY}
                             enabled: true
-                    traefik:
-                        enabled: false
         persistence:
             config:
                 mountPath: /config

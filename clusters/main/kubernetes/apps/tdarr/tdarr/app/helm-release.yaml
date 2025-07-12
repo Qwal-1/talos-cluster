@@ -41,8 +41,6 @@ spec:
                             custom:
                                 key: ""
                             enabled: true
-                    traefik:
-                        enabled: false
         persistence:
             media:
                 enabled: true

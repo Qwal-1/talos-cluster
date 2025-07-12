@@ -41,9 +41,6 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
-                integrations:
-                    traefik:
-                        enabled: false
         persistence:
             config:
                 volsync:

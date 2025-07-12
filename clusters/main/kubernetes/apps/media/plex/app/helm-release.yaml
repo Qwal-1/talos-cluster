@@ -74,7 +74,7 @@ spec:
             #    enabled: false
             media:
                 enabled: true
-                existingClaim: media-nfs-pvc
+                existingClaim: nfs-media-pvc
                 mountPath: "/media"
         plex:
             serverIP: ${PLEX_IP}

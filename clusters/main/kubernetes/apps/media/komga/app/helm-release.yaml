@@ -73,7 +73,7 @@ spec:
                           schedule: 15 0 * * *
             media:
                 enabled: true
-                existingClaim: media-nfs-pvc
+                existingClaim: nfs-media-pvc
                 mountPath: "/media"
 
         workload:

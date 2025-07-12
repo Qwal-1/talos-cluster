@@ -112,7 +112,7 @@ spec:
                           schedule: 25 0 * * *
             media:
                 enabled: true
-                existingClaim: media-nfs-pvc
+                existingClaim: nfs-media-pvc
                 mountPath: "/media"
             venv:
                 enabled: true

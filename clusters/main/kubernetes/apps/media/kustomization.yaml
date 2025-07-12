@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
 
   - namespace.yaml
-  - media-nfs-pvc.yaml
+  - nfs-media-pvc.yaml
   - plex/ks.yaml
   - prowlarr/ks.yaml
   - qbittorrent/ks.yaml

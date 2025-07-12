@@ -41,6 +41,7 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+                integrations:
                     homepage:
                         description: ""
                         enabled: true

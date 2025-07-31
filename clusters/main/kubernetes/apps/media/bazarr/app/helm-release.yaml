@@ -48,10 +48,10 @@ spec:
                         group: Media Management
                         icon: ""
                         name: ""
-                        #widget:
-                        #    custom:
-                        #        key: ${bazarr_HOMEPAGE_KEY}
-                        #    enabled: true
+                        widget:
+                            custom:
+                                key: ${BAZARR_HOMEPAGE_KEY}
+                            enabled: true
         persistence:
             config:
                 volsync:

@@ -15,4 +15,3 @@ resources:
   - profilarr/ks.yaml
   - flood/ks.yaml
   - bazarr/ks.yaml
-  - nevu/ks.yaml

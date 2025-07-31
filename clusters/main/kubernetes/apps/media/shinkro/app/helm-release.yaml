@@ -31,7 +31,7 @@ spec:
         ingress:
             main:
                 enabled: true
-                ingressClassName: internal
+                ingressClassName: external
                 hosts:
                     - host: shinkro.${DOMAIN_0}
                       paths:
@@ -68,7 +68,7 @@ spec:
                       type: restic
                       name: config
                       dest:
-                        enabled: false
+                        enabled: true
                       src:
                         enabled: true
                         trigger:

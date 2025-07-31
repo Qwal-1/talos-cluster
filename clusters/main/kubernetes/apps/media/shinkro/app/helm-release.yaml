@@ -1,0 +1,75 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: shinkro
+    namespace: media
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: app-template
+            version: 15.3.1
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+    releaseName: shinkro
+    values:
+        global:
+            stopAll: false
+        image:
+            repository: ghcr.io/varoop/shinkro
+            tag: v0.1.7
+        credentials:
+            minio:
+                accessKey: ${MINIO_ACCESSKEY}
+                bucket: ${MINIO_BUCKET}
+                encrKey: ${MINIO_ENCRKEY}
+                secretKey: ${MINIO_SECRETKEY}
+                type: s3
+                url: ${MINIO_URL}
+        ingress:
+            main:
+                enabled: true
+                ingressClassName: internal
+                hosts:
+                    - host: shinkro.${DOMAIN_0}
+                      paths:
+                        - path: /
+                          pathType: Prefix
+        service:
+            main:
+                enabled: true
+                ports:
+                    main:
+                        enabled: true
+                        port: 7011
+                        protocol: http
+                        targetPort: 7011
+                type: ClusterIP
+        workload:
+            main:
+                podSpec:
+                    containers:
+                        main:
+                            env:
+                                SHINKRO_USERNAME: ${SHINKRO_USERNAME}
+                                SHINKRO_PASSWORD: ${SHINKRO_PASSWORD}
+                                PLEX_USERNAME: ${PLEX_USERNAME}
+                                PLEX_PASSWORD: ${PLEX_PASSWORD}
+                                ANIME_LIBRARIES: Anime TV Shows, Anime Movies
+        persistence:
+            config:
+                mountPath: "/config"
+                enabled: true
+                readOnly: false
+                volsync:
+                    - credentials: minio
+                      type: restic
+                      name: config
+                      dest:
+                        enabled: false
+                      src:
+                        enabled: true
+                        trigger:
+                          schedule: 45 0 * * *

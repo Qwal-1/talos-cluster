@@ -19,7 +19,7 @@ spec:
             stopAll: false
         image:
             repository: ghcr.io/xbapps/xbvr
-            tag: 0.4.34
+            tag: 0.4.35
         credentials:
             minio:
                 accessKey: ${MINIO_ACCESSKEY}

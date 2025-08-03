@@ -16,3 +16,4 @@ resources:
   - flood/ks.yaml
   - bazarr/ks.yaml
   - shinkro/ks.yaml
+  - shoko/ks.yaml

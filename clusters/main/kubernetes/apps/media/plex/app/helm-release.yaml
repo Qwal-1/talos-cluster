@@ -88,7 +88,7 @@ spec:
                                 PLEX_CLAIM: ${PLEX_CLAIM_TOKEN}
         addons:
             codeserver:
-                enabled: false
+                enabled: true
                 ingress:
                     enabled: true
                     hosts:

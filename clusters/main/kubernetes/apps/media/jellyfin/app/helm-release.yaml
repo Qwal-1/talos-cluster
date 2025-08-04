@@ -41,6 +41,10 @@ spec:
                         group: Media Player
                         icon: ""
                         name: ""
+                        widget:
+                            custom:
+                                key: ${JELLYFIN_HOMEPAGE_KEY}
+                            enabled: true
         persistence:
             config:
                 mountPath: /config

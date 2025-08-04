@@ -17,3 +17,4 @@ resources:
   - bazarr/ks.yaml
   - shinkro/ks.yaml
   - shoko/ks.yaml
+  - jellyfin/ks.yaml

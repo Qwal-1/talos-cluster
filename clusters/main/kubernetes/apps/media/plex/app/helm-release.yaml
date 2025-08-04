@@ -16,7 +16,7 @@ spec:
     releaseName: plex
     values:
         global:
-            stopAll: true
+            stopAll: false
         credentials:
             minio:
                 accessKey: ${MINIO_ACCESSKEY}

@@ -17,7 +17,7 @@ spec:
     values:
         image:
             repository: jhonderson/actual-http-api
-            tag: 25.7.1
+            tag: 25.8.0
         ingress:
             main:
                 enabled: true

@@ -119,4 +119,8 @@ spec:
                 mountPath: "/venv"
         resources:
             limits:
+                cpu: 4000m
                 memory: 16Gi
+            requests:
+                cpu: 500m
+                memory: 1000Mi

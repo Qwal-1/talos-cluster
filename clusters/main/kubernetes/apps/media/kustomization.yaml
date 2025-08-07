@@ -4,7 +4,7 @@ resources:
 
   - namespace.yaml
   - nfs-media-pvc.yaml
-  #- plex/ks.yaml
+  - plex/ks.yaml
   - prowlarr/ks.yaml
   - qbittorrent/ks.yaml
   - radarr/ks.yaml

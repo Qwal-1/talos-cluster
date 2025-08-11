@@ -54,4 +54,4 @@ spec:
                 readOnly: false
         resources:
             limits:
-                memory: 16 Gi
+                memory: 16Gi

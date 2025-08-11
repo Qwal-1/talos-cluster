@@ -41,14 +41,14 @@ spec:
                 type: ClusterIP
         persistence:
             config:
-                mountPath: "./configs"
+                mountPath: "configs"
                 enabled: true
                 readOnly: false
             outputs:
-                mountPath: "./outputs"
+                mountPath: "outputs"
                 enabled: true
                 readOnly: false
             models:
-                mountPath: "./models"
+                mountPath: "models"
                 enabled: true
                 readOnly: false

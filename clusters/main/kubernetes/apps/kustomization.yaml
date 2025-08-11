@@ -26,4 +26,3 @@ resources:
   - anything-llm/ks.yaml
   - ollama/ks.yaml
   - syncthing/ks.yaml
-  - whisper-ui/ks.yaml

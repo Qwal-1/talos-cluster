@@ -52,3 +52,6 @@ spec:
                 mountPath: "/models"
                 enabled: true
                 readOnly: false
+        resources:
+            limits:
+                memory: 16 Gi

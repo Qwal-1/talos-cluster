@@ -55,20 +55,22 @@ spec:
         resources:
             limits:
                 memory: 16Gi
-
-        initContainers:
-          - name: init-config
-            image: ghcr.io/jhj0517/whisper-webui:v1.0.6
-            command:
-              - sh
-              - -c
-              - |
-                if [ -z "$(ls -A /mnt/config)" ]; then
-                  echo "Config volume is empty, seeding defaults..."
-                  cp -r /Whisper-WebUI/configs/* /mnt/config/
-                else
-                  echo "Config volume already has files, skipping."
-                fi
-            volumeMounts:
-              - name: config
-                mountPath: /mnt/config
+        workload:
+          main:
+            podSpec:
+              initContainers:
+                - name: init-config
+                  image: ghcr.io/jhj0517/whisper-webui:v1.0.6
+                  command:
+                    - sh
+                    - -c
+                    - |
+                      if [ -z "$(ls -A /mnt/config)" ]; then
+                        echo "Config volume is empty, seeding defaults..."
+                        cp -r /Whisper-WebUI/configs/* /mnt/config/
+                      else
+                        echo "Config volume already has files, skipping."
+                      fi
+                  volumeMounts:
+                    - name: config
+                      mountPath: /mnt/config

@@ -19,7 +19,7 @@ spec:
             stopAll: false
         image:
             repository: ghcr.io/varoop/shinkro
-            tag: v0.1.7
+            tag: v0.5.0
         credentials:
             minio:
                 accessKey: ${MINIO_ACCESSKEY}

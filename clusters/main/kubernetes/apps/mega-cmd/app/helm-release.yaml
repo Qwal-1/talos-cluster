@@ -49,11 +49,10 @@ spec:
             targetPort: 4442
 
     persistence:
-      #config:
-       # enabled: true
-      #  mountPath: "/root/.megaCmd"
-      #  readOnly: false
-
+      config:
+        enabled: true
+        mountPath: "/root/.megaCmd"
+        readOnly: false
 
       data:
         enabled: true

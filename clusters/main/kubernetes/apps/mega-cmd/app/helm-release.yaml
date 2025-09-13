@@ -49,11 +49,17 @@ spec:
             targetPort: 4442
 
     persistence:
-      #config:
-      #  enabled: true
-      #  mountPath: "//.megaCmd"
-      #  readOnly: false
-
+       config:
+         enabled: true
+         mountPath: "/config"
+         readOnly: false
+    workload:
+      main:
+        podSpec:
+          containers:
+            main:
+              env:
+                HOME: "/config"
       data:
         enabled: true
         path: "${MEGACMD_HOSTPATH}"

@@ -22,7 +22,14 @@ spec:
       repository: qwal/megacmd
       tag: latest
       pullPolicy: IfNotPresent
-
+    credentials:
+      minio:
+        accessKey: ${MINIO_ACCESSKEY}
+        bucket: ${MINIO_BUCKET}
+        encrKey: ${MINIO_ENCRKEY}
+        secretKey: ${MINIO_SECRETKEY}
+        type: s3
+        url: ${MINIO_URL}
     ingress:
       main:
         enabled: true

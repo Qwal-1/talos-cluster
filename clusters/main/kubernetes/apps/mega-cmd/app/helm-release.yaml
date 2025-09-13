@@ -20,8 +20,8 @@ spec:
 
     image:
       repository: qwal/megacmd
-      tag: latest
-      pullPolicy: Always
+      tag: 0.0.1
+      pullPolicy: IfNotPresent
     credentials:
       minio:
         accessKey: ${MINIO_ACCESSKEY}

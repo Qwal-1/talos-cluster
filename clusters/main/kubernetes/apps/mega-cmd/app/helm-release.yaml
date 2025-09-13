@@ -21,7 +21,7 @@ spec:
     image:
       repository: qwal/megacmd
       tag: latest
-      pullPolicy: IfNotPresent
+      pullPolicy: Always
     credentials:
       minio:
         accessKey: ${MINIO_ACCESSKEY}
@@ -45,8 +45,8 @@ spec:
         ports:
           main:
             enabled: true
-            port: 4443          
-            targetPort: 4443
+            port: 4442          
+            targetPort: 4442
 
     persistence:
       config:

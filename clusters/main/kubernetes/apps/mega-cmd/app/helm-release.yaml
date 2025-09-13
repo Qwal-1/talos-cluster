@@ -21,7 +21,7 @@ spec:
     image:
       repository: qwal/megacmd
       tag: 0.0.1
-      pullPolicy: IfNotPresent
+      pullPolicy: Always
     credentials:
       minio:
         accessKey: ${MINIO_ACCESSKEY}

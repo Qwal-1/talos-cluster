@@ -49,20 +49,11 @@ spec:
             targetPort: 4442
 
     persistence:
-      config:
-        enabled: true
-        mountPath: "/root/.megaCmd"
-        readOnly: false
-        volsync:
-          - credentials: minio
-            type: restic
-            name: config
-            dest:
-              enabled: false
-            src:
-              enabled: true
-              trigger:
-                schedule: 35 0 * * *
+      #config:
+       # enabled: true
+      #  mountPath: "/root/.megaCmd"
+      #  readOnly: false
+
 
       data:
         enabled: true

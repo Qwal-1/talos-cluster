@@ -60,6 +60,16 @@ spec:
         enabled: true
         mountPath: "/config"
         readOnly: false
+        volsync:
+          - credentials: minio
+            type: restic
+            name: config
+            dest:
+              enabled: false
+            src:
+              enabled: true
+              trigger:
+                schedule: 35 0 * * *
       data:
         enabled: true
         path: "${MEGACMD_HOSTPATH}"

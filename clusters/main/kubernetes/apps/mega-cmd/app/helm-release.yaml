@@ -43,6 +43,10 @@ spec:
                 startup:
                   enabled: false
     persistence:
+      config:
+        enabled: true
+        path: /.megaCmd
+        readOnly: false
       data:
         enabled: true
         path: "${MEGACMD_HOSTPATH}"

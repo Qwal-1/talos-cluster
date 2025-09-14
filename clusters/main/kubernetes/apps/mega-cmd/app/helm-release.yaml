@@ -56,7 +56,7 @@ spec:
               env:
                 USERNAME: ${MEGA_USER}
                 PASSWORD: ${MEGA_PASSWORD}
-                MEGACMD: SERVER
+                MEGACMD: help
     persistence:
       #config:
       #  enabled: true

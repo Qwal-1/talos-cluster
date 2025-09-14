@@ -15,6 +15,5 @@ resources:
   - profilarr/ks.yaml
   - flood/ks.yaml
   - bazarr/ks.yaml
-  - shinkro/ks.yaml
   - shoko/ks.yaml
   - jellyfin/ks.yaml

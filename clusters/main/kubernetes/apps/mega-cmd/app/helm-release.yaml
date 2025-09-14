@@ -35,6 +35,9 @@ spec:
                 USERNAME: ${MEGA_USER}
                 PASSWORD: ${MEGA_PASSWORD}
                 MEGACMD: ${MEGA_CMD}
+            probes:
+              liveness:
+                enabled: false
     persistence:
       data:
         enabled: true

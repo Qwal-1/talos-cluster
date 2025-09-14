@@ -23,6 +23,9 @@ spec:
       tag: "20240419"
       pullPolicy: IfNotPresent
 
+    service:
+      main:
+        enabled: false
     workload:
       main:
         podSpec:

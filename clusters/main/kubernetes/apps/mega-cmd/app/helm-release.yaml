@@ -38,6 +38,8 @@ spec:
             probes:
               liveness:
                 enabled: false
+              readiness:
+                enabled: false
     persistence:
       data:
         enabled: true

@@ -45,7 +45,7 @@ spec:
     persistence:
       config:
         enabled: true
-        path: /.megaCmd
+        mountPath: /.megaCmd
         readOnly: false
       data:
         enabled: true

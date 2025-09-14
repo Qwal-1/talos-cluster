@@ -35,11 +35,11 @@ spec:
                 USERNAME: ${MEGA_USER}
                 PASSWORD: ${MEGA_PASSWORD}
                 MEGACMD: ${MEGA_CMD}
-            probes:
-              liveness:
-                enabled: false
-              readiness:
-                enabled: false
+              probes:
+                liveness:
+                  enabled: false
+                readiness:
+                  enabled: false
     persistence:
       data:
         enabled: true

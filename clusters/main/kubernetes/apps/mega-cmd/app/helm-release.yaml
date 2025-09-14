@@ -19,9 +19,9 @@ spec:
       stopAll: false
 
     image:
-      repository: qwal/megacmd
-      tag: 0.0.6
-      pullPolicy: Always
+      repository: kosdk/megacmd
+      tag: 20240419
+      pullPolicy: IfNotPresent
     credentials:
       minio:
         accessKey: ${MINIO_ACCESSKEY}
@@ -54,22 +54,24 @@ spec:
           containers:
             main:
               env:
-                HOME: "/config"
+                USERNAME: ${MEGA_USER}
+                PASSWORD: ${MEGA_PASSWORD}
+                MEGACMD: SERVER
     persistence:
-      config:
-        enabled: true
-        mountPath: "/config"
-        readOnly: false
-        volsync:
-          - credentials: minio
-            type: restic
-            name: config
-            dest:
-              enabled: false
-            src:
-              enabled: true
-              trigger:
-                schedule: 35 0 * * *
+      #config:
+      #  enabled: true
+      #  mountPath: "/config"
+      #  readOnly: false
+      #  volsync:
+      #    - credentials: minio
+      #      type: restic
+      #      name: config
+      #      dest:
+      #        enabled: false
+      #      src:
+      #        enabled: true
+      #        trigger:
+      #          schedule: 35 0 * * *
       data:
         enabled: true
         path: "${MEGACMD_HOSTPATH}"

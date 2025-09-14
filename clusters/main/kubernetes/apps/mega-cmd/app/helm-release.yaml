@@ -20,7 +20,7 @@ spec:
 
     image:
       repository: kosdk/megacmd
-      tag: 20240419
+      tag: "20240419"
       pullPolicy: IfNotPresent
     credentials:
       minio:

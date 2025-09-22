@@ -81,6 +81,8 @@ spec:
                 enabled: true
                 type: configmap
                 objectName: qbittorrent-scripts
+                expandObjectName: false
+                optional: false
                 defaultMode: "0755"
                 mountPath: /config
                 items:

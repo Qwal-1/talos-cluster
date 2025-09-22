@@ -84,7 +84,7 @@ spec:
                 expandObjectName: false
                 optional: false
                 defaultMode: "0755"
-                mountPath: /config
+                mountPath: /
                 items:
                   - key: hardlink.sh
                     path: hardlink.sh

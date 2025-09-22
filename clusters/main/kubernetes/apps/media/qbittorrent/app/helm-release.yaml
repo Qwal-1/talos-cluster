@@ -82,9 +82,10 @@ spec:
                 type: configmap
                 objectName: qbittorrent-scripts
                 defaultMode: "0755"
+                mountPath: /config
                 items:
                   - key: hardlink.sh
-                    path: /config/hardlink.sh
+                    path: hardlink.sh
         workload:
             main:
                 podSpec:

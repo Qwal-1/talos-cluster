@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: qbittorrent-scripts
+data:
+  hardlink.sh: |
+      #!/bin/bash
+      SRC="$1"      # Torrent content path (file or directory)
+      CAT="$2"      # Torrent category
+      NAME="$3"     # Torrent name
+      DEST="$4"     # Target folder (argument passed from qBittorrent)
+
+      # Only run if category starts with "Other"
+      if [[ "$CAT" == Other* ]]; then
+          # Ensure destination exists
+          if [[ -d "$DEST" ]]; then
+              BASENAME="$(basename "$SRC")"
+              TARGET="$DEST/$BASENAME"
+              NEWTARGET="$TARGET"
+              COUNT=1
+
+              if [[ -d "$SRC" ]]; then
+                  # Directory case (multi-file torrent)
+                  while [[ -e "$NEWTARGET" ]]; do
+                      NEWTARGET="${TARGET}-${COUNT}"
+                      COUNT=$((COUNT+1))
+                  done
+
+                  mkdir -p "$NEWTARGET"
+                  (
+                    cd "$SRC"
+                    find . -type d -exec mkdir -p "$NEWTARGET/{}" \;
+                    find . -type f -exec cp -al "{}" "$NEWTARGET/{}" \;
+                  )
+              else
+                  # File case (single-file torrent)
+                  EXT="${BASENAME##*.}"
+                  NAME_NOEXT="${BASENAME%.*}"
+
+                  # Handle files without extension gracefully
+                  if [[ "$BASENAME" == "$EXT" ]]; then
+                      # no extension
+                      NAME_NOEXT="$BASENAME"
+                      EXT=""
+                  fi
+
+                  while [[ -e "$NEWTARGET" ]]; do
+                      if [[ -n "$EXT" && "$NAME_NOEXT" != "$BASENAME" ]]; then
+                          NEWTARGET="$DEST/${NAME_NOEXT}-${COUNT}.${EXT}"
+                      else
+                          NEWTARGET="$DEST/${NAME_NOEXT}-${COUNT}"
+                      fi
+                      COUNT=$((COUNT+1))
+                  done
+
+                  cp -al "$SRC" "$NEWTARGET"
+              fi
+          else
+              echo "Destination $DEST does not exist, skipping." >&2
+          fi
+      fi

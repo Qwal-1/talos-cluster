@@ -77,6 +77,13 @@ spec:
                 enabled: true
                 existingClaim: nfs-media-pvc
                 mountPath: "/media"
+            scripts:
+              enabled: true
+              type: configMap
+              name: qbittorrent-scripts
+              mountPath: /scripts
+              subPath: hardlink.sh
+              defaultMode: 0755
         workload:
             main:
                 podSpec:

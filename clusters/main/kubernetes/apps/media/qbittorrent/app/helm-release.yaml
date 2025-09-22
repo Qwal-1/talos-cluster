@@ -79,11 +79,12 @@ spec:
                 mountPath: "/media"
             scripts:
                 enabled: true
-                type: configMap
-                name: qbittorrent-scripts
-                mountPath: /config/hardlink.sh
-                subPath: hardlink.sh
-                defaultMode: 0755
+                type: configmap
+                objectName: qbittorrent-scripts
+                defaultMode: "0755"
+                items:
+                  - key: hardlink.sh
+                    path: /config/hardlink.sh
         workload:
             main:
                 podSpec:

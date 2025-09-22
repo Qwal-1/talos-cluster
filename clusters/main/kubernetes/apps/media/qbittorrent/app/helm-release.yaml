@@ -77,7 +77,7 @@ spec:
                 enabled: true
                 existingClaim: nfs-media-pvc
                 mountPath: "/media"
-            configmap-vol:
+            scripts:
                 enabled: true
                 type: configmap
                 objectName: qbittorrent-scripts

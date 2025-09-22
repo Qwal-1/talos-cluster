@@ -81,7 +81,7 @@ spec:
                 enabled: true
                 type: configMap
                 name: qbittorrent-scripts
-                mountPath: /scripts/hardlink.sh
+                mountPath: /config/hardlink.sh
                 subPath: hardlink.sh
                 defaultMode: 0755
         workload:

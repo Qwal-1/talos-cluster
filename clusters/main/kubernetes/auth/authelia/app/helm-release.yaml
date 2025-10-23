@@ -244,3 +244,4 @@ spec:
       persistence:
         data:
           enabled: true
+          mountPath: "/bitnami/redis"

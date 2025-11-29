@@ -54,10 +54,34 @@ spec:
                       name: config
                       dest:
                         enabled: true
+                      src:
+                        enabled: true
+                        trigger:
+                          schedule: 0 1 * * *
+            data:
+                mountPath: /data
+                volsync:
+                    - credentials: minio
+                      type: restic
+                      name: config
+                      dest:
+                        enabled: false
                         cacheCapacity: 20Gi
                       src:
                         enabled: true
                         cacheCapacity: 20Gi
+                        trigger:
+                          schedule: 0 1 * * *
+            logs:
+                mountPath: /logs
+                volsync:
+                    - credentials: minio
+                      type: restic
+                      name: config
+                      dest:
+                        enabled: false
+                      src:
+                        enabled: true
                         trigger:
                           schedule: 0 1 * * *
             media:

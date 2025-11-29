@@ -77,19 +77,29 @@ spec:
                     podSpec:
                         containers:
                             broadcastproxy:
+                                command:
+                                    - sh
+                                    - -c
+                                    - tail -f /dev/null
                                 probes:
                                     readiness:
-                                        enabled: false
+                                        enabled: true
                                         type: exec
                                         command:
+                                            - sh
+                                            - -c
                                             - tail -f /dev/null
                                     liveness:
-                                        enabled: false
+                                        enabled: true
                                         type: exec
                                         command:
+                                            - sh
+                                            - -c
                                             - tail -f /dev/null
                                     startup:
-                                        enabled: false
+                                        enabled: true
                                         type: exec
                                         command:
+                                            - sh
+                                            - -c
                                             - tail -f /dev/null

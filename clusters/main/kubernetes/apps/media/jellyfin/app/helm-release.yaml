@@ -71,3 +71,25 @@ spec:
                     enabled: true
                     hosts:
                       - host: jellyfin-codeserver.${DOMAIN_0}
+        workload:
+            main:
+                broadcastproxy:
+                    podSpec:
+                    containers:
+                        broadcastproxy:
+                        probes:
+                            readiness:
+                                enabled: true
+                                type: exec
+                                command:
+                                    - tail -f /dev/null
+                            liveness:
+                                enabled: true
+                                type: exec
+                                command:
+                                    - tail -f /dev/null
+                            startup:
+                                enabled: true
+                                type: exec
+                                command:
+                                    - tail -f /dev/null

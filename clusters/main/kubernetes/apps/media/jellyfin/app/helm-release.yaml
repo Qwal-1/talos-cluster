@@ -79,17 +79,17 @@ spec:
                             broadcastproxy:
                                 probes:
                                     readiness:
-                                        enabled: true
+                                        enabled: false
                                         type: exec
                                         command:
                                             - tail -f /dev/null
                                     liveness:
-                                        enabled: true
+                                        enabled: false
                                         type: exec
                                         command:
                                             - tail -f /dev/null
                                     startup:
-                                        enabled: true
+                                        enabled: false
                                         type: exec
                                         command:
                                             - tail -f /dev/null

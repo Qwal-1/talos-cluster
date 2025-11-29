@@ -73,33 +73,19 @@ spec:
                       - host: jellyfin-codeserver.${DOMAIN_0}
         workload:
             main:
+                podSpec:
+                    containers:
+                        main:
+                            command:
+                                - sh
+                                - -c
+                                - tail -f /dev/null
+                            probes:
+                                readiness:
+                                    enabled: false
+                                liveness:
+                                    enabled: false
+                                startup:
+                                    enabled: false
                 broadcastproxy:
-                    podSpec:
-                        containers:
-                            broadcastproxy:
-                                command:
-                                    - sh
-                                    - -c
-                                    - tail -f /dev/null
-                                probes:
-                                    readiness:
-                                        enabled: true
-                                        type: exec
-                                        command:
-                                            - sh
-                                            - -c
-                                            - tail -f /dev/null
-                                    liveness:
-                                        enabled: true
-                                        type: exec
-                                        command:
-                                            - sh
-                                            - -c
-                                            - tail -f /dev/null
-                                    startup:
-                                        enabled: true
-                                        type: exec
-                                        command:
-                                            - sh
-                                            - -c
-                                            - tail -f /dev/null
+                    enabled: false

@@ -90,7 +90,7 @@ spec:
                 mountPath: "/media"
         addons:
             codeserver:
-                enabled: true
+                enabled: false
                 ingress:
                     enabled: true
                     hosts:

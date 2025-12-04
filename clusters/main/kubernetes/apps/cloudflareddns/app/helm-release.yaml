@@ -49,4 +49,10 @@ spec:
             interval: 3600
             log_level: 3
             user: ${DOMAIN_0_EMAIL}
+        securityContext:
+            container:
+                runAsNonRoot: false
+                readOnlyRootFilesystem: false
+                runAsUser: 0
+                runAsGroup: 0
 

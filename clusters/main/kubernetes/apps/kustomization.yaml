@@ -2,26 +2,26 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - kubernetes-dashboard/ks.yaml
-  - media
-  - tautulli/ks.yaml
-  - ghostfolio/ks.yaml
-  - actualserver/ks.yaml
-  - actual-http-api/ks.yaml
-  - cloudflareddns/ks.yaml
-  - upsnap/ks.yaml
-  - tailscale/ks.yaml
-  - mariadb/ks.yaml
-  - mealie/ks.yaml
+#  - media
+#  - tautulli/ks.yaml
+#  - ghostfolio/ks.yaml
+#  - actualserver/ks.yaml
+#  - actual-http-api/ks.yaml
+#  - cloudflareddns/ks.yaml
+#  - upsnap/ks.yaml
+#  - tailscale/ks.yaml
+#  - mariadb/ks.yaml
+#  - mealie/ks.yaml
   - minio/ks.yaml
-  - muse/ks.yaml
-  - homepage/ks.yaml
-  - pgadmin/ks.yaml
-  - plex-auto-languages/ks.yaml
-  - external-apps
-  - qdirstat/ks.yaml
-  - tdarr
-  - grafana/ks.yaml
-  - blocky-ui/ks.yaml
-  - anything-llm/ks.yaml
-  - ollama/ks.yaml
-  - syncthing/ks.yaml
+#  - muse/ks.yaml
+#  - homepage/ks.yaml
+#  - pgadmin/ks.yaml
+#  - plex-auto-languages/ks.yaml
+#  - external-apps
+#  - qdirstat/ks.yaml
+#  - tdarr
+#  - grafana/ks.yaml
+#  - blocky-ui/ks.yaml
+#  - anything-llm/ks.yaml
+#  - ollama/ks.yaml
+#  - syncthing/ks.yaml

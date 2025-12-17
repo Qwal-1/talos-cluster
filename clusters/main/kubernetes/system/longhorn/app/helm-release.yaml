@@ -24,22 +24,12 @@ spec:
     remediation:
       retries: 3
   values:
-    # Temporary fix
-    image:
-      longhorn:
-        manager:
-          tag: v1.9.0-hotfix-1
-    preUpgradeChecker:
-      jobEnabled: true
-      upgradeVersionCheck: false
-    # End of Temp fix
     defaultSettings:
       # Increase to 3 for a multi-node cluster
       defaultReplicaCount: 1
       # Overprovisioning might be needed when using volsync
       storageOverProvisioningPercentage: 100000
       # v2DataEngine: true
-      defaultDiskReservedPercentage: 20
     persistence:
       # Set to false to pick another CSI as default
       defaultClass: true

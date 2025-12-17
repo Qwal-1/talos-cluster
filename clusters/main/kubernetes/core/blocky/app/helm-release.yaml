@@ -38,6 +38,9 @@ spec:
         externalTrafficPolicy: Local
         loadBalancerIP: ${BLOCKY_IP}
         type: LoadBalancer
+        integrations:
+          metallb:
+            enabled: true
 
     blocking:
       # --  Add blocky whitelists

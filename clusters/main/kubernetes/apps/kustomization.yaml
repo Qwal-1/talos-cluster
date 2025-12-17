@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - kubernetes-dashboard/ks.yaml
-#  - media
+  - media
   - tautulli/ks.yaml
   - ghostfolio/ks.yaml
   - actualserver/ks.yaml

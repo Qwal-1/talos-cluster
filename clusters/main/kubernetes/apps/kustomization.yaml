@@ -19,7 +19,7 @@ resources:
   - plex-auto-languages/ks.yaml
   - external-apps
   - qdirstat/ks.yaml
-  - tdarr
+  #- tdarr
   - grafana/ks.yaml
   - blocky-ui/ks.yaml
   - anything-llm/ks.yaml

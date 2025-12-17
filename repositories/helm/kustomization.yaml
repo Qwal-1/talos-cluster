@@ -9,7 +9,7 @@ resources:
   - home-ops-mirror.yaml
   - jetstack.yaml
   - kustomization.yaml
-  - nvidia.yaml
+  - metallb.yaml
   - prometheus-community.yaml
   - spegel.yaml
   - truecharts.yaml

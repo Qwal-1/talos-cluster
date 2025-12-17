@@ -4,6 +4,6 @@ resources:
   - namespace.yaml
   - helm-release.yaml
   - volumeSnapshotClass.yaml
-  - filesystemtrim.yaml
-  - snapshotcleanup.yaml
-  - ingress.yaml
+  #- filesystemtrim.yaml
+  #- snapshotcleanup.yaml
+  #- ingress.yaml

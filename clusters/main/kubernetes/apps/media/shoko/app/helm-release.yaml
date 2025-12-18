@@ -41,7 +41,7 @@ spec:
                       type: restic
                       name: config
                       dest:
-                        enabled: true
+                        enabled: false
                         copyAttributes: "none"
                       src:
                         enabled: false

@@ -70,7 +70,7 @@ spec:
             dest:
               enabled: true
             src:
-              enabled: true
+              enabled: false
               trigger:
                 schedule: 10 0 * * *
     workload:

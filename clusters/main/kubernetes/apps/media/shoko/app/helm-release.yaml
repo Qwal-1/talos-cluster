@@ -41,25 +41,12 @@ spec:
                       type: restic
                       name: config
                       dest:
-                        enabled: false
+                        enabled: true
                       src:
-                        enabled: false
+                        enabled: true
                         trigger:
                           schedule: 55 0 * * *
             media:
                 enabled: true
                 existingClaim: nfs-media-pvc
                 mountPath: "/media"
-        addons:
-            codeserver:
-                enabled: true
-                ingress:
-                    enabled: true
-                    hosts:
-                        - host: shoko-codeserver.${DOMAIN_0}
-                          paths:
-                            - path: /
-                              pathType: Prefix
-        resources:
-            limits:
-                memory: 12Gi

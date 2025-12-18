@@ -41,9 +41,9 @@ spec:
                       type: restic
                       name: config
                       dest:
-                        enabled: true
+                        enabled: false
                       src:
-                        enabled: true
+                        enabled: false
                         trigger:
                           schedule: 55 0 * * *
             media:

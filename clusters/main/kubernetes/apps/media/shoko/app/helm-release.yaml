@@ -37,30 +37,17 @@ spec:
         persistence:
             appdata:
                 enabled: true
-                #volsync:
-                #    - credentials: minio
-                #      type: restic
-                #      name: config
-                #      dest:
-                #        enabled: false
-                #      src:
-                #        enabled: false
-                #        trigger:
-                #          schedule: 55 0 * * *
+                volsync:
+                    - credentials: minio
+                      type: restic
+                      name: config
+                      dest:
+                        enabled: false
+                      src:
+                        enabled: false
+                        trigger:
+                          schedule: 55 0 * * *
             media:
                 enabled: true
                 existingClaim: nfs-media-pvc
                 mountPath: "/media"
-        addons:
-            codeserver:
-                enabled: true
-                ingress:
-                    enabled: true
-                    hosts:
-                        - host: shoko-codeserver.${DOMAIN_0}
-                          paths:
-                            - path: /
-                              pathType: Prefix
-        resources:
-            limits:
-                memory: 12Gi

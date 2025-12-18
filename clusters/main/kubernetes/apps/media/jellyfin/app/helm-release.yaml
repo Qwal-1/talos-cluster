@@ -55,7 +55,7 @@ spec:
                       dest:
                         enabled: true
                       src:
-                        enabled: true
+                        enabled: false
                         trigger:
                           schedule: 0 1 * * *
             data:
@@ -68,7 +68,7 @@ spec:
                         enabled: true
                         cacheCapacity: 20Gi
                       src:
-                        enabled: true
+                        enabled: false
                         cacheCapacity: 20Gi
                         trigger:
                           schedule: 0 1 * * *
@@ -81,7 +81,7 @@ spec:
                       dest:
                         enabled: true
                       src:
-                        enabled: true
+                        enabled: false
                         trigger:
                           schedule: 0 1 * * *
             media:

@@ -52,7 +52,7 @@ spec:
                       dest:
                         enabled: true
                       src:
-                        enabled: true
+                        enabled: false
                         trigger:
                           schedule: 25 0 * * *
             cache:
@@ -63,7 +63,7 @@ spec:
                       dest:
                         enabled: true
                       src:
-                        enabled: true
+                        enabled: false
                         trigger:
                           schedule: 25 0 * * *
             config:
@@ -74,7 +74,7 @@ spec:
                       dest:
                         enabled: true
                       src:
-                        enabled: true
+                        enabled: false
                         trigger:
                           schedule: 25 0 * * *
             data:
@@ -85,7 +85,7 @@ spec:
                       dest:
                         enabled: true
                       src:
-                        enabled: true
+                        enabled: false
                         trigger:
                           schedule: 25 0 * * *
             generated:
@@ -96,7 +96,7 @@ spec:
                       dest:
                         enabled: true
                       src:
-                        enabled: true
+                        enabled: false
                         trigger:
                           schedule: 25 0 * * *
             metadata:
@@ -107,7 +107,7 @@ spec:
                       dest:
                         enabled: true
                       src:
-                        enabled: true
+                        enabled: false
                         trigger:
                           schedule: 25 0 * * *
             media:

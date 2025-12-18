@@ -60,3 +60,6 @@ spec:
                           paths:
                             - path: /
                               pathType: Prefix
+        resources:
+            limits:
+                memory: 12Gi

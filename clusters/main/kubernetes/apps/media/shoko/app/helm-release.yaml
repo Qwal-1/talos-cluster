@@ -45,6 +45,7 @@ spec:
                         options:
                         - --no-owner
                         - --no-group
+                        - --ignore-ownership
                       src:
                         enabled: false
                         trigger:

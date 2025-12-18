@@ -41,7 +41,7 @@ spec:
                       type: restic
                       name: config
                       dest:
-                        enabled: true
+                        enabled: false
                         copyAttributes: "none"
                       src:
                         enabled: false
@@ -51,3 +51,14 @@ spec:
                 enabled: true
                 existingClaim: nfs-media-pvc
                 mountPath: "/media"
+
+                    addons:
+            codeserver:
+                enabled: true
+                ingress:
+                    enabled: true
+                    hosts:
+                        - host: shoko-codeserver.${DOMAIN_0}
+                          paths:
+                            - path: /
+                              pathType: Prefix

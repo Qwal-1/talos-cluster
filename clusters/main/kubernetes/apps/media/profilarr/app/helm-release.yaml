@@ -49,16 +49,3 @@ spec:
                         enabled: false
                         trigger:
                           schedule: 5 1 * * *
-        addons:
-            codeserver:
-                enabled: true
-                ingress:
-                    enabled: true
-                    hosts:
-                        - host: profilarr-codeserver.${DOMAIN_0}
-                          paths:
-                            - path: /
-                              pathType: Prefix
-        resources:
-            limits:
-                memory: 12Gi

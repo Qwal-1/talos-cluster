@@ -36,6 +36,7 @@ spec:
                           pathType: Prefix
         persistence:
             appdata:
+                enabled: true
                 #volsync:
                 #    - credentials: minio
                 #      type: restic

@@ -41,7 +41,7 @@ spec:
                       type: restic
                       name: config
                       dest:
-                        enabled: false
+                        enabled: true
                         copyAttributes: "none"
                       src:
                         enabled: false
@@ -51,8 +51,7 @@ spec:
                 enabled: true
                 existingClaim: nfs-media-pvc
                 mountPath: "/media"
-
-                    addons:
+        addons:
             codeserver:
                 enabled: true
                 ingress:

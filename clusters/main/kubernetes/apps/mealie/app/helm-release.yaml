@@ -60,12 +60,12 @@ spec:
                 password: ${CNPG_PASSWORD}
                 mode: recovery
                 backups:
-                    enabled: true
+                    enabled: false
                     credentials: minio
-                    revision: "3"
+                    revision: "4"
                 recovery:
                     credentials: minio
-                    revision: "2"
+                    revision: "3"
         workload:  
             main:
                 podSpec:

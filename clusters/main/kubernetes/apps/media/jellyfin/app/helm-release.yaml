@@ -72,18 +72,6 @@ spec:
                         cacheCapacity: 20Gi
                         trigger:
                           schedule: 0 1 * * *
-            logs:
-                mountPath: /logs
-                volsync:
-                    - credentials: minio
-                      type: restic
-                      name: config
-                      dest:
-                        enabled: true
-                      src:
-                        enabled: false
-                        trigger:
-                          schedule: 0 1 * * *
             media:
                 enabled: true
                 existingClaim: nfs-media-pvc

@@ -55,9 +55,9 @@ spec:
                 password: ${CNPG_PASSWORD}
                 mode: recovery
                 backups:
-                    enabled: false
+                    enabled: true
                     credentials: minio
-                    revision: "3"
+                    revision: "1"
                 recovery:
                     credentials: minio
-                    revision: "2"
+                    revision: "1"

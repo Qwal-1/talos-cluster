@@ -55,12 +55,12 @@ spec:
         cluster:
           singleNode: true
         backups:
-          enabled: false
+          enabled: true
           credentials: minio
-          revision: "3"
+          revision: "1"
         recovery:
           credentials: minio
-          revision: "2"
+          revision: "1"
     persistence:
       config:
         volsync:
@@ -70,7 +70,7 @@ spec:
             dest:
               enabled: true
             src:
-              enabled: false
+              enabled: true
               trigger:
                 schedule: 10 0 * * *
     workload:

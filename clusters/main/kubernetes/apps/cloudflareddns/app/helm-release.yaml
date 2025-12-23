@@ -17,7 +17,7 @@ spec:
     values:
         image:
             repository: ghcr.io/hotio/cloudflareddns
-            tag: latest@sha256:1dd9a89da9030f667ec165b8f6143ef5676d49840903290f448f80220cc85e9c
+            tag: latest@sha256:aa3072eab875f0019735630083595c1190430df43def22abc145fbf3307bc847
         cloudflareddns:
             api_key: ""
             api_token: ${DOMAIN_0_CLOUDFLARE_TOKEN}

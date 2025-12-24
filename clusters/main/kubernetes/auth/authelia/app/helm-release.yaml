@@ -29,13 +29,13 @@ spec:
     keepHistory: false
   values:
     credentials:
-      minio:
-        accessKey: ${MINIO_ACCESSKEY}
-        bucket: ${MINIO_BUCKET}
-        encrKey: ${MINIO_ENCRKEY}
-        secretKey: ${MINIO_SECRETKEY}
+      s3:
+        accessKey: ${BACKUP_S3_ACCESS_KEY}
+        bucket: ${BACKUP_S3_BUCKET}
+        encrKey: ${BACKUP_RESTIC_PASSWORD}
+        secretKey: ${BACKUP_S3_SECRET_KEY}
         type: s3
-        url: ${MINIO_URL}
+        url: ${BACKUP_S3_ENDPOINT}
     ingress:
         main:
           enabled: true
@@ -56,17 +56,17 @@ spec:
           singleNode: true
         backups:
           enabled: true
-          credentials: minio
+          credentials: s3
           revision: "1"
         recovery:
-          credentials: minio
+          credentials: s3
           revision: "1"
     persistence:
       config:
         volsync:
           - name: config
             type: restic
-            credentials: minio
+            credentials: s3
             dest:
               enabled: true
             src:

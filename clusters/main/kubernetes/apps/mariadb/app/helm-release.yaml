@@ -57,8 +57,31 @@ spec:
                         enabled: true
                         trigger:
                           schedule: 10 0 * * *
+            tuning:
+                enabled: true
+                type: configmap
+                objectName: tuning
+                mountPath: /opt/bitnami/mariadb/conf/bitnami/conf.d/tuning.cnf
+                subPath: tuning.cnf
+                targetSelector:
+                  main:
+                    main:
+                      readOnly: true
         resources:
             requests:
                 memory: 2Gi
             limits:
                 memory: 24Gi
+        configmap:
+                tuning:
+                  enabled: true
+                  data:
+                    tuning.cnf: |
+                      [mysqld]
+                      max_connections=400
+                      innodb_buffer_pool_size=1024M
+                      tmp_table_size=64M
+                      max_heap_table_size=64M
+                      innodb_strict_mode=OFF
+                      sql_mode = "NO_ENGINE_SUBSTITUTION"
+                      skip-name-resolve = 1

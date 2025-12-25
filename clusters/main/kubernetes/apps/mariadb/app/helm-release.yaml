@@ -61,12 +61,12 @@ spec:
                 enabled: true
                 type: configmap
                 objectName: tuning
-                mountPath: /opt/bitnami/mariadb/conf/bitnami/conf.d/tuning.cnf
+                mountPath: /bitnami/mariadb/conf/tuning.cnf
                 subPath: tuning.cnf
                 targetSelector:
-                  main:
                     main:
-                      readOnly: true
+                        main:
+                            readOnly: true
         resources:
             requests:
                 memory: 2Gi

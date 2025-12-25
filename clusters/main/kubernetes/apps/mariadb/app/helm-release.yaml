@@ -70,10 +70,10 @@ spec:
                             env:
                                 MARIADB_EXTRA_FLAGS: >-
                                   --init-file=/init/passinit.sql
-                                  --innodb-buffer-pool-size=1024M
                                   --max-connections=400
-                                  --innodb-strict-mode=OFF
+                                  --innodb-buffer-pool-size=1024M
                                   --tmp-table-size=64M
                                   --max-heap-table-size=64M
-                                  --sql-mode="NO_ENGINE_SUBSTITUTION"
+                                  --innodb-strict-mode=OFF
+                                #--sql-mode="NO_ENGINE_SUBSTITUTION"
                                 #--skip-name-resolve

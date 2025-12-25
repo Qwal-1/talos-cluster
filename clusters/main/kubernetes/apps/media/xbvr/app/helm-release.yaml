@@ -70,6 +70,8 @@ spec:
                         main:
                             env:
                                 DATABASE_URL: mysql://xbvr:${MARIADB_ROOT_PASSWORD}@mariadb.mariadb.svc.cluster.local:3306/xbvr?charset=utf8mb4&parseTime=True&loc=Local
+                                DB_CONNECTION_POOL_SIZE: 300
+                                DCONCURRENT_SCRAPERS: 6
         securityContext:
             container:
                 advanced: true

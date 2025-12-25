@@ -75,5 +75,5 @@ spec:
                                   --innodb-strict-mode=OFF
                                   --tmp-table-size=64M
                                   --max-heap-table-size=64M
-                                  --sql-mode="NO_ENGINE_SUBSTITUTION"
+                                # --sql-mode="NO_ENGINE_SUBSTITUTION"
                                 #--skip-name-resolve

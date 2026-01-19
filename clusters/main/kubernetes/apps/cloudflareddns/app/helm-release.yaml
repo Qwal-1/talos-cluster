@@ -15,9 +15,6 @@ spec:
                 namespace: flux-system
     releaseName: cloudflareddns
     values:
-        image:
-            repository: ghcr.io/hotio/cloudflareddns
-            tag: latest@sha256:9abb24ac227d441fc32cab324e76bec6190b68423d52bcd9e2ed3d3ae980b1aa
         cloudflareddns:
             api_key: ""
             api_token: ${DOMAIN_0_CLOUDFLARE_TOKEN}
@@ -49,10 +46,3 @@ spec:
             interval: 3600
             log_level: 3
             user: ${DOMAIN_0_EMAIL}
-        securityContext:
-            container:
-                runAsNonRoot: false
-                readOnlyRootFilesystem: false
-                runAsUser: 0
-                runAsGroup: 0
-

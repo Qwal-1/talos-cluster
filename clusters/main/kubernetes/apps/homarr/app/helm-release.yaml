@@ -50,3 +50,10 @@ spec:
                         enabled: true
                         trigger:
                           schedule: 5 0 * * *
+        workload:
+            main:
+                podSpec:
+                    containers:
+                        main:
+                            env:
+                                SECRET_ENCRYPTION_KEY: "${HOMARR_ENC_KEY}"

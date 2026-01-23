@@ -15,6 +15,14 @@ spec:
                 namespace: flux-system
     releaseName: tracearr
     values:
+        credentials:
+            s3:
+                accessKey: ${BACKUP_S3_ACCESS_KEY}
+                bucket: ${BACKUP_S3_BUCKET}
+                encrKey: ${BACKUP_RESTIC_PASSWORD}
+                secretKey: ${BACKUP_S3_SECRET_KEY}
+                type: s3
+                url: ${BACKUP_S3_ENDPOINT}
         global:
             stopAll: false
         ingress:
@@ -26,3 +34,14 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+        cnpg:
+            main:
+                password: ${CNPG_PASSWORD}
+                mode: recovery
+                backups:
+                    enabled: true
+                    credentials: s3
+                    revision: "1"
+                recovery:
+                    credentials: s3
+                    revision: "1"

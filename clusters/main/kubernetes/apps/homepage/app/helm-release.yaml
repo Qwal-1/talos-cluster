@@ -67,3 +67,5 @@ spec:
                         main:
                             env:
                                 HOMEPAGE_ALLOWED_HOSTS: "${DOMAIN_0}"
+        rbac:
+            enabled: true

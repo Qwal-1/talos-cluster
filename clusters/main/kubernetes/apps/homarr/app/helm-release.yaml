@@ -45,7 +45,7 @@ spec:
                             type: "authelia"
                             internalHost: "authelia.authelia.svc.cluster.local:9091"
                             externalHost: "auth.${DOMAIN_0}"
-                                # Can be left default in most cases
+                            # Can be left default in most cases
                             responseHeaders: []
         persistence:
             appdata:
@@ -66,3 +66,10 @@ spec:
                         main:
                             env:
                                 SECRET_ENCRYPTION_KEY: "${HOMARR_ENC_KEY}"
+        rbac:
+            rbac-homarr:
+                enabled: true
+                rules:
+                      - apiGroups: ["networking.k8s.io"]
+                        resources: ["ingresses"]
+                        verbs: ["get", "list", "watch"]

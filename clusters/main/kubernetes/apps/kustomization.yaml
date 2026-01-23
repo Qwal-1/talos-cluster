@@ -26,4 +26,3 @@ resources:
   - ollama/ks.yaml
   - syncthing/ks.yaml
   - homarr/ks.yaml
-  - tracearr/ks.yaml

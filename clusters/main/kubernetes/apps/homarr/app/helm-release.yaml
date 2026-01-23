@@ -70,7 +70,9 @@ spec:
             rbac-homarr:
                 enabled: true
                 primary: true
+                serviceAccounts:
+                  - homarr-main
                 rules:
-                      - apiGroups: ["networking.k8s.io"]
-                        resources: ["ingresses"]
-                        verbs: ["get", "list", "watch"]
+                  - apiGroups: ["networking.k8s.io"]
+                    resources: ["ingresses"]
+                    verbs: ["get", "list", "watch"]

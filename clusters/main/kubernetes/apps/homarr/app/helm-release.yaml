@@ -1,0 +1,52 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: homarr
+    namespace: homarr
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: homarr
+            version: 14.9.7
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+    releaseName: homarr
+    values:
+        TZ: Europe/Zurich
+        credentials:
+            s3:
+                accessKey: ${BACKUP_S3_ACCESS_KEY}
+                bucket: ${BACKUP_S3_BUCKET}
+                encrKey: ${BACKUP_RESTIC_PASSWORD}
+                secretKey: ${BACKUP_S3_SECRET_KEY}
+                type: s3
+                url: ${BACKUP_S3_ENDPOINT}
+        ingress:
+            main:
+                enabled: true
+                ingressClassName: internal
+                annotations:
+                    nginx.ingress.kubernetes.io/auth-method: 'GET'
+                    nginx.ingress.kubernetes.io/auth-url: 'http://authelia.authelia.svc.cluster.local:9091/api/verify'
+                    nginx.ingress.kubernetes.io/auth-signin: 'https://auth.${DOMAIN_0}?rm=$request_method'
+                    nginx.ingress.kubernetes.io/auth-response-headers: 'Remote-User,Remote-Name,Remote-Groups,Remote-Email'
+                hosts:
+                    - host: homarr.${DOMAIN_0}
+                      paths:
+                        - path: /
+                          pathType: Prefix
+        persistence:
+            appdata:
+                volsync:
+                    - credentials: s3
+                      type: restic
+                      name: config
+                      dest:
+                        enabled: true
+                      src:
+                        enabled: true
+                        trigger:
+                          schedule: 5 0 * * *

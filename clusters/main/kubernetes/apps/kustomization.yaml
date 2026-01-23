@@ -25,3 +25,4 @@ resources:
   - anything-llm/ks.yaml
   - ollama/ks.yaml
   - syncthing/ks.yaml
+  - homarr/ks.yaml

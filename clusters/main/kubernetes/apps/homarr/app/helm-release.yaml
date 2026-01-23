@@ -67,12 +67,14 @@ spec:
                             env:
                                 SECRET_ENCRYPTION_KEY: "${HOMARR_ENC_KEY}"
         rbac:
-            rbac-homarr:
+            main:
                 enabled: true
                 primary: true
-                serviceAccounts:
-                  - default
                 rules:
                   - apiGroups: ["networking.k8s.io"]
                     resources: ["ingresses"]
                     verbs: ["get", "list", "watch"]
+        serviceAccount:
+            main:
+                enabled: true
+                primary: true

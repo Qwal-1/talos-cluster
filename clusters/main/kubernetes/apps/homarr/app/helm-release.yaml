@@ -69,6 +69,7 @@ spec:
         rbac:
             rbac-homarr:
                 enabled: true
+                primary: true
                 rules:
                       - apiGroups: ["networking.k8s.io"]
                         resources: ["ingresses"]

@@ -33,6 +33,11 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+                annotations:
+                    homarr.dev/enabled: "true"
+                    homarr.dev/name: Homarr
+                    homarr.dev/group: Infra
+                    homarr.dev/icon: homarr
                 integrations:
                     nginx:
                         enabled: true

@@ -67,14 +67,16 @@ spec:
                             env:
                                 SECRET_ENCRYPTION_KEY: "${HOMARR_ENC_KEY}"
         rbac:
-            main:
-                enabled: true
-                primary: true
-                rules:
-                  - apiGroups: ["*"]
-                    resources: ["*"]
-                    verbs: ["get", "list", "watch"]
-        serviceAccount:
-            main:
-                enabled: true
-                primary: true
+            enabled: true
+        #rbac:
+        #    main:
+        #        enabled: true
+        #        primary: true
+        #        rules:
+        #          - apiGroups: ["*"]
+        #            resources: ["*"]
+        #            verbs: ["get", "list", "watch"]
+        #serviceAccount:
+        #    main:
+        #        enabled: true
+        #        primary: true

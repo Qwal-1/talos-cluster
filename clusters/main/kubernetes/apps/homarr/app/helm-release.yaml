@@ -71,7 +71,7 @@ spec:
                 enabled: true
                 primary: true
                 serviceAccounts:
-                  - homarr-main
+                  - default
                 rules:
                   - apiGroups: ["networking.k8s.io"]
                     resources: ["ingresses"]

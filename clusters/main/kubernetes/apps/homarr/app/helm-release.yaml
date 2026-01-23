@@ -71,8 +71,8 @@ spec:
                 enabled: true
                 primary: true
                 rules:
-                  - apiGroups: ["networking.k8s.io"]
-                    resources: ["ingresses"]
+                  - apiGroups: ["*"]
+                    resources: ["*"]
                     verbs: ["get", "list", "watch"]
         serviceAccount:
             main:

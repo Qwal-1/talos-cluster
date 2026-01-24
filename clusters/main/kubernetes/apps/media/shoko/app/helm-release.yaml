@@ -39,7 +39,7 @@ spec:
                         description: "Shoko Server is a personal anime media server and collection manager"
                         enabled: true
                         group: Media Management
-                        icon: "shoko"
+                        icon: "shokoanime"
                         name: "Shoko"
                         widget:
                             enabled: false

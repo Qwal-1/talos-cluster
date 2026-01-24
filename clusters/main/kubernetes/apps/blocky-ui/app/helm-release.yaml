@@ -41,6 +41,8 @@ spec:
                         group: Networking
                         icon: "blocky"
                         name: "Blocky UI"
+                        widget:
+                            enabled: false
         service:
             main:
                 enabled: true

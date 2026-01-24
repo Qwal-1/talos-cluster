@@ -32,12 +32,16 @@ spec:
                         icon: "truenas"
                         name: "TrueNAS"
                         widget:
-                            type: truenas
-                            version: 1
-                            key: ${TRUENAS_HOMEPAGE_KEY}
-                            url: "http://${TRUENAS_IP}"
-                            enablePools: true
-                            enabled: false
+                            enabled: true
+                            customkv:
+                                - key: key
+                                  value: ${TRUENAS_HOMEPAGE_KEY}
+                                - key: url
+                                  value: "http://${TRUENAS_IP}"
+                                - key: enablePools
+                                  value: "true"
+                                - key: type
+                                  value: "truenas"
 
         service:
             main:

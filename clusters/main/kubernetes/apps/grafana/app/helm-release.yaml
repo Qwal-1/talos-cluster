@@ -35,7 +35,7 @@ spec:
                         name: "Grafana"
                         enabled: true
                         widget:
-                            enabled: true
+                            enabled: false
                             username: ${GRAFANA_ADMIN_USER}
                             password: ${GRAFANA_ADMIN_PASSWORD}
                             customkv:

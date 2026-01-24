@@ -34,6 +34,15 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+                integrations:
+                    homepage:
+                        description: "Real-time monitoring for Plex, Jellyfin, and Emby servers."
+                        enabled: true
+                        group: Stats
+                        icon: "tracearr"
+                        name: "Tracearr"
+                        widget:
+                            enabled: false
         cnpg:
             main:
                 password: ${CNPG_PASSWORD}

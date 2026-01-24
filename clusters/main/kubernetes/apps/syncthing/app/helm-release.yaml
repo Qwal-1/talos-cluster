@@ -32,6 +32,15 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+                integrations:
+                    homepage:
+                        description: "Syncthing is a continuous file synchronization program"
+                        enabled: true
+                        group: Other
+                        icon: "syncthing"
+                        name: "Syncthing"
+                        widget:
+                            enabled: false
         persistence:
             config:
                  volsync:

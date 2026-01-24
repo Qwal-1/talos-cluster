@@ -50,8 +50,8 @@ spec:
                         name: "Prowlarr"
                         widget:
                             enabled: true
-                            type: prowlarr
-                            key: ${PROWLARR_HOMEPAGE_KEY}
+                            custom: 
+                              key: ${PROWLARR_HOMEPAGE_CUSTOM_KEY}
         persistence:
             config:
                 volsync:

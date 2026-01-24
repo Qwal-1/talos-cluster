@@ -36,9 +36,9 @@ spec:
                         enabled: true
                         widget:
                             enabled: true
-                            type: grafana
-                            version: 2
                             customkv:
+                                - key: version
+                                  value: 2
                                 - key: username
                                   value: ${GRAFANA_ADMIN_USER}
                                 - key: password

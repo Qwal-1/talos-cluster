@@ -33,7 +33,7 @@ spec:
                         name: "TrueNAS"
                         widget:
                             type: truenas
-                            version: 2
+                            version: 1
                             key: ${TRUENAS_HOMEPAGE_KEY}
                             url: "http://${TRUENAS_IP}"
                             enablePools: true

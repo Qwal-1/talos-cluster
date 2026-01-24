@@ -37,7 +37,7 @@ spec:
                             key: ${TRUENAS_HOMEPAGE_KEY}
                             url: "http://${TRUENAS_IP}"
                             enablePools: true
-                            enabled: true
+                            enabled: false
 
         service:
             main:

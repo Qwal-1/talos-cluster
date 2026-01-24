@@ -24,6 +24,20 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+            integrations:
+                homepage:
+                    description: "TrueNAS web interface"
+                    enabled: true
+                    group: Storage
+                    icon: "truenas"
+                    name: "TrueNAS"
+                    widget:
+                        type: truenas
+                        version: 2
+                        key: ${TRUENAS_HOMEPAGE_KEY}
+                        enablePools: true
+                        enabled: true
+
         service:
             main:
                 enabled: true

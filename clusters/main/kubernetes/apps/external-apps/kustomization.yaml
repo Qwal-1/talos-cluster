@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
   - proxy-ha-code/ks.yaml
   - proxy-homeassistant/ks.yaml
-  - proxy-pihole/ks.yaml
   - proxy-router/ks.yaml
   - proxy-truenas/ks.yaml
   - namespace.yaml

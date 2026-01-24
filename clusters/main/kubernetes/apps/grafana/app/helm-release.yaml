@@ -35,7 +35,7 @@ spec:
                         name: "Grafana"
                         enabled: true
                         widget:
-                            enabled: true
+                            enabled: false
                             type: grafana
                             version: 2
                             username: ${GRAFANA_ADMIN_USER}

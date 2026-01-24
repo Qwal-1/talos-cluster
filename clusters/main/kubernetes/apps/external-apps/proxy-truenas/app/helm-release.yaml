@@ -33,6 +33,7 @@ spec:
                         description: TrueNAS web interface
                         widget:
                             type: truenas
+                            enabled: false
                             url: http://${TRUENAS_IP}
                             key: ${TRUENAS_HOMEPAGE_KEY}
                             enablePools: true

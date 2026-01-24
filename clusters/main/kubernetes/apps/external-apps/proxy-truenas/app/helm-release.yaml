@@ -25,17 +25,17 @@ spec:
                         - path: /
                           pathType: Prefix
                 integrations:
-                homepage:
-                    enabled: true
-                    group: Storage
-                    icon: truenas
-                    name: TrueNAS
-                    description: TrueNAS web interface
-                    widget:
-                        type: truenas
-                        url: http://${TRUENAS_IP}
-                        key: ${TRUENAS_HOMEPAGE_KEY}
-                        enablePools: true
+                    homepage:
+                        enabled: true
+                        group: Storage
+                        icon: truenas
+                        name: TrueNAS
+                        description: TrueNAS web interface
+                        widget:
+                            type: truenas
+                            url: http://${TRUENAS_IP}
+                            key: ${TRUENAS_HOMEPAGE_KEY}
+                            enablePools: true
 
         service:
             main:

@@ -35,6 +35,7 @@ spec:
                             type: truenas
                             version: 2
                             key: ${TRUENAS_HOMEPAGE_KEY}
+                            url: ${TRUENAS_IP}
                             enablePools: true
                             enabled: true
 

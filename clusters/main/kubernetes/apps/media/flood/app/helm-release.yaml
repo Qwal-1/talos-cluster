@@ -23,3 +23,12 @@ spec:
                     - host: flood.${DOMAIN_0}
                       path:  /
                       pathType: Prefix
+                integrations:
+                    homepage:
+                        description: "Flood UI for Qbittorrent"
+                        enabled: true
+                        group: Media Management
+                        icon: "flood"
+                        name: "Flood"
+                        widget:
+                            enabled: false

@@ -37,6 +37,15 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+                integrations:
+                    homepage:
+                        description: "Configuration Management Platform for Radarr/Sonarr"
+                        enabled: true
+                        group: Media Management
+                        icon: "profilarr"
+                        name: "ProfiLarr"
+                        widget:
+                            enabled: false
         persistence:
             config:
                 volsync:

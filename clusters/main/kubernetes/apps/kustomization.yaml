@@ -23,5 +23,4 @@ resources:
   - grafana/ks.yaml
   - blocky-ui/ks.yaml
   - syncthing/ks.yaml
-  - homarr/ks.yaml
   - tracearr/ks.yaml

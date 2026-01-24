@@ -50,6 +50,15 @@ spec:
                   paths:
                     - path: /
                       pathType: Prefix
+            integrations:
+                homepage:
+                    description: "Kubernetes Dashboard web interface"
+                    enabled: true
+                    group: Other
+                    icon: "kubernetes-dashboard"
+                    name: "Kubernetes Dashboard"
+                    widget:
+                        enabled: false
     configmap:
       kubernetes-dashboard-settings:
         expandObjectName: false

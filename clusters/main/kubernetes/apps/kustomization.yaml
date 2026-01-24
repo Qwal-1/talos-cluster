@@ -12,7 +12,6 @@ resources:
   - tailscale/ks.yaml
   - mariadb/ks.yaml
   - mealie/ks.yaml
-  - minio/ks.yaml
   - muse/ks.yaml
   - homepage/ks.yaml
   - pgadmin/ks.yaml

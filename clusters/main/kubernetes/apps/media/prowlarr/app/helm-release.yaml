@@ -51,7 +51,7 @@ spec:
                         widget:
                             enabled: true
                             custom: 
-                              key: ${PROWLARR_HOMEPAGE_CUSTOM_KEY}
+                              key: ${PROWLARR_HOMEPAGE_KEY}
         persistence:
             config:
                 volsync:

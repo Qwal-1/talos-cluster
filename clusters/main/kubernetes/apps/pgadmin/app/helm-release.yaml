@@ -32,6 +32,15 @@ spec:
                     paths:
                       - path: /
                         pathType: Prefix
+              integrations:
+                  homepage:
+                      description: "pgAdmin is a web-based database management tool for PostgreSQL"
+                      enabled: true
+                      group: Other
+                      icon: "pgadmin"
+                      name: "pgAdmin"
+                      widget:
+                          enabled: false
       workload:
         main:
           podSpec:

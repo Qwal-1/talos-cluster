@@ -34,6 +34,15 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+                integrations:
+                    homepage:
+                        description: "Shoko Server is a personal anime media server and collection manager"
+                        enabled: true
+                        group: Media Management
+                        icon: "shoko"
+                        name: "Shoko"
+                        widget:
+                            enabled: false
         persistence:
             appdata:
                 enabled: true

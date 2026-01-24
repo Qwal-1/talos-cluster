@@ -31,6 +31,7 @@ spec:
                         icon: truenas
                         name: TrueNAS
                         description: TrueNAS web interface
+                        url: http://${TRUENAS_IP}
                         widget:
                             type: truenas
                             enabled: false

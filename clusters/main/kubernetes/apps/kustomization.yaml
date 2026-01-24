@@ -22,8 +22,6 @@ resources:
   #- tdarr
   - grafana/ks.yaml
   - blocky-ui/ks.yaml
-  - anything-llm/ks.yaml
-  - ollama/ks.yaml
   - syncthing/ks.yaml
   - homarr/ks.yaml
   - tracearr/ks.yaml

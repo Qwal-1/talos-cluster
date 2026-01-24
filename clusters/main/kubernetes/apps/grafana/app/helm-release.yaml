@@ -36,13 +36,15 @@ spec:
                         enabled: true
                         widget:
                             enabled: true
+                            username: ${GRAFANA_ADMIN_USER}
+                            password: ${GRAFANA_ADMIN_PASSWORD}
                             customkv:
                                 - key: version
                                   value: 2
-                                - key: username
-                                  value: ${GRAFANA_ADMIN_USER}
-                                - key: password
-                                  value: ${GRAFANA_ADMIN_PASSWORD}
+                                #- key: username
+                                #  value: ${GRAFANA_ADMIN_USER}
+                                #- key: password
+                                #  value: ${GRAFANA_ADMIN_PASSWORD}
 
 
         workload:

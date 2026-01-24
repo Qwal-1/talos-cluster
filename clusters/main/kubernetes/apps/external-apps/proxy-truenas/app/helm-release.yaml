@@ -31,13 +31,13 @@ spec:
                         group: Storage
                         icon: "truenas"
                         name: "TrueNAS"
-                        #widget:
-                        #    type: truenas
-                        #    version: 1
-                        #    key: ${TRUENAS_HOMEPAGE_KEY}
-                        #    url: "http://${TRUENAS_IP}"
-                        #    enablePools: true
-                        #    enabled: true
+                        widget:
+                            type: truenas
+                            version: 1
+                            key: ${TRUENAS_HOMEPAGE_KEY}
+                            url: "http://${TRUENAS_IP}"
+                            enablePools: true
+                            enabled: true
 
         service:
             main:

@@ -38,7 +38,7 @@ spec:
                     homepage:
                         description: "Lidl Discord"
                         enabled: true
-                        group: Stats
+                        group: Other
                         icon: "si-teamspeak"
                         name: "TeamSpeak"
                         widget:

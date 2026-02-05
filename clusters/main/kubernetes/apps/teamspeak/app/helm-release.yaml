@@ -25,7 +25,7 @@ spec:
                 url: ${BACKUP_S3_ENDPOINT}
         global:
             stopAll: false
-        ingress:
+        service:
             main:
                 loadBalancerIP: ${TEAMSPEAK_IP}
                 type: LoadBalancer

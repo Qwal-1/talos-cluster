@@ -1,0 +1,68 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: teamspeak
+    namespace: teamspeak
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: teamspeak
+            version: 13.13.16
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+    releaseName: teamspeak
+    values:
+        credentials:
+            s3:
+                accessKey: ${BACKUP_S3_ACCESS_KEY}
+                bucket: ${BACKUP_S3_BUCKET}
+                encrKey: ${BACKUP_RESTIC_PASSWORD}
+                secretKey: ${BACKUP_S3_SECRET_KEY}
+                type: s3
+                url: ${BACKUP_S3_ENDPOINT}
+        global:
+            stopAll: false
+        ingress:
+            main:
+                enabled: true
+                ingressClassName: external
+                hosts:
+                    - host: ts.${DOMAIN_0}
+                      paths:
+                        - path: /
+                          pathType: Prefix
+                integrations:
+                    homepage:
+                        description: "Lidl Discord"
+                        enabled: true
+                        group: Stats
+                        icon: "si-teamspeak"
+                        name: "TeamSpeak"
+                        widget:
+                            enabled: false
+        persistence:
+            data:
+                volsync:
+                    - credentials: s3
+                      type: restic
+                      name: config
+                      dest:
+                        enabled: false
+                      src:
+                        enabled: true
+                        trigger:
+                          schedule: 20 0 * * *
+            config:
+                volsync:
+                    - credentials: s3
+                      type: restic
+                      name: config
+                      dest:
+                        enabled: false
+                      src:
+                        enabled: true
+                        trigger:
+                          schedule: 20 0 * * *

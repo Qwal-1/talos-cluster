@@ -29,7 +29,7 @@ spec:
             main:
                 loadBalancerIP: ${TEAMSPEAK_IP}
                 type: LoadBalancer
-                ingressClassName: external
+                externalTrafficPolicy: Local
                 integrations:
                     metallb:
                         enabled: true

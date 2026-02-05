@@ -26,7 +26,7 @@ spec:
         global:
             stopAll: false
         ingress:
-            main:
+            voice:
                 enabled: true
                 ingressClassName: external
                 hosts:

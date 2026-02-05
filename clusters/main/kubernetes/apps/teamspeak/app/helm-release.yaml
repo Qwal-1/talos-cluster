@@ -26,23 +26,13 @@ spec:
         global:
             stopAll: false
         ingress:
-            voice:
-                enabled: true
+            main:
+                loadBalancerIP: ${TEAMSPEAK_IP}
+                type: LoadBalancer
                 ingressClassName: external
-                hosts:
-                    - host: ts.${DOMAIN_0}
-                      paths:
-                        - path: /
-                          pathType: Prefix
                 integrations:
-                    homepage:
-                        description: "Lidl Discord"
+                    metallb:
                         enabled: true
-                        group: Other
-                        icon: "si-teamspeak"
-                        name: "TeamSpeak"
-                        widget:
-                            enabled: false
         persistence:
             data:
                 volsync:

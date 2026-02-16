@@ -3,6 +3,7 @@
   "extends": [
     "config:recommended",
     "github>trueforge-org/renovate-config",
-    "github>trueforge-org/renovate-config:autoMergeLabels.json5"
+    // "github>trueforge-org/renovate-config:autoMergeLabels.json5",  // Commented out due to trailing comma syntax error
+    "local>../.github/renovate/autoMergeLabels.json5"
   ]
 }

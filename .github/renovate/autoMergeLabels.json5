@@ -10,7 +10,7 @@
         "pinDigest",
         "lockfile"
       ],
-      "addLabels": ["automerge"]
+      "addLabels": ["automerge"],
     }
   ]
 }

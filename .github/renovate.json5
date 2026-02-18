@@ -2,7 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended",
-    "github>trueforge-org/renovate-config/default.json",
+    "github>trueforge-org/renovate-config",
     "github>trueforge-org/renovate-config/autoMergeLabels.json5"
   ]
 }

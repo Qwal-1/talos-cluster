@@ -2,6 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended",
-    "github>trueforge-org/renovate-config"
+    "github>trueforge-org/renovate-config",
+    "github>Qwal-1/talos-cluster//.github/renovate/autoMergeLabels.json5"
   ]
 }

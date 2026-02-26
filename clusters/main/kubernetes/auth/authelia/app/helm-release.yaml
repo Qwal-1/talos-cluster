@@ -241,13 +241,7 @@ spec:
               token_endpoint_auth_method: 'client_secret_post'
               consent_mode: 'implicit'          
     redis:
-      persistence:
+      volumeClaimTemplates:
         data:
           enabled: true
-          mountPath: "/bitnami/redis"
-      master:
-        configuration: |-
-          appendonly yes
-          appendfsync everysec
-          auto-aof-rewrite-percentage 100
-          auto-aof-rewrite-min-size 64mb
+          mountPath: "/bitnami/valkey" 

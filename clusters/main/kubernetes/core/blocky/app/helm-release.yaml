@@ -44,10 +44,11 @@ spec:
             enabled: true
 
     blocking:
-      allowlists:
-        default:
-          - google.com
-          - ${WHITELIST_URL_1}
+      whitelist:
+        - name: default
+          lists:
+            - ${WHITELIST_URL_1}
+            - google.com
 
       # -- Blocky blacklists
       denylists: 

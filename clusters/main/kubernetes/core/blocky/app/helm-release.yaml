@@ -44,9 +44,9 @@ spec:
             enabled: true
 
     blocking:
-      # --  Add blocky whitelists
-      allowlists: 
-        default:
+      allowlists:
+        - name: default
+          lists:
             - ${WHITELIST_URL_1}
 
       # -- Blocky blacklists

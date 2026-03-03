@@ -46,8 +46,7 @@ spec:
     blocking:
       # --  Add blocky whitelists
       whitelist: 
-       - name: ads
-         lists:
+        false-positives:
             - ${WHITELIST_URL_1}
 
       # -- Blocky blacklists

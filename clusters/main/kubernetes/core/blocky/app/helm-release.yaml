@@ -46,7 +46,7 @@ spec:
     blocking:
       # --  Add blocky whitelists
       whitelist: 
-        false-positives:
+        default:
             - ${WHITELIST_URL_1}
 
       # -- Blocky blacklists

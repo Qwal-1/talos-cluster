@@ -48,6 +48,7 @@ spec:
         - name: default
           lists:
             - ${WHITELIST_URL_1}
+            - google.com
 
       # -- Blocky blacklists
       denylists: 

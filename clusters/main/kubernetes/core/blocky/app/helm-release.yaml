@@ -45,12 +45,12 @@ spec:
 
     blocking:
       # --  Add blocky whitelists
-      whitelist: 
+      allowlists: 
         default:
             - ${WHITELIST_URL_1}
 
       # -- Blocky blacklists
-      blacklist: 
+      denylists: 
         - name: aggressive-ads
           lists:
              - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/pro.plus.txt

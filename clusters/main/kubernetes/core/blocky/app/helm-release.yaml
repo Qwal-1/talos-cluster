@@ -47,16 +47,13 @@ spec:
       whitelist:
         - name: default
           lists:
-            - ${WHITELIST_URL_1}
-            - ${WHITELIST_URL_2}
+            - ${WHITELIST_GIST}?token=${WHITELIST_GIST_TOKEN}
         - name: aggressive-ads
           lists:
-            - ${WHITELIST_URL_1}
-            - ${WHITELIST_URL_2}
+            - ${WHITELIST_GIST}?token=${WHITELIST_GIST_TOKEN}
         - name: default-ads
           lists:
-            - ${WHITELIST_URL_1}
-            - ${WHITELIST_URL_2}
+            - ${WHITELIST_GIST}?token=${WHITELIST_GIST_TOKEN}
 
       # -- Blocky blacklists
       blacklist: 

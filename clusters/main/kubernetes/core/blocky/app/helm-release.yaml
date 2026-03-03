@@ -53,7 +53,7 @@ spec:
       blacklist: 
         - name: aggressive-ads
           lists:
-            # - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/pro.plus.txt
+             - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/pro.plus.txt
  
             # -- Blocky clientGroupsBlock
       clientGroupsBlock:

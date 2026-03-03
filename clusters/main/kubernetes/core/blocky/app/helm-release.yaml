@@ -48,12 +48,15 @@ spec:
         - name: default
           lists:
             - ${WHITELIST_URL_1}
+            - ${WHITELIST_URL_2}
         - name: aggressive-ads
           lists:
             - ${WHITELIST_URL_1}
+            - ${WHITELIST_URL_2}
         - name: default-ads
           lists:
             - ${WHITELIST_URL_1}
+            - ${WHITELIST_URL_2}
 
       # -- Blocky blacklists
       blacklist: 

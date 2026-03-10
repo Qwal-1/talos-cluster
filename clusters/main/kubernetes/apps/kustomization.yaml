@@ -24,3 +24,4 @@ resources:
   - syncthing/ks.yaml
   - tracearr/ks.yaml
   - teamspeak/ks.yaml
+  - miniflux/ks.yaml

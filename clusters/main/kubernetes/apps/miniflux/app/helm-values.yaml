@@ -1,0 +1,64 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: miniflux
+    namespace: miniflux
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: miniflux
+            version: 17.17.0
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+    releaseName: miniflux
+    values:
+        credentials:
+            s3:
+                accessKey: ENC[AES256_GCM,data:hMarLd7lPj9HsTuMc6LOPuGIQqNth20=,iv:M9Jdl0GIKiK21DDbMmDXObKQIep42EGioDLjKCUUWOE=,tag:39WeMr/PvNIkZcNoZ+3elQ==,type:str]
+                bucket: ${BACKUP_S3_BUCKET}
+                encrKey: ENC[AES256_GCM,data:owHIlNWBPljb1WSc5JQLSZLSRJ1GfpzdxA==,iv:VMtJNJDB+9TdTHGz56ezORZ0L5eJD+7GwK2E/5bIyac=,tag:iLFbdcyaFSZaUjK54PsQWg==,type:str]
+                secretKey: ENC[AES256_GCM,data:4+qWa3uifhOllYaiJKgWr/7li0iG1sA=,iv:Pqt8NjedwJyX6DTm+hrYRB2WuUNb6goD5baalTXqB+I=,tag:hj01Bgl38VuRHjReAol24g==,type:str]
+                type: s3
+                url: ${BACKUP_S3_ENDPOINT}
+        ingress:
+            main:
+                enabled: true
+                ingressClassName: internal
+                hosts:
+                    - host: rss.${DOMAIN_0}
+                      paths:
+                        - path: /
+                          pathType: Prefix
+        persistence:
+            config:
+                enabled: true
+                mountPath: /config
+                volsync:
+                    - credentials: s3
+                      type: restic
+                      name: config
+                      dest:
+                        enabled: false
+                      src:
+                        enabled: false
+                        trigger:
+                            schedule: 45 0 * * *
+sops:
+    shamir_threshold: 3
+    age:
+        - recipient: age1cn79agmdffpagt5de9zg6l4zj64z7evgu86yq8u84r90rndnvpzsnesh46
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBhK3VlL2hRNzJXYU1KT2dP
+            ajcwekhJbWhhbGZCQUE0VmtaYUF3WW51S0NFCjVjQnBmenJyd0FaTmM5d01kbEpz
+            RnNFam1SZXhQNmcxZXp2di9mQytRdEkKLS0tIFAzdWwvQUhBaTVkd0tJSU81OVJz
+            MmYvb250ampRUHoxeW4vZElpVEtsZjQKDdVDWV3VIv2GPeAgFl/aOtWnAp5z4Kv4
+            pId3gTsTQEsIvPBGk3QaXy0+Q4Yk2FGjPrLPfgWoumlFU8D0+8gUVw==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-03-10T17:11:35Z"
+    mac: ENC[AES256_GCM,data:iFv9ZoMaRMr9moChOwjWbEowg9a2ocWaGcFU8JKBCMDUiBqsLov6SQSINFQl/IOepgq7P5lXax4JjLFhtWP5GKOEJNKIPPRv0Rd0uGhVD9kiHTFPKEhJIuPCCcOrYtMNeEMgCKcmjq3Y/8N7guais4IlyrqdBojVDlV9x60BtNA=,iv:LKvvBLeNApojBWiW68DWULjCUta141as46wCpvAL8jI=,tag:VXZQg2h/XZS6UesplCQxOg==,type:str]
+    encrypted_regex: ((?i)(displayname|email|pass|ca|id|bootstraptoken|secretboxencryptionsecret|secrets|secrets|password|cert|secret($|[^N])|key|token|^data$|^stringData))
+    version: 3.11.0

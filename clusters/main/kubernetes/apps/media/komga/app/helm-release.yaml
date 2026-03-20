@@ -8,7 +8,7 @@ spec:
     chart:
         spec:
             chart: komga
-            version: 16.19.2
+            version: 17.0.0
             sourceRef:
                 kind: HelmRepository
                 name: truecharts

@@ -15,9 +15,9 @@ spec:
                 namespace: flux-system
     releaseName: muse
     values:
-      image:
-        repository: ghcr.io/museofficial/muse
-        tag: pr-1287
+      #image:
+      #  repository: ghcr.io/museofficial/muse
+      #  tag: pr-1287
       global:
         stopAll: false
       muse:

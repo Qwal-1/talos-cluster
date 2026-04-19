@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-    name: proxy-truenas
+    name: proxy-ai-server
     namespace: external-apps
 spec:
     interval: 15m
@@ -13,7 +13,7 @@ spec:
                 kind: HelmRepository
                 name: truecharts
                 namespace: flux-system
-    releaseName: proxy-truenas
+    releaseName: proxy-ai-server
     values:
         ingress:
             main:

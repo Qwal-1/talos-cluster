@@ -1,0 +1,38 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: proxy-truenas
+    namespace: external-apps
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: external-service
+            version: 17.0.2
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+    releaseName: proxy-truenas
+    values:
+        ingress:
+            main:
+                enabled: true
+                ingressClassName: internal
+                hosts:
+                    - host: ai-server.${DOMAIN_0}
+                      paths:
+                        - path: /
+                          pathType: Prefix
+        service:
+            main:
+                enabled: true
+                type: ExternalIP
+                externalIP: ${AI_SERVER_IP}
+                useSlice: false
+                ports:
+                    main:
+                        enabled: true
+                        protocol: http
+                        port: 4153
+

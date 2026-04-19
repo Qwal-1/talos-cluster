@@ -7,3 +7,4 @@ resources:
   - proxy-truenas/ks.yaml
   - namespace.yaml
   - proxy-scrutiny/ks.yaml
+  - proxy-ai-server/ks.yaml

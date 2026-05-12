@@ -5,15 +5,17 @@
       {
         "description": "Block all automerge for Siderolabs images",
         "matchDatasources": ["docker"],
-        "matchPackagePatterns": ["siderolabs/(kubelet|installer)"],
+        "matchPackagePatterns": ["siderolabs"],
         "automerge": false,
+        "automergeType": "none",
         "labels": ["system-upgrade"]
       },
       {
         "description": "Block all automerge for kubectl image",
         "matchDatasources": ["docker"],
-        "matchPackagePatterns": ["registry\\.k8s\\.io/kubectl"],
+        "matchPackagePatterns": ["kubectl"],
         "automerge": false,
+        "automergeType": "none",
         "labels": ["system-upgrade"]
       }
     ]

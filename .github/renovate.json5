@@ -4,23 +4,5 @@
     "config:recommended",
     "github>trueforge-org/renovate-config",
     "github>trueforge-org/renovate-config//autoMergeLabels.json5"
-  ],
-  "packageRules": [
-    {
-      "description": "Block all automerge for Siderolabs images",
-      "matchDatasources": ["docker"],
-      "matchPackagePatterns": ["siderolabs"],
-      "automerge": false,
-      "automergeType": "none",
-      "labels": ["system-upgrade"]
-    },
-    {
-      "description": "Block all automerge for kubectl image",
-      "matchDatasources": ["docker"],
-      "matchPackagePatterns": ["kubectl"],
-      "automerge": false,
-      "automergeType": "none",
-      "labels": ["system-upgrade"]
-    }
   ]
 }

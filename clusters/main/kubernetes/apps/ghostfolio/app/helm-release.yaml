@@ -50,6 +50,7 @@ spec:
                         main:
                             env:
                                 ALPHA_VANTAGE_API_KEY: ${GHOSTFOLIO_ALPHA_VANTAGE_API_KEY}
+                                ACCESS_TOKEN_SALT: ${GHOSTFOLIO_ACCESS_TOKEN_SALT}
         cnpg:
             main:
                 password: ${CNPG_PASSWORD}

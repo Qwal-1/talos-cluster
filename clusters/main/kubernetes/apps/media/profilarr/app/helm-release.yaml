@@ -54,9 +54,6 @@ spec:
                       name: config
                       dest:
                         enabled: true
-                        resticConfig:
-                            resticOptions:
-                            - --no-restore-owner
                       src:
                         enabled: true
                         trigger:

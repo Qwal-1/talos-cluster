@@ -54,6 +54,10 @@ spec:
                       name: config
                       dest:
                         enabled: true
+                        moverSecurityContext:
+                            runAsUser: 0
+                            runAsGroup: 0
+                            fsGroup: 0
                       src:
                         enabled: true
                         trigger:

@@ -245,7 +245,7 @@ spec:
               client_secret: ${OIDC_PROFILARR_SECRET}
               public: false
               authorization_policy: 'two_factor'
-              require_pkce: true
+              require_pkce: false
               pkce_challenge_method: 'S256'
               redirect_uris:
                 - 'https://profilarr.${DOMAIN_0}/auth/oidc/callback'

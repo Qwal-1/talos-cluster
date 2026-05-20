@@ -29,10 +29,10 @@ spec:
         service:
             main:
                 ports:
-                main:
-                    protocol: http
-                    targetPort: 6868
-                    port: 6868
+                    main:
+                        protocol: http
+                        targetPort: 6868
+                        port: 6868
         ingress:
             main:
                 enabled: true

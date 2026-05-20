@@ -62,6 +62,8 @@ spec:
                                 ORIGIN: https://profilarr.${DOMAIN_0}
         persistence:
             config:
+                enabled: true
+                mountPath: "/config"
                 volsync:
                     - credentials: s3
                       type: restic

@@ -12,7 +12,7 @@ resources:
   - stash/ks.yaml
   - xbvr/ks.yaml
   - komga/ks.yaml
-  #- profilarr/ks.yaml
+  - profilarr/ks.yaml
   - flood/ks.yaml
   - bazarr/ks.yaml
   - shoko/ks.yaml

@@ -52,14 +52,9 @@ spec:
                     - credentials: s3
                       type: restic
                       name: config
-                      moverSecurityContext:
-                          runAsUser: 0
-                          runAsGroup: 0
-                          fsGroup: 0
-                          runAsNonRoot: false
                       dest:
                         enabled: false
                       src:
-                        enabled: false
+                        enabled: true
                         trigger:
                           schedule: 5 1 * * *

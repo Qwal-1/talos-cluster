@@ -58,8 +58,8 @@ spec:
                           fsGroup: 0
                           runAsNonRoot: false
                       dest:
-                        enabled: true
+                        enabled: false
                       src:
-                        enabled: true
+                        enabled: false
                         trigger:
                           schedule: 5 1 * * *

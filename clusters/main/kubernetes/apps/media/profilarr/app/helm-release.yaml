@@ -26,6 +26,13 @@ spec:
                 secretKey: ${BACKUP_S3_SECRET_KEY}
                 type: s3
                 url: ${BACKUP_S3_ENDPOINT}
+        service:
+            main:
+                ports:
+                main:
+                    protocol: http
+                    targetPort: 6868
+                    port: 6868
         ingress:
             main:
                 enabled: true

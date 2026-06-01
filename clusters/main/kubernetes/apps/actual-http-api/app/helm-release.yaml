@@ -51,4 +51,3 @@ spec:
                                 ACTUAL_SERVER_PASSWORD: "${ACTUAL_SERVER_PASSWORD}"
                                 ACTUAL_SERVER_URL: "${ACTUAL_SERVER_URL}"
                                 API_KEY: "${ACTUAL_API_KEY}"
-                                EN: "test"

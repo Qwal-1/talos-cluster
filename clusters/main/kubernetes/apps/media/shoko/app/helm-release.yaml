@@ -51,7 +51,7 @@ spec:
                       type: restic
                       name: config
                       dest:
-                        enabled: true
+                        enabled: false
                       src:
                         enabled: true
                         trigger:

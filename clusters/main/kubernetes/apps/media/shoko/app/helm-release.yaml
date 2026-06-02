@@ -60,3 +60,10 @@ spec:
                 enabled: true
                 existingClaim: nfs-media-pvc
                 mountPath: "/media"
+        addons:
+            codeserver:
+                enabled: true
+                ingress:
+                    enabled: true
+                    hosts:
+                      - host: shoko-codeserver.${DOMAIN_0}

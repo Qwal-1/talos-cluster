@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-media-pvc
+  name: shoko-media-pvc
   namespace: shoko
 spec:
   storageClassName: media-nfs

@@ -58,5 +58,5 @@ spec:
                           schedule: 55 0 * * *
             media:
                 enabled: true
-                existingClaim: nfs-media-pvc
+                existingClaim: shoko-media-pvc
                 mountPath: "/media"

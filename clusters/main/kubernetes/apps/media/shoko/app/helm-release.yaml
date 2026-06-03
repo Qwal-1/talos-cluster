@@ -58,5 +58,7 @@ spec:
                           schedule: 55 0 * * *
             media:
                 enabled: true
-                existingClaim: shoko-media-pvc
+                path: ${DEFAULT_STORAGE_PATH}
+                server: ${TRUENAS_IP}
+                type: nfs
                 mountPath: "/media"

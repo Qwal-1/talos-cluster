@@ -17,7 +17,7 @@ spec:
     values:
         image:
             repository: ghcr.io/dictionarry-hub/profilarr
-            tag: 2.0.7
+            tag: 2.0.8
         credentials:
             s3:
                 accessKey: ${BACKUP_S3_ACCESS_KEY}

@@ -6,7 +6,6 @@ resources:
   - tautulli/ks.yaml
   - ghostfolio/ks.yaml
   - actualserver/ks.yaml
-  - actual-http-api/ks.yaml
   - cloudflareddns/ks.yaml
   - upsnap/ks.yaml
   - tailscale/ks.yaml

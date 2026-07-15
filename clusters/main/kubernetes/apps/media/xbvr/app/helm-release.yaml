@@ -88,8 +88,10 @@ spec:
                       name: config
                       dest:
                         enabled: true
+                        cacheCapacity: 20Gi
                       src:
                         enabled: true
+                        cacheCapacity: 20Gi
                         trigger:
                           schedule: 35 0 * * *
             media:

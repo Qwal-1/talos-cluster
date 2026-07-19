@@ -41,12 +41,12 @@ spec:
           main:
             enabled: true
             port: 7777
-            protocol: UDP
+            protocol: udp
             targetPort: 7777
           rcon:
             enabled: true
             port: 27020
-            protocol: TCP
+            protocol: tcp
             targetPort: 27020
     persistence:
       steam:

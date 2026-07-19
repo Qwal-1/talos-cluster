@@ -1,0 +1,74 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: ark-survival-ascended
+  namespace: ark-survival-ascended
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 18.14.4
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+  releaseName: ark-survival-ascended
+  values:
+    image:
+      repository: mschnitzer/asa-linux-server
+      tag: 1.5.1
+      pullPolicy: IfNotPresent
+    workload:
+      main:
+        type: StatefulSet
+        podSpec:
+          containers:
+            main:
+              command:
+                - /usr/bin/start_server
+              env:
+                ENABLE_DEBUG: "0"
+                ASA_START_PARAMS: >-
+                  TheIsland_WP?listen
+                  ?Port=7777
+                  ?RCONEnabled=True
+                  ?RCONPort=27020
+                  -WinLiveMaxPlayers=10
+    service:
+      main:
+        ports:
+          game:
+            enabled: true
+            protocol: udp
+            port: 7777
+            targetPort: 7777
+          rcon:
+            enabled: true
+            protocol: tcp
+            port: 27020
+            targetPort: 27020
+    persistence:
+      steam:
+        enabled: true
+        mountPath: /home/gameserver/steam
+        size: 20Gi
+      steamcmd:
+        enabled: true
+        mountPath: /home/gameserver/steamcmd
+        size: 5Gi
+      server-files:
+        enabled: true
+        mountPath: /home/gameserver/server-files
+        size: 100Gi
+      cluster-shared:
+        enabled: true
+        mountPath: /home/gameserver/cluster-shared
+        size: 20Gi
+    securityContext:
+      container:
+        runAsNonRoot: true
+        runAsUser: 25000
+        runAsGroup: 25000
+      pod:
+        fsGroup: 25000

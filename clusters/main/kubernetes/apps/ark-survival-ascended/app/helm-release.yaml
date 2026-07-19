@@ -36,47 +36,44 @@ spec:
                   -ClusterDirOverride="/home/gameserver/cluster-shared"
               lifecycle:
                 preStop:
-                  exec:
-                    command:
-                      - /bin/sh
-                      - -c
-                      - "asa-ctrl rcon --exec 'saveworld'"
+                  type: exec
+                  command:
+                    - /bin/sh
+                    - -c
+                    - "asa-ctrl rcon --exec 'saveworld'"
               probes:
                 startup:
                   enabled: true
-                  custom:
-                    spec:
-                      exec:
-                        command:
-                          - /bin/sh
-                          - -c
-                          - "asa-ctrl rcon --exec 'listplayers'"
-                      initialDelaySeconds: 60
-                      periodSeconds: 30
-                      failureThreshold: 20
+                  type: exec
+                  command:
+                    - /bin/sh
+                    - -c
+                    - "asa-ctrl rcon --exec 'listplayers'"
+                  spec:
+                    initialDelaySeconds: 60
+                    periodSeconds: 30
+                    failureThreshold: 20
                 readiness:
                   enabled: true
-                  custom:
-                    spec:
-                      exec:
-                        command:
-                          - /bin/sh
-                          - -c
-                          - "asa-ctrl rcon --exec 'listplayers'"
-                      periodSeconds: 30
-                      failureThreshold: 3
+                  type: exec
+                  command:
+                    - /bin/sh
+                    - -c
+                    - "asa-ctrl rcon --exec 'listplayers'"
+                  spec:
+                    periodSeconds: 30
+                    failureThreshold: 3
                 liveness:
                   enabled: true
-                  custom:
-                    spec:
-                      exec:
-                        command:
-                          - /bin/sh
-                          - -c
-                          - "asa-ctrl rcon --exec 'listplayers'"
-                      initialDelaySeconds: 300
-                      periodSeconds: 60
-                      failureThreshold: 5
+                  type: exec
+                  command:
+                    - /bin/sh
+                    - -c
+                    - "asa-ctrl rcon --exec 'listplayers'"
+                  spec:
+                    initialDelaySeconds: 300
+                    periodSeconds: 60
+                    failureThreshold: 5
 
     service:
       main:

@@ -34,6 +34,7 @@ spec:
                   ?Port=7777
                   ?RCONEnabled=True
                   ?RCONPort=27020
+                  ?ServerAdminPassword=${ARK_ADMIN_PASSWORD}
                   -WinLiveMaxPlayers=10
               probes:
                 liveness:

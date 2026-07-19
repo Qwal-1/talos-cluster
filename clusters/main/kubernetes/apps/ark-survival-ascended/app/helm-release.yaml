@@ -30,7 +30,7 @@ spec:
               env:
                 ENABLE_DEBUG: "0"
                 ASA_START_PARAMS: >-
-                  TheIsland_WP?listen?Port=7777?RCONEnabled=True?RCONPort=27020?ServerAdminPassword=${ARK_ADMIN_PASSWORD}
+                  Ragnarok_WP?listen?Port=7777?RCONEnabled=True?RCONPort=27020?ServerAdminPassword=${ARK_ADMIN_PASSWORD}
                   -WinLiveMaxPlayers=10
                   -clusterid=default
                   -ClusterDirOverride="/home/gameserver/cluster-shared"

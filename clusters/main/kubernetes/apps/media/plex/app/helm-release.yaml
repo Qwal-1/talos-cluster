@@ -26,7 +26,7 @@ spec:
                 type: s3
                 url: ${BACKUP_S3_ENDPOINT}
         service:
-            main:   
+            main:
                 type: LoadBalancer
                 annotations:
                       metallb.io/loadBalancerIPs:  ${PLEX_IP}
@@ -81,7 +81,7 @@ spec:
                                 PLEX_CLAIM: ${PLEX_CLAIM_TOKEN}
         addons:
             codeserver:
-                enabled: true
+                enabled: false
                 ingress:
                     enabled: true
                     hosts:

@@ -37,6 +37,7 @@ spec:
                   -WinLiveMaxPlayers=10
     service:
       main:
+        type: LoadBalancer
         ports:
           main:
             enabled: true
@@ -79,3 +80,10 @@ spec:
         limits:
             cpu: 4
             memory: 24Gi
+    addons:
+        codeserver:
+            enabled: true
+            ingress:
+                enabled: true
+                hosts:
+                  - host: ark-codeserver.${DOMAIN_0}

@@ -32,13 +32,52 @@ spec:
                 ASA_START_PARAMS: >-
                   TheIsland_WP?listen?Port=7777?RCONEnabled=True?RCONPort=27020?ServerAdminPassword=${ARK_ADMIN_PASSWORD}
                   -WinLiveMaxPlayers=10
+                  -clusterid=default
+                  -ClusterDirOverride="/home/gameserver/cluster-shared"
+              lifecycle:
+                preStop:
+                  exec:
+                    command:
+                      - /bin/sh
+                      - -c
+                      - "asa-ctrl rcon --exec 'saveworld'"
               probes:
-                liveness:
-                  enabled: false
-                readiness:
-                  enabled: false
                 startup:
-                  enabled: false
+                  enabled: true
+                  custom:
+                    spec:
+                      exec:
+                        command:
+                          - /bin/sh
+                          - -c
+                          - "asa-ctrl rcon --exec 'listplayers'"
+                      initialDelaySeconds: 60
+                      periodSeconds: 30
+                      failureThreshold: 20
+                readiness:
+                  enabled: true
+                  custom:
+                    spec:
+                      exec:
+                        command:
+                          - /bin/sh
+                          - -c
+                          - "asa-ctrl rcon --exec 'listplayers'"
+                      periodSeconds: 30
+                      failureThreshold: 3
+                liveness:
+                  enabled: true
+                  custom:
+                    spec:
+                      exec:
+                        command:
+                          - /bin/sh
+                          - -c
+                          - "asa-ctrl rcon --exec 'listplayers'"
+                      initialDelaySeconds: 300
+                      periodSeconds: 60
+                      failureThreshold: 5
+
     service:
       main:
         type: LoadBalancer

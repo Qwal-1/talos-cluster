@@ -35,6 +35,13 @@ spec:
                   ?RCONEnabled=True
                   ?RCONPort=27020
                   -WinLiveMaxPlayers=10
+              probes:
+                liveness:
+                  enabled: false
+                readiness:
+                  enabled: false
+                startup:
+                  enabled: false
     service:
       main:
         type: LoadBalancer

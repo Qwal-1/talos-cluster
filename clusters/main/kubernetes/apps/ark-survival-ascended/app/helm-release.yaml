@@ -48,11 +48,12 @@ spec:
                   command:
                     - /bin/sh
                     - -c
-                    - "asa-ctrl rcon --exec 'listplayers'"
+                    - "pgrep -f ShooterGameServer"
                   spec:
                     initialDelaySeconds: 60
                     periodSeconds: 30
-                    failureThreshold: 20
+                    timeoutSeconds: 5
+                    failureThreshold: 30
                 readiness:
                   enabled: true
                   type: exec

@@ -48,7 +48,7 @@ spec:
                   command:
                     - /bin/sh
                     - -c
-                    - "pgrep -f ShooterGameServer"
+                    - "pgrep -f ArkAscendedServer.exe"
                   spec:
                     initialDelaySeconds: 60
                     periodSeconds: 30

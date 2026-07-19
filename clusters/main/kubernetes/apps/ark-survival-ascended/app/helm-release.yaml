@@ -72,3 +72,10 @@ spec:
         runAsGroup: 25000
       pod:
         fsGroup: 25000
+    resources:
+        requests:
+            cpu: 10m
+            memory: 2Gi
+        limits:
+            cpu: 4
+            memory: 24Gi

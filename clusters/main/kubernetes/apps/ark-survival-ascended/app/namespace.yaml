@@ -2,5 +2,3 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: ark-survival-ascended
-  labels:
-    app: ark-survival-ascended

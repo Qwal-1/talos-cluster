@@ -1,0 +1,214 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: palworld
+  namespace: palworld
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 18.14.4
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+  releaseName: palworld
+  values:
+    # NOTE: verify this is still the latest tag before applying:
+    # https://github.com/pocketpairjp/palworld-dedicated-server-docker/pkgs/container/palserver
+    image:
+      repository: ghcr.io/pocketpairjp/palserver
+      tag: v1.0.1.100619
+      pullPolicy: IfNotPresent
+
+    workload:
+      main:
+        type: StatefulSet
+        podSpec:
+          # Pod-wide fsGroup so the dashboard sidecar (uid 1001) can write
+          # its credential store on the dashboard-data PVC.
+          securityContext:
+            fsGroup: 1001
+
+          initContainers:
+            # The official image has no env-var config: the REST API (which
+            # the dashboard needs) is only configurable via PalWorldSettings.ini,
+            # and that file only exists after the server's first boot. This
+            # seeds it once, from the image's own default template, so the
+            # REST API + your passwords are already active on first start.
+            init-config:
+              image:
+                repository: ghcr.io/pocketpairjp/palserver
+                tag: v1.0.1.100619
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  set -e
+                  CONF_DIR=/pal/Package/Pal/Saved/Config/LinuxServer
+                  CONF_FILE="$CONF_DIR/PalWorldSettings.ini"
+                  if [ ! -f "$CONF_FILE" ]; then
+                    mkdir -p "$CONF_DIR"
+                    cp /pal/Package/DefaultPalWorldSettings.ini "$CONF_FILE"
+                    sed -i \
+                      -e "s/RESTAPIEnabled=False/RESTAPIEnabled=True/" \
+                      -e "s/AdminPassword=\"\"/AdminPassword=\"${PALWORLD_ADMIN_PASSWORD}\"/" \
+                      -e "s/ServerPassword=\"\"/ServerPassword=\"${PALWORLD_SERVER_PASSWORD}\"/" \
+                      -e "s/ServerName=\"Default Palworld Server\"/ServerName=\"${PALWORLD_SERVER_NAME:-Talos Palworld Server}\"/" \
+                      "$CONF_FILE"
+                    echo "Wrote $CONF_FILE"
+                  else
+                    echo "$CONF_FILE already exists, leaving it alone"
+                  fi
+                  # First-boot-only permissions fix: the exact non-root uid
+                  # this image runs as isn't documented, so this takes the
+                  # pragmatic route rather than guessing a runAsUser.
+                  chmod -R 0777 /pal/Package/Pal/Saved
+              env:
+                PALWORLD_ADMIN_PASSWORD: ${PALWORLD_ADMIN_PASSWORD}
+                PALWORLD_SERVER_PASSWORD: ${PALWORLD_SERVER_PASSWORD}
+                PALWORLD_SERVER_NAME: ${PALWORLD_SERVER_NAME}
+
+          containers:
+            main:
+              command:
+                - /bin/sh
+              args:
+                - /pal/Package/PalServer.sh
+                - -port=8211
+                - -useperfthreads
+                - -NoAsyncLoadingThread
+                - -UseMultithreadForDS
+              probes:
+                # Binary name is unconfirmed - verify with:
+                # kubectl -n palworld exec sts/palworld -c main -- ps aux
+                startup:
+                  enabled: true
+                  type: exec
+                  command:
+                    - /bin/sh
+                    - -c
+                    - "pgrep -f PalServer-Linux-Shipping"
+                  spec:
+                    initialDelaySeconds: 60
+                    periodSeconds: 15
+                    timeoutSeconds: 5
+                    failureThreshold: 40
+                readiness:
+                  enabled: true
+                  type: exec
+                  command:
+                    - /bin/sh
+                    - -c
+                    - "pgrep -f PalServer-Linux-Shipping"
+                  spec:
+                    periodSeconds: 30
+                    failureThreshold: 3
+                liveness:
+                  enabled: true
+                  type: exec
+                  command:
+                    - /bin/sh
+                    - -c
+                    - "pgrep -f PalServer-Linux-Shipping"
+                  spec:
+                    initialDelaySeconds: 120
+                    periodSeconds: 60
+                    failureThreshold: 5
+
+            dashboard:
+              image:
+                repository: ghcr.io/rnz01/palworld-server-dashboard
+                tag: latest
+              env:
+                NODE_ENV: production
+                PORT: "3000"
+                HOSTNAME: 0.0.0.0
+                PANEL_AUTH_FILE: /app/data/panel-auth.json
+                # REST API lives in the same pod - no need to expose it.
+                PALWORLD_REST_URL: http://127.0.0.1:8212
+                PALWORLD_ADMIN_PASSWORD: ${PALWORLD_ADMIN_PASSWORD}
+                PANEL_INITIAL_ADMIN_PASSWORD: ${PALWORLD_DASHBOARD_PASSWORD}
+              probes:
+                readiness:
+                  enabled: true
+                  type: http
+                  path: /
+                  port: 3000
+                  spec:
+                    initialDelaySeconds: 15
+                    periodSeconds: 15
+                liveness:
+                  enabled: true
+                  type: http
+                  path: /
+                  port: 3000
+                  spec:
+                    initialDelaySeconds: 30
+                    periodSeconds: 30
+
+    service:
+      main:
+        type: LoadBalancer
+        ports:
+          main:
+            enabled: true
+            port: 8211
+            protocol: udp
+            targetPort: 8211
+      dashboard:
+        controller: main
+        type: ClusterIP
+        ports:
+          main:
+            enabled: true
+            port: 3000
+            protocol: http
+            targetPort: 3000
+
+    ingress:
+      dashboard:
+        enabled: true
+        ingressClassName: internal
+        annotations:
+          nginx.ingress.kubernetes.io/auth-method: "GET"
+          nginx.ingress.kubernetes.io/auth-url: "http://authelia.authelia.svc.cluster.local:9091/api/verify"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth.${DOMAIN_0}?rm=$request_method"
+          nginx.ingress.kubernetes.io/auth-response-headers: "Remote-User,Remote-Name,Remote-Groups,Remote-Email"
+        hosts:
+          - host: pal.${DOMAIN_0}
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: dashboard
+                  port: main
+
+    persistence:
+      saved:
+        enabled: true
+        size: 15Gi
+        advancedMounts:
+          main:
+            main:
+              - path: /pal/Package/Pal/Saved
+            init-config:
+              - path: /pal/Package/Pal/Saved
+      dashboard-data:
+        enabled: true
+        size: 256Mi
+        advancedMounts:
+          main:
+            dashboard:
+              - path: /app/data
+
+    # Palworld 1.0 recommends 16GB RAM even for small servers.
+    # Tune these to match how many players you actually expect.
+    resources:
+      requests:
+        cpu: "2"
+        memory: 8Gi
+      limits:
+        cpu: "6"
+        memory: 24Gi

@@ -34,8 +34,8 @@ spec:
         # PublicIP: "my public IP"
         # AllowConnectPlatform: "Steam|Xbox"
       update_public_ip: false
-      #params:
-      #  - -publiclobby
+      params:
+        - -publiclobby
       params_extra:
         - -useperfthreads
         - -NoAsyncLoadingThread

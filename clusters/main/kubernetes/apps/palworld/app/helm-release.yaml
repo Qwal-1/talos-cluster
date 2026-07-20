@@ -160,7 +160,7 @@ spec:
         enabled: true
         type: ClusterIP
         ports:
-          main:
+          dashboard:
             enabled: true
             port: 3000
             protocol: http

@@ -70,6 +70,9 @@ spec:
             main:
               securityContext:
                 readOnlyRootFilesystem: false
+                runAsNonRoot: false
+                runAsUser: 0
+                runAsGroup: 0
               imageSelector: image
               enabled: true
               command:

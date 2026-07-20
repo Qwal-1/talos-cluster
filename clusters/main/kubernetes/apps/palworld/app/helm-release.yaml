@@ -50,8 +50,22 @@ spec:
     #       port: 3000
     #       protocol: http
     #       targetPort: 3000
-
-    #ingress:
+    service:
+      main:
+        type: LoadBalancer
+        ports:
+          main:
+            protocol: udp
+            port: 8211
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: external
+        hosts:
+          - host: pal.${DOMAIN_0}
+            paths:
+              - path: /
+                pathType: Prefix
     #  dashboard:
     #    enabled: true
     #    primary: true

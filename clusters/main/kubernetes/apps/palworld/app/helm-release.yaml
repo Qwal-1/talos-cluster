@@ -134,6 +134,8 @@ spec:
                 PALWORLD_ADMIN_PASSWORD: ${PALWORLD_ADMIN_PASSWORD}
                 PANEL_INITIAL_ADMIN_PASSWORD: ${PALWORLD_DASHBOARD_PASSWORD}
               probes:
+                startup:
+                  enabled: false
                 readiness:
                   enabled: true
                   type: http

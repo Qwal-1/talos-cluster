@@ -24,13 +24,7 @@ spec:
 
     workload:
       main:
-        type: StatefulSet
         podSpec:
-          # Pod-wide fsGroup so the dashboard sidecar (uid 1001) can write
-          # its credential store on the dashboard-data PVC.
-          securityContext:
-            fsGroup: 1001
-
           initContainers:
             # The official image has no env-var config: the REST API (which
             # the dashboard needs) is only configurable via PalWorldSettings.ini,
@@ -39,12 +33,12 @@ spec:
             # REST API + your passwords are already active on first start.
             init-config:
               enabled: true
-              image:
-                repository: ghcr.io/pocketpairjp/palserver
-                tag: v1.0.1.100619
+              type: init
+              imageSelector: "image"
               command:
                 - /bin/sh
                 - -c
+              args:
                 - |
                   set -e
                   CONF_DIR=/pal/Package/Pal/Saved/Config/LinuxServer
@@ -193,22 +187,18 @@ spec:
     persistence:
       saved:
         enabled: true
-        size: 15Gi
-        mountPath: /pal/Package/Pal/Saved
-        advancedMounts:
+        size: 25Gi
+        targetSelector:
           main:
             main:
-              - path: /pal/Package/Pal/Saved
+              mountPath: /pal/Package/Pal/Saved
             init-config:
-              - path: /pal/Package/Pal/Saved
+              mountPath: /pal/Package/Pal/Saved
       dashboard-data:
         enabled: true
-        size: 256Mi
+        size: 2Gi
         mountPath: /app/data
-        advancedMounts:
-          main:
-            dashboard:
-              - path: /app/data
+
 
     # Palworld 1.0 recommends 16GB RAM even for small servers.
     # Tune these to match how many players you actually expect.

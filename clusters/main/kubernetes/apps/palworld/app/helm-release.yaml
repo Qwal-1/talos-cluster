@@ -20,8 +20,10 @@ spec:
     image:
       repository: ghcr.io/pocketpairjp/palserver
       tag: v1.0.1.100619
-      pullPolicy: IfNotPresent
 
+    dashboardImage:
+      repository: ghcr.io/rnz01/palworld-server-dashboard
+      tag: latest
     workload:
       main:
         podSpec:
@@ -67,6 +69,7 @@ spec:
 
           containers:
             main:
+              imageSelector: image
               enabled: true
               command:
                 - /bin/sh
@@ -115,9 +118,7 @@ spec:
 
             dashboard:
               enabled: true
-              image:
-                repository: ghcr.io/rnz01/palworld-server-dashboard
-                tag: latest
+              imageSelector: dashboardImage
               env:
                 NODE_ENV: production
                 PORT: "3000"

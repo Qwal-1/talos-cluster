@@ -157,7 +157,7 @@ spec:
             protocol: udp
             targetPort: 8211
       dashboard:
-        controller: main
+        enabled: true
         type: ClusterIP
         ports:
           main:

@@ -73,6 +73,8 @@ spec:
       dashboard:
         enabled: true
         ingressClassName: internal
+        targetSelector:
+          dashboard: dashboard
         annotations:
           nginx.ingress.kubernetes.io/auth-method: "GET"
           nginx.ingress.kubernetes.io/auth-url: "http://authelia.authelia.svc.cluster.local:9091/api/verify"

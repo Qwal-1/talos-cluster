@@ -126,3 +126,10 @@ spec:
           main:
             dashboard:
               mountPath: /app/data
+    addons:
+        codeserver:
+            enabled: true
+            ingress:
+                enabled: true
+                hosts:
+                  - host: pal-codeserver.${DOMAIN_0}

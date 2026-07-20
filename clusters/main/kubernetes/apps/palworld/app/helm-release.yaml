@@ -194,6 +194,7 @@ spec:
       saved:
         enabled: true
         size: 15Gi
+        mountPath: /pal/Package/Pal/Saved
         advancedMounts:
           main:
             main:
@@ -203,6 +204,7 @@ spec:
       dashboard-data:
         enabled: true
         size: 256Mi
+        mountPath: /app/data
         advancedMounts:
           main:
             dashboard:

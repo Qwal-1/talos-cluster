@@ -169,6 +169,7 @@ spec:
     ingress:
       dashboard:
         enabled: true
+        primary: true
         ingressClassName: internal
         annotations:
           nginx.ingress.kubernetes.io/auth-method: "GET"

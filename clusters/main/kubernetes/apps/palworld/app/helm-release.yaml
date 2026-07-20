@@ -68,6 +68,8 @@ spec:
 
           containers:
             main:
+              securityContext:
+                readOnlyRootFilesystem: false
               imageSelector: image
               enabled: true
               command:

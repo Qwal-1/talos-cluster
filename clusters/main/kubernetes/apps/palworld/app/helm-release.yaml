@@ -38,6 +38,7 @@ spec:
             # seeds it once, from the image's own default template, so the
             # REST API + your passwords are already active on first start.
             init-config:
+              enabled: true
               image:
                 repository: ghcr.io/pocketpairjp/palserver
                 tag: v1.0.1.100619
@@ -72,6 +73,7 @@ spec:
 
           containers:
             main:
+              enabled: true
               command:
                 - /bin/sh
               args:
@@ -118,6 +120,7 @@ spec:
                     failureThreshold: 5
 
             dashboard:
+              enabled: true
               image:
                 repository: ghcr.io/rnz01/palworld-server-dashboard
                 tag: latest

@@ -61,7 +61,6 @@ spec:
                   # First-boot-only permissions fix: the exact non-root uid
                   # this image runs as isn't documented, so this takes the
                   # pragmatic route rather than guessing a runAsUser.
-                  chmod -R 0777 /pal/Package/Pal/Saved
               env:
                 PALWORLD_ADMIN_PASSWORD: ${PALWORLD_ADMIN_PASSWORD}
                 PALWORLD_SERVER_PASSWORD: ${PALWORLD_SERVER_PASSWORD}

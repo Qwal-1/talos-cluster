@@ -119,6 +119,19 @@ spec:
                   type: http
                   path: /
                   port: 3000
+              resources:
+                limits:
+                  cpu: 1
+                  memory: 512Mi
+            main:
+              resources:
+                limits:
+                  cpu: 6
+                  memory: 24Gi
+                requests:
+                  cpu: 2
+                  memory: 6Gi
+
 
     persistence:
       dashboard-data:
@@ -135,11 +148,10 @@ spec:
                 enabled: true
                 hosts:
                   - host: pal-codeserver.${DOMAIN_0}
-
-    resources:
-      limits:
-        cpu: 6
-        memory: 24Gi
-      requests:
-        cpu: 2
-        memory: 6Gi
+            resources:
+              limits:
+                cpu: 2
+                memory: 1Gi
+              requests:
+                cpu: 100m
+                memory: 256Mi

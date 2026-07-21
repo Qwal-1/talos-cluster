@@ -17,7 +17,7 @@ spec:
     values:
         rcon:
             rwa_admin: true
-            rwa_websocket_url_ssl: "wss://rcon.${DOMAIN_0}"
+            rwa_websocket_url_ssl: "wss://rcon-ws.${DOMAIN_0}"
         ingress:
             main:
                 enabled: true
@@ -37,7 +37,7 @@ spec:
                 enabled: true
                 ingressClassName: internal
                 hosts:
-                    - host: rcon.${DOMAIN_0}
+                    - host: rcon-ws.${DOMAIN_0}
                       paths:
                         - path: /
                           pathType: Prefix

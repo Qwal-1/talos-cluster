@@ -17,17 +17,6 @@ spec:
     values:
       rcon:
         rwa_admin: true
-        rwa_env: false
-        rwa_web_rcon: false
-        rwa_read_only_widget_options: false
-        rwa_game:
-        rwa_server_name:
-        rwa_rcon_host: ""
-        rwa_rcon_port:
-        rwa_websocket_url_ssl: ""
-        rwa_websocket_url: ""
-        rwa_restrict_commands: []
-        rwa_restrict_widgets: []
       ingress:
         main:
           enabled: true

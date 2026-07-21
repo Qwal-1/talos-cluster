@@ -17,6 +17,7 @@ spec:
     values:
         rcon:
             rwa_admin: true
+            rwa_websocket_url_ssl: "wss://rcon.${DOMAIN_0}"
         ingress:
             main:
                 enabled: true

@@ -151,10 +151,11 @@ spec:
                 enabled: true
                 hosts:
                   - host: pal-codeserver.${DOMAIN_0}
-            resources:
-              limits:
-                cpu: 2
-                memory: 1Gi
-              requests:
-                cpu: 100m
-                memory: 256Mi
+            container:
+              resources:
+                limits:
+                  cpu: 2
+                  memory: 1Gi
+                requests:
+                  cpu: 100m
+                  memory: 256Mi

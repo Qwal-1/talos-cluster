@@ -1,0 +1,47 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: rcon-webadmin
+    namespace: rcon-webadmin
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: rcon-webadmin
+            version: 12.6.0
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+    releaseName: rcon-webadmin
+    values:
+        ingress:
+            main:
+                enabled: true
+                ingressClassName: internal
+                annotations:
+                    nginx.ingress.kubernetes.io/auth-method: GET
+                    nginx.ingress.kubernetes.io/auth-url: http://authelia.authelia.svc.cluster.local:9091/api/verify
+                    nginx.ingress.kubernetes.io/auth-signin: https://auth.${DOMAIN_0}?rm=$request_method
+                    nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
+                hosts:
+                    - host: rcon.${DOMAIN_0}
+                      paths:
+                        - path: /
+                          pathType: Prefix
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBGd1diUTR3dkJrUmQ0Witw
+            RTM0TkJnOUtqcVhVZEw2SDZrdGZ2RmVMSUJvCjJjNzh0WlRnNThDSWYyd1M0ZjEx
+            dGJJemtCVWdoRXhHS3JYZDBNMVViQkUKLS0tIHpNdy93OTNpdHZKdEhZVUxUdUp6
+            bWRNOUphd3hYNmhabmpnaVdvaGh1S1EKyUsjB/2Udq4t+fnq6ZhkxFJCisnieqb1
+            Xza194r2KaXxjUpiuaerJyxLlluRx10obVpSyqW45ZNp6xYFT1fkfg==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1cn79agmdffpagt5de9zg6l4zj64z7evgu86yq8u84r90rndnvpzsnesh46
+    encrypted_regex: ((?i)(displayname|email|pass|ca|id|bootstraptoken|secretboxencryptionsecret|secrets|secrets|password|cert|secret($|[^N])|key|token|^data$|^stringData))
+    lastmodified: "2026-07-21T17:54:29Z"
+    mac: ENC[AES256_GCM,data:4zzUmVoCGUVduwNpRFQfpoIgk1bGsWv717MPdqk+CZEeOL50b21T3649k1dV62ZDGGLMNGO/+6quO+e15Rhscn5zS7IVdg24DEwICDnbD8Vxu94t25DyznGkH5JOROx0SZxCvOQqshClrPIMewJYV/3o0oZ9Xa34H94y7hQxHbE=,iv:rQ9rTHpUOzV5qzvOgQJbgLnB5aRxgFkIDZQMn82qbLY=,tag:EldYkco++lWhX8kJBezbyA==,type:str]
+    shamir_threshold: 3
+    version: 3.13.1

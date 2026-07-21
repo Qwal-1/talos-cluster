@@ -25,3 +25,4 @@ resources:
   - miniflux/ks.yaml
   - ark-survival-ascended/ks.yaml
   - palworld/ks.yaml
+  - rcon-webadmin/ks.yaml

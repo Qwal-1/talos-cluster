@@ -130,6 +130,14 @@ spec:
                   add:
                     - NET_RAW
 
+              probes:
+                liveness:
+                  enabled: false
+                readiness:
+                  enabled: false
+                startup:
+                  enabled: false
+
     persistence:
       palworld:
         enabled: true

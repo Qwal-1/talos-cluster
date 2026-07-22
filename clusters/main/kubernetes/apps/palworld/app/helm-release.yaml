@@ -27,6 +27,7 @@ spec:
         enabled: true
         ports:
           main:
+            enabled: true
             protocol: udp
             port: 8211
             targetPort: 8211
@@ -35,6 +36,7 @@ spec:
         enabled: true
         ports:
           rcon:
+            enabled: true
             protocol: tcp
             port: 25575
             targetPort: 25575
@@ -43,6 +45,7 @@ spec:
         enabled: true
         ports:
           query:
+            enabled: true
             protocol: udp
             port: 27015
             targetPort: 27015
@@ -51,6 +54,7 @@ spec:
         enabled: true
         ports:
           api:
+            enabled: true
             protocol: tcp
             port: 8212
             targetPort: 8212

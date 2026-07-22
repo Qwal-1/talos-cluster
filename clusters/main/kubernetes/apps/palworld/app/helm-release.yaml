@@ -115,9 +115,9 @@ spec:
                   memory: 6Gi
 
     persistence:
-      serverfiles:
+      palworld:
         enabled: true
-        mountPath: /serverdata/serverfiles
+        mountPath: /palworld/
 
     ingress:
       main:

@@ -27,5 +27,5 @@ spec:
     persistence:
       serverfiles:
         enabled: true
-        existingClaim: palworld-serverfiles
-        mountPath: /serverfiles
+        existingClaim: palworld-palworld
+        mountPath: /palworld

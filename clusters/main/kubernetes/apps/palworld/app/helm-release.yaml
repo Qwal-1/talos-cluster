@@ -64,7 +64,7 @@ spec:
               env:
 
                 # Server settings
-                SERVER_NAME: "Cryptic🫪"
+                SERVER_NAME: "CrypticTest"
                 SERVER_DESCRIPTION: "A Palworld Server running in Kubernetes"
 
                 SERVER_PASSWORD: "${PALWORLD_SERVER_PASSWORD}"

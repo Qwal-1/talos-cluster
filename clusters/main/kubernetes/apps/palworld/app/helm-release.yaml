@@ -21,6 +21,12 @@ spec:
       tag: v2.7.0
       pullPolicy: IfNotPresent
 
+    images:
+      nginx:
+        repository: nginx
+        tag: alpine
+        pullPolicy: IfNotPresent
+
     service:
       main:
         type: LoadBalancer
@@ -150,10 +156,7 @@ spec:
 
             rest-proxy:
               enabled: true
-              image:
-                repository: nginx
-                tag: alpine
-                pullPolicy: IfNotPresent
+              imageSelector: nginx
               command:
                 - /bin/sh
                 - -c

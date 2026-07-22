@@ -18,7 +18,7 @@ spec:
 
     image:
       repository: ghcr.io/thijsvanloef/palworld-server-docker
-      tag: 2.7.0
+      tag: v2.7.0
       pullPolicy: IfNotPresent
 
     service:

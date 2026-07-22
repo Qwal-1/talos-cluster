@@ -41,6 +41,7 @@ spec:
             targetPort: 25575
 
       query:
+        type: LoadBalancer
         enabled: true
         ports:
           query:

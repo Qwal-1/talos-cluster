@@ -70,7 +70,7 @@ spec:
                 SERVER_PASSWORD: "${PALWORLD_SERVER_PASSWORD}"
                 ADMIN_PASSWORD: "${PALWORLD_ADMIN_PASSWORD}"
 
-                COMMUNITY_SERVER: "true"
+                COMMUNITY: "true"
 
                 # RCON
                 RCON_ENABLED: "false"

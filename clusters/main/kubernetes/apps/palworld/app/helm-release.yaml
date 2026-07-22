@@ -97,6 +97,7 @@ spec:
                 AUTO_PAUSE_ENABLED: "true"
                 AUTO_PAUSE_TIMEOUT_EST: "180"
                 AUTO_PAUSE_LOG: "true"
+                AUTO_PAUSE_DEBUG: "true"
 
                 # Performance
                 ENABLE_PERF_THREADING_ARGS: true
@@ -114,12 +115,12 @@ spec:
                 AUTO_REBOOT_CRON_EXPRESSION: "0 0 * * *"
 
               resources:
-                limits:
-                  cpu: 6
-                  memory: 24Gi
                 requests:
                   cpu: 2
                   memory: 6Gi
+                limits:
+                  cpu: 6
+                  memory: 24Gi
 
     persistence:
       palworld:

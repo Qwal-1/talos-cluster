@@ -70,10 +70,8 @@ spec:
               env:
 
                 # Steam
-                PUID: "1000"
-                PGID: "1000"
-
-                STEAMCMD_APP_ID: "2394010"
+                #PUID: "1000"
+                #PGID: "1000"
 
                 # Server settings
                 SERVER_NAME: "A Palworld Server"

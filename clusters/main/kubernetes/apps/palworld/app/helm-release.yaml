@@ -72,12 +72,8 @@ spec:
 
                 COMMUNITY_SERVER: "true"
 
-
                 # RCON
-                RCON_ENABLED: "true"
-                RCON_PORT: "25575"
-                RCON_PASSWORD: "${PALWORLD_ADMIN_PASSWORD}"
-
+                RCON_ENABLED: "false"
 
                 # REST API
                 REST_API_ENABLED: "true"
@@ -93,13 +89,11 @@ spec:
                 # Performance
                 ENABLE_PERF_THREADING_ARGS: true
 
-
                 # Updates
                 UPDATE_ON_BOOT: "true"
                 AUTO_UPDATE_ENABLED: "false"
                 AUTO_UPDATE_CRON_EXPRESSION: "0 * * * *"
                 AUTO_UPDATE_WARN_MINUTES: "30"
-
 
                 # Reboot
                 AUTO_REBOOT_ENABLED: "false"
@@ -132,7 +126,6 @@ spec:
                   enabled: false
                 startup:
                   enabled: false
-
 
     persistence:
       palworld:

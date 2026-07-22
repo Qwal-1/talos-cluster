@@ -33,7 +33,7 @@ spec:
                 PANEL_AUTH_FILE: /app/data/panel-auth.json
                 PANEL_INITIAL_ADMIN_PASSWORD: "${PALWORLD_DASHBOARD_PASSWORD}"
 
-                PALWORLD_REST_URL: http://palworld-api:8212
+                PALWORLD_REST_URL: http://palworld-app-template-api:8212
                 PALWORLD_ADMIN_PASSWORD: "${PALWORLD_ADMIN_PASSWORD}"
 
               probes:

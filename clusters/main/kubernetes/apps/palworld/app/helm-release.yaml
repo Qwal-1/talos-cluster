@@ -15,9 +15,6 @@ spec:
         namespace: flux-system
   releaseName: palworld
   values:
-    dashboardImage:
-      repository: ghcr.io/rnz01/palworld-server-dashboard
-      tag: latest
 
     palworld:
       steam:
@@ -52,15 +49,7 @@ spec:
           main:
             protocol: udp
             port: 8211
-      dashboard:
-        enabled: true
-        type: ClusterIP
-        ports:
-          dashboard:
-            enabled: true
-            port: 3000
-            protocol: http
-            targetPort: 3000
+
     ingress:
       main:
         enabled: true
@@ -70,62 +59,11 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
-      dashboard:
-        enabled: true
-        ingressClassName: internal
-        targetSelector:
-          dashboard: dashboard
-        annotations:
-          nginx.ingress.kubernetes.io/auth-method: "GET"
-          nginx.ingress.kubernetes.io/auth-url: "http://authelia.authelia.svc.cluster.local:9091/api/verify"
-          nginx.ingress.kubernetes.io/auth-signin: "https://auth.${DOMAIN_0}?rm=$request_method"
-          nginx.ingress.kubernetes.io/auth-response-headers: "Remote-User,Remote-Name,Remote-Groups,Remote-Email"
-        hosts:
-          - host: pal-admin.${DOMAIN_0}
-            paths:
-              - path: /
-                pathType: Prefix
 
     workload:
       main:
         podSpec:
           containers:
-            dashboard:
-              enabled: true
-              imageSelector: dashboardImage
-              env:
-                NODE_ENV: production
-                HOSTNAME: 0.0.0.0
-                PORT: "3000"
-
-                PANEL_AUTH_FILE: /app/data/panel-auth.json
-                PANEL_INITIAL_ADMIN_PASSWORD: "${PALWORLD_DASHBOARD_PASSWORD}"
-
-                PALWORLD_REST_URL: http://127.0.0.1:8212
-                PALWORLD_ADMIN_PASSWORD: "${PALWORLD_ADMIN_PASSWORD}"
-
-              probes:
-                startup:
-                  enabled: false
-
-                readiness:
-                  enabled: true
-                  type: http
-                  path: /
-                  port: 3000
-
-                liveness:
-                  enabled: true
-                  type: http
-                  path: /
-                  port: 3000
-              resources:
-                limits:
-                  cpu: 1
-                  memory: 512Mi
-                requests:
-                  cpu: 100m
-                  memory: 256Mi
             main:
               resources:
                 limits:
@@ -135,15 +73,6 @@ spec:
                   cpu: 2
                   memory: 6Gi
 
-
-    persistence:
-      dashboard-data:
-        enabled: true
-        size: 2Gi
-        targetSelector:
-          main:
-            dashboard:
-              mountPath: /app/data
     addons:
         codeserver:
             enabled: true

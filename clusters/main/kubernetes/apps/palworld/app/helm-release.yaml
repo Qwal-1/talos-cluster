@@ -21,12 +21,11 @@ spec:
       tag: v2.7.0
       pullPolicy: IfNotPresent
 
-    images:
-      nginx:
-        repository: nginx
-        tag: alpine
-        pullPolicy: IfNotPresent
-
+    nginx:
+      repository: nginx
+      tag: alpine
+      pullPolicy: IfNotPresent
+      
     service:
       main:
         type: LoadBalancer

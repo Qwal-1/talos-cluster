@@ -115,13 +115,10 @@ spec:
                   cpu: 2
                   memory: 6Gi
 
-
     persistence:
-
       serverfiles:
         enabled: true
-        existingClaim: palworld-serverfiles
-        mountPath: /palworld
+        mountPath: /serverdata/serverfiles
 
     ingress:
       main:

@@ -128,15 +128,6 @@ spec:
                 runAsNonRoot: false
                 readOnlyRootFilesystem: false
                 allowPrivilegeEscalation: true
-                capabilities:
-                  add:
-                    - CHOWN
-                    - SETUID
-                    - SETGID
-                    - FOWNER
-                    - DAC_OVERRIDE
-                  drop:
-                    - ALL
 
     persistence:
       palworld:

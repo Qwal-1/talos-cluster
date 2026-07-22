@@ -81,7 +81,7 @@ spec:
                 - -c
               args:
                 - |
-                    serverfiles={{ .Values.persistence.serverfiles.targetSelector.main.main.mountPath }}
+                    serverfiles=/serverdata/serverfiles
                     config=${serverfiles}/Pal/Saved/Config/LinuxServer
                     cfgFile=${config}/PalWorldSettings.ini
                     dfCfgFile=${serverfiles}/DefaultPalWorldSettings.ini

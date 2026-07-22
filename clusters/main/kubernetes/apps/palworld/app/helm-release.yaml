@@ -60,31 +60,10 @@ spec:
               - path: /
                 pathType: Prefix
 
-    workload:
-      main:
-        podSpec:
-          containers:
-            main:
-              resources:
-                limits:
-                  cpu: 6
-                  memory: 24Gi
-                requests:
-                  cpu: 2
-                  memory: 6Gi
-
-    addons:
-        codeserver:
-            enabled: true
-            ingress:
-                enabled: true
-                hosts:
-                  - host: pal-codeserver.${DOMAIN_0}
-            container:
-              resources:
-                limits:
-                  cpu: 2
-                  memory: 1Gi
-                requests:
-                  cpu: 100m
-                  memory: 256Mi
+    resources:
+      limits:
+        cpu: 6
+        memory: 24Gi
+      requests:
+        cpu: 2
+        memory: 6Gi

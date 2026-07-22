@@ -20,7 +20,7 @@ spec:
         enabled: true
         ingressClassName: internal
         hosts:
-          - host: pal-code.${DOMAIN_0}
+          - host: pal-codeserver.${DOMAIN_0}
             paths:
               - path: /
                 pathType: Prefix

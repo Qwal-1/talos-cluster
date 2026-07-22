@@ -74,7 +74,7 @@ spec:
                 #PGID: "1000"
 
                 # Server settings
-                SERVER_NAME: "A Palworld Server"
+                SERVER_NAME: "Cryptic1291"
                 SERVER_DESCRIPTION: "A Palworld Server running in Kubernetes"
 
                 SERVER_PASSWORD: "${PALWORLD_SERVER_PASSWORD}"

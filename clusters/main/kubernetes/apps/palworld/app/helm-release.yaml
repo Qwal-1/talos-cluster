@@ -182,6 +182,14 @@ spec:
                   enabled: true
                   containerPort: 8213
                   protocol: TCP
+
+              probes:
+                liveness:
+                  enabled: false
+                readiness:
+                  enabled: false
+                startup:
+                  enabled: false
               resources:
 
                 requests:

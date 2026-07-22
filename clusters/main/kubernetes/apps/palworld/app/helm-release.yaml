@@ -29,6 +29,7 @@ spec:
           main:
             protocol: udp
             port: 8211
+            targetPort: 8211
 
       rcon:
         enabled: true
@@ -36,6 +37,7 @@ spec:
           rcon:
             protocol: tcp
             port: 25575
+            targetPort: 25575
 
       query:
         enabled: true
@@ -43,6 +45,7 @@ spec:
           query:
             protocol: udp
             port: 27015
+            targetPort: 27015
 
       api:
         enabled: true
@@ -50,6 +53,7 @@ spec:
           api:
             protocol: tcp
             port: 8212
+            targetPort: 8212
 
 
     workload:

@@ -91,19 +91,3 @@ spec:
         enabled: true
         size: 2Gi
         mountPath: /app/data
-
-    addons:
-        codeserver:
-            enabled: true
-            ingress:
-                enabled: true
-                hosts:
-                  - host: pal-codeserver.${DOMAIN_0}
-            container:
-              resources:
-                limits:
-                  cpu: 2
-                  memory: 1Gi
-                requests:
-                  cpu: 100m
-                  memory: 256Mi

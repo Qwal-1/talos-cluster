@@ -30,6 +30,11 @@ spec:
             protocol: udp
             port: 8211
             targetPort: 8211
+          query:
+            enabled: true
+            protocol: udp
+            port: 27015
+            targetPort: 27015
 
       rcon:
         enabled: true
@@ -40,15 +45,6 @@ spec:
             port: 25575
             targetPort: 25575
 
-      query:
-        type: LoadBalancer
-        enabled: true
-        ports:
-          query:
-            enabled: true
-            protocol: udp
-            port: 27015
-            targetPort: 27015
 
       api:
         enabled: true

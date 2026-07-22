@@ -45,7 +45,6 @@ spec:
             port: 25575
             targetPort: 25575
 
-
       api:
         enabled: true
         ports:

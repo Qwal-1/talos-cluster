@@ -122,6 +122,22 @@ spec:
                   cpu: 6
                   memory: 24Gi
 
+              securityContext:
+                runAsUser: 0
+                runAsGroup: 0
+                runAsNonRoot: false
+                readOnlyRootFilesystem: false
+                allowPrivilegeEscalation: true
+                capabilities:
+                  add:
+                    - CHOWN
+                    - SETUID
+                    - SETGID
+                    - FOWNER
+                    - DAC_OVERRIDE
+                  drop:
+                    - ALL
+
     persistence:
       palworld:
         enabled: true

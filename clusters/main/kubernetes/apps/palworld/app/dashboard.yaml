@@ -17,15 +17,14 @@ spec:
   releaseName: palworld-dashboard
 
   values:
+    image:
+      repository: ghcr.io/rnz01/palworld-server-dashboard
+      tag: latest
     workload:
       main:
         podSpec:
           containers:
             main:
-              image:
-                repository: ghcr.io/rnz01/palworld-server-dashboard
-                tag: latest
-
               env:
                 NODE_ENV: production
                 HOSTNAME: 0.0.0.0

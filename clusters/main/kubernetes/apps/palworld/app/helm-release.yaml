@@ -15,7 +15,14 @@ spec:
         namespace: flux-system
   releaseName: palworld
   values:
-
+    credentials:
+        s3:
+            accessKey: ${BACKUP_S3_ACCESS_KEY}
+            bucket: ${BACKUP_S3_BUCKET}
+            encrKey: ${BACKUP_RESTIC_PASSWORD}
+            secretKey: ${BACKUP_S3_SECRET_KEY}
+            type: s3
+            url: ${BACKUP_S3_ENDPOINT}
     image:
       repository: ghcr.io/thijsvanloef/palworld-server-docker
       tag: v2.7.0
@@ -82,7 +89,7 @@ spec:
 
                 # Auto pause
                 AUTO_PAUSE_ENABLED: "true"
-                AUTO_PAUSE_TIMEOUT_EST: "180"
+                AUTO_PAUSE_TIMEOUT_EST: "60"
                 AUTO_PAUSE_LOG: "true"
                 AUTO_PAUSE_DEBUG: "false"
 
@@ -131,6 +138,18 @@ spec:
       palworld:
         enabled: true
         mountPath: /palworld/
+        volsync:
+            - credentials: s3
+              type: restic
+              name: config
+              dest:
+                enabled: true
+                cacheCapacity: 20Gi
+              src:
+                enabled: true
+                cacheCapacity: 20Gi
+                trigger:
+                  schedule: 0 3 * * *
 
     ingress:
       main:

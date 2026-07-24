@@ -25,7 +25,7 @@ spec:
             url: ${BACKUP_S3_ENDPOINT}
     image:
       repository: ghcr.io/thijsvanloef/palworld-server-docker
-      tag: v2.7.0
+      tag: v2.7.1
       pullPolicy: IfNotPresent
     service:
       main:

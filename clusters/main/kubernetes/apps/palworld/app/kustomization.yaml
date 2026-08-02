@@ -5,3 +5,4 @@ resources:
   - helm-release.yaml
   - dashboard.yaml
   - codeserver.yaml
+  - helm-release2.yaml

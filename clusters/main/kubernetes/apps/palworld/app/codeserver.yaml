@@ -29,3 +29,7 @@ spec:
         enabled: true
         existingClaim: palworld-app-template-palworld
         mountPath: /palworld
+      serverfiles2:
+        enabled: true
+        existingClaim: palworld2-app-template-palworld
+        mountPath: /palworld2

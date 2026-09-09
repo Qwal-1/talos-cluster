@@ -22,5 +22,5 @@ resources:
   - syncthing/ks.yaml
   - tracearr/ks.yaml
   - miniflux/ks.yaml
-  - ark-survival-ascended/ks.yaml
-  - palworld/ks.yaml
+  #- ark-survival-ascended/ks.yaml
+  #- palworld/ks.yaml

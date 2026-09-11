@@ -44,7 +44,7 @@ spec:
                         widget:
                             custom:
                                 key: ${JELLYFIN_HOMEPAGE_KEY}
-                                version: 2
+                            version: 2
                             enabled: true
         persistence:
             config:

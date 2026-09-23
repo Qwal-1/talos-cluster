@@ -95,8 +95,10 @@ spec:
                       name: config
                       dest:
                         enabled: true
+                        cacheCapacity: 32Gi
                       src:
                         enabled: true
+                        cacheCapacity: 32Gi
                         trigger:
                           schedule: 25 0 * * *
             metadata:

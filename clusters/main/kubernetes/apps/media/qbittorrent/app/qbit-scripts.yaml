@@ -23,7 +23,7 @@ data:
               if [[ -d "$SRC" ]]; then
                   # Directory case (multi-file torrent)
                   while [[ -e "$NEWTARGET" ]]; do
-                      NEWTARGET="${TARGET}-${COUNT}"
+                      NEWTARGET="$${TARGET}-$${COUNT}"
                       COUNT=$((COUNT+1))
                   done
 
@@ -35,8 +35,8 @@ data:
                   )
               else
                   # File case (single-file torrent)
-                  EXT="${BASENAME##*.}"
-                  NAME_NOEXT="${BASENAME%.*}"
+                  EXT="$${BASENAME##*.}"
+                  NAME_NOEXT="$${BASENAME%.*}"
 
                   # Handle files without extension gracefully
                   if [[ "$BASENAME" == "$EXT" ]]; then
@@ -47,9 +47,9 @@ data:
 
                   while [[ -e "$NEWTARGET" ]]; do
                       if [[ -n "$EXT" && "$NAME_NOEXT" != "$BASENAME" ]]; then
-                          NEWTARGET="$DEST/${NAME_NOEXT}-${COUNT}.${EXT}"
+                          NEWTARGET="$DEST/$${NAME_NOEXT}-$${COUNT}.$${EXT}"
                       else
-                          NEWTARGET="$DEST/${NAME_NOEXT}-${COUNT}"
+                          NEWTARGET="$DEST/$${NAME_NOEXT}-$${COUNT}"
                       fi
                       COUNT=$((COUNT+1))
                   done

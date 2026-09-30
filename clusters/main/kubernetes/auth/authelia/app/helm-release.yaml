@@ -89,7 +89,7 @@ spec:
         ldap:
           address: ldap://lldap-ldap.lldap.svc.cluster.local:3890
           tls:
-            server_name: lldap.${DOMAIN_1}
+            server_name: lldap.${DOMAIN_0}
           base_dn: DC=${DN},DC=${DC}
           attributes:
             username: uid
@@ -239,7 +239,7 @@ spec:
                 - 'groups'
               userinfo_signed_response_alg: 'none'
               token_endpoint_auth_method: 'client_secret_post'
-              consent_mode: 'implicit'  
+              consent_mode: 'implicit'
             - client_id: 'profilarr'
               client_name: 'ProfiLarr'
               client_secret: ${OIDC_PROFILARR_SECRET}
@@ -255,7 +255,7 @@ spec:
                 - 'profile'
                 - 'groups'
               userinfo_signed_response_alg: 'none'
-              consent_mode: 'implicit'        
+              consent_mode: 'implicit'
 
     redis:
       persistence:

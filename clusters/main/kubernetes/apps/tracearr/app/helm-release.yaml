@@ -54,3 +54,9 @@ spec:
                 recovery:
                     credentials: s3
                     revision: "1"
+
+        persistence:
+            backup:
+                mountPath: "/data/backup"
+                enabled: true
+                readOnly: false

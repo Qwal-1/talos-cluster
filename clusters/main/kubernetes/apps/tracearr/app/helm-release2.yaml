@@ -1,0 +1,192 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: tracearr2
+    namespace: tracearr
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: app-template
+            version: 18.23.3
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+    releaseName: tracearr2
+    values:
+        image:
+            repository: ghcr.io/connorgallopo/tracearr
+            pullPolicy: IfNotPresent
+            tag: "2.5.1"
+
+        timescaleImage:
+            repository: timescale/timescaledb-ha
+            pullPolicy: IfNotPresent
+            tag: "pg18.4-ts2.29.1"
+
+        securityContext:
+            container:
+                readOnlyRootFilesystem: false
+
+        tracearr:
+            jwtSecret: ${TRACEARR2_JWT_SECRET}
+            cookieSecret: ${TRACEARR2_COOKIE_SECRET}
+            dbPassword: ${TRACEARR2_DB_PASSWORD}
+
+        workload:
+            main:
+                strategy: Recreate
+                podSpec:
+                    containers:
+                        main:
+                            env:
+                                NODE_ENV: production
+                                HOST: "0.0.0.0"
+                                PORT: "3000"
+                                CORS_ORIGIN: "*"
+                                LOG_LEVEL: info
+                                TRUST_PROXY: "true"
+                                JWT_SECRET: "{{ .Values.tracearr.jwtSecret }}"
+                                COOKIE_SECRET: "{{ .Values.tracearr.cookieSecret }}"
+                                DATABASE_URL: 'postgres://tracearr:{{ .Values.tracearr.dbPassword }}@{{ printf "%s-timescale" (include "tc.v1.common.lib.chart.names.fullname" .) }}:5432/tracearr'
+                                REDIS_URL:
+                                    secretKeyRef:
+                                        expandObjectName: false
+                                        name: '{{ printf "%s-%s" .Release.Name "rediscreds" }}'
+                                        key: url
+
+            timescale:
+                enabled: true
+                type: StatefulSet
+                podSpec:
+                    securityContext:
+                        fsGroup: 1000
+                    containers:
+                        timescale:
+                            enabled: true
+                            primary: true
+                            imageSelector: timescaleImage
+                            args:
+                                - postgres
+                                - -c
+                                - timescaledb.license=timescale
+                                - -c
+                                - timescaledb.max_tuples_decompressed_per_dml_transaction=100000
+                                - -c
+                                - max_locks_per_transaction=4096
+                                - -c
+                                - timescaledb.telemetry_level=off
+                                - -c
+                                - max_connections=150
+                            env:
+                                POSTGRES_USER: tracearr
+                                POSTGRES_DB: tracearr
+                                POSTGRES_PASSWORD: "{{ .Values.tracearr.dbPassword }}"
+                                PGDATA: /home/postgres/pgdata/data
+                            securityContext:
+                                runAsUser: 1000
+                                runAsGroup: 1000
+                            probes:
+                                liveness:
+                                    type: exec
+                                    command:
+                                        - pg_isready
+                                        - -U
+                                        - tracearr
+                                readiness:
+                                    type: exec
+                                    command:
+                                        - pg_isready
+                                        - -U
+                                        - tracearr
+                                startup:
+                                    type: exec
+                                    command:
+                                        - pg_isready
+                                        - -U
+                                        - tracearr
+
+        service:
+            main:
+                ports:
+                    main:
+                        port: 3000
+                        protocol: http
+
+            timescale:
+                enabled: true
+                targetSelector: timescale
+                ports:
+                    postgresql:
+                        enabled: true
+                        targetSelector: timescale
+                        port: 5432
+
+        redis:
+            enabled: true
+            redisUsername: default
+
+        ingress:
+            main:
+                enabled: true
+                ingressClassName: internal
+                hosts:
+                    - host: tracearr2.${DOMAIN_0}
+                      paths:
+                        - path: /
+                          pathType: Prefix
+                integrations:
+                    homepage:
+                        description: "Real-time monitoring for Plex, Jellyfin, and Emby servers."
+                        enabled: true
+                        group: Stats
+                        icon: tracearr
+                        name: Tracearr2
+                        widget:
+                            enabled: false
+
+        credentials:
+            s3:
+                accessKey: ${BACKUP_S3_ACCESS_KEY}
+                bucket: ${BACKUP_S3_BUCKET}
+                encrKey: ${BACKUP_RESTIC_PASSWORD}
+                secretKey: ${BACKUP_S3_SECRET_KEY}
+                type: s3
+                url: ${BACKUP_S3_ENDPOINT}
+
+        persistence:
+            backup:
+                enabled: true
+                mountPath: /data/backup
+                #volsync:
+                #    - credentials: s3
+                #      type: restic
+                #      name: backup
+                #      dest:
+                #          enabled: true
+                #      src:
+                #          enabled: true
+                #          trigger:
+                #              schedule: 45 0 * * *
+
+            image-cache:
+                enabled: true
+                mountPath: /data/tracearr/image-cache
+
+            timescale-data:
+                enabled: true
+                mountPath: /home/postgres/pgdata
+                targetSelector:
+                    timescale:
+                        timescale: {}
+
+            dshm:
+                enabled: true
+                type: emptyDir
+                medium: Memory
+                size: 512Mi
+                mountPath: /dev/shm
+                targetSelector:
+                    timescale:
+                        timescale: {}

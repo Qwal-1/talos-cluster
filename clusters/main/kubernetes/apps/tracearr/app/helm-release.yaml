@@ -3,8 +3,10 @@ kind: HelmRelease
 metadata:
   name: tracearr
   namespace: tracearr
+
 spec:
   interval: 15m
+
   chart:
     spec:
       chart: app-template
@@ -13,6 +15,7 @@ spec:
         kind: HelmRepository
         name: truecharts
         namespace: flux-system
+
   releaseName: tracearr
 
   values:
@@ -32,7 +35,6 @@ spec:
 
     workload:
       main:
-        strategy: Recreate
         podSpec:
           containers:
             main:
@@ -69,11 +71,13 @@ spec:
       main:
         enabled: true
         ingressClassName: internal
+
         hosts:
           - host: tracearr.${DOMAIN_0}
             paths:
               - path: /
                 pathType: Prefix
+
         integrations:
           homepage:
             description: "Real-time monitoring for Plex, Jellyfin, and Emby servers."
@@ -94,9 +98,10 @@ spec:
         url: ${BACKUP_S3_ENDPOINT}
 
     cnpg:
-    main:
+      main:
         enabled: true
         primary: true
+
         type: timescaledb
         pgVersion: 16
 
@@ -107,27 +112,25 @@ spec:
         mode: standalone
 
         cluster:
-            instances: 1
-            singleNode: true
+          instances: 1
+          singleNode: true
 
-            imageName: >-
-                ghcr.io/imusmanmalik/timescaledb-postgis:16.15-3.6.4-system-trixie
+          imageName: ghcr.io/imusmanmalik/timescaledb-postgis:16.15-3.6.4-system-trixie
 
-            # CNPG-native image uses UID/GID 26.
-            postgresUID: 26
-            postgresGID: 26
+          postgresUID: 26
+          postgresGID: 26
 
-            postgresql:
-                max_connections: "150"
-                max_locks_per_transaction: "4096"
-                timescaledb.license: "timescale"
-                timescaledb.max_tuples_decompressed_per_dml_transaction: "100000"
-                timescaledb.telemetry_level: "off"
+          postgresql:
+            max_connections: "150"
+            max_locks_per_transaction: "4096"
+            timescaledb.license: "timescale"
+            timescaledb.max_tuples_decompressed_per_dml_transaction: "100000"
+            timescaledb.telemetry_level: "off"
 
         backups:
-            enabled: false
-            credentials: s3
-            revision: "1"
+          enabled: false
+          credentials: s3
+          revision: "1"
         # recovery:
         #   credentials: s3
         #   revision: "1"

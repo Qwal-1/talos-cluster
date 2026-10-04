@@ -180,13 +180,3 @@ spec:
                 targetSelector:
                     timescale:
                         timescale: {}
-
-            dshm:
-                enabled: true
-                type: emptyDir
-                medium: Memory
-                size: 512Mi
-                mountPath: /dev/shm
-                targetSelector:
-                    timescale:
-                        timescale: {}

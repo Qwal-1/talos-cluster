@@ -118,7 +118,7 @@ spec:
 
         database: tracearr
         user: tracearr
-        password: ${TRACEARR_DB_PASSWORD}
+        password: ${TRACEARR2_DB_PASSWORD}
 
         mode: standalone
 

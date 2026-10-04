@@ -21,16 +21,6 @@ spec:
       pullPolicy: IfNotPresent
       tag: "2.5.1"
 
-    # TrueCharts common 29.20.0 expects this root-level image selector
-    # for cnpg.<name>.type: timescaledb.
-    #
-    # Keep TimescaleDB at 2.29.1 so it matches the currently working
-    # Tracearr deployment while only changing PostgreSQL from 18 -> 16.
-    postgresTimescaledb16Image:
-      repository: docker.io/timescale/timescaledb
-      pullPolicy: IfNotPresent
-      tag: "2.29.1-pg16"
-
     securityContext:
       container:
         readOnlyRootFilesystem: false
@@ -110,7 +100,7 @@ spec:
         url: ${BACKUP_S3_ENDPOINT}
 
     cnpg:
-      main:
+    main:
         enabled: true
         primary: true
         type: timescaledb
@@ -123,27 +113,27 @@ spec:
         mode: standalone
 
         cluster:
-          # This is a single Talos node, so one database instance avoids
-          # pretending that two pods on the same VM provide real HA.
-          instances: 1
-          singleNode: true
+            instances: 1
+            singleNode: true
 
-          # The official timescale/timescaledb image is Alpine/Postgres based.
-          # Its postgres user/group are UID/GID 70.
-          postgresUID: 70
-          postgresGID: 70
+            imageName: >-
+                ghcr.io/imusmanmalik/timescaledb-postgis:16.15-3.6.4-system-trixie
 
-          postgresql:
-            max_connections: "150"
-            max_locks_per_transaction: "4096"
-            timescaledb.license: "timescale"
-            timescaledb.max_tuples_decompressed_per_dml_transaction: "100000"
-            timescaledb.telemetry_level: "off"
+            # CNPG-native image uses UID/GID 26.
+            postgresUID: 26
+            postgresGID: 26
+
+            postgresql:
+                max_connections: "150"
+                max_locks_per_transaction: "4096"
+                timescaledb.license: "timescale"
+                timescaledb.max_tuples_decompressed_per_dml_transaction: "100000"
+                timescaledb.telemetry_level: "off"
 
         backups:
-          enabled: false
-          credentials: s3
-          revision: "1"
+            enabled: false
+            credentials: s3
+            revision: "1"
         # recovery:
         #   credentials: s3
         #   revision: "1"

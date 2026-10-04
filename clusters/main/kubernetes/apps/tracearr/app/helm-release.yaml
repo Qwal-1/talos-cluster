@@ -1,155 +1,182 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: tracearr
-  namespace: tracearr
-
+    name: tracearr
+    namespace: tracearr
 spec:
-  interval: 15m
+    interval: 15m
+    chart:
+        spec:
+            chart: app-template
+            version: 18.23.3
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+    releaseName: tracearr
+    values:
+        image:
+            repository: ghcr.io/connorgallopo/tracearr
+            pullPolicy: IfNotPresent
+            tag: "2.5.1"
 
-  chart:
-    spec:
-      chart: app-template
-      version: 18.23.3
-      sourceRef:
-        kind: HelmRepository
-        name: truecharts
-        namespace: flux-system
+        timescaleImage:
+            repository: timescale/timescaledb-ha
+            pullPolicy: IfNotPresent
+            tag: "pg18.4-ts2.29.1"
 
-  releaseName: tracearr
+        securityContext:
+            container:
+                readOnlyRootFilesystem: false
 
-  values:
-    image:
-      repository: ghcr.io/connorgallopo/tracearr
-      pullPolicy: IfNotPresent
-      tag: "2.5.1"
+        tracearr:
+            jwtSecret: ${TRACEARR_JWT_SECRET}
+            cookieSecret: ${TRACEARR_COOKIE_SECRET}
+            dbPassword: ${TRACEARR_DB_PASSWORD}
 
-    securityContext:
-      container:
-        readOnlyRootFilesystem: false
-
-    tracearr:
-      jwtSecret: ${TRACEARR2_JWT_SECRET}
-      cookieSecret: ${TRACEARR2_COOKIE_SECRET}
-      dbPassword: ${TRACEARR2_DB_PASSWORD}
-
-    workload:
-      main:
-        podSpec:
-          containers:
+        workload:
             main:
-              env:
-                NODE_ENV: production
-                HOST: "0.0.0.0"
-                PORT: "3000"
-                CORS_ORIGIN: "*"
-                LOG_LEVEL: info
-                TRUST_PROXY: "true"
-                BETTER_AUTH_URL: "https://tracearr.${DOMAIN_0}"
-                JWT_SECRET: "{{ .Values.tracearr.jwtSecret }}"
-                COOKIE_SECRET: "{{ .Values.tracearr.cookieSecret }}"
-                DATABASE_URL: 'postgresql://tracearr:{{ .Values.tracearr.dbPassword }}@{{ printf "%s-cnpg-main-rw" (include "tc.v1.common.lib.chart.names.fullname" .) }}:5432/tracearr'
+                strategy: Recreate
+                podSpec:
+                    containers:
+                        main:
+                            env:
+                                NODE_ENV: production
+                                HOST: "0.0.0.0"
+                                PORT: "3000"
+                                CORS_ORIGIN: "*"
+                                LOG_LEVEL: info
+                                TRUST_PROXY: "true"
+                                JWT_SECRET: "{{ .Values.tracearr.jwtSecret }}"
+                                COOKIE_SECRET: "{{ .Values.tracearr.cookieSecret }}"
+                                DATABASE_URL: 'postgres://tracearr:{{ .Values.tracearr.dbPassword }}@{{ printf "%s-timescale" (include "tc.v1.common.lib.chart.names.fullname" .) }}:5432/tracearr'
+                                REDIS_URL:
+                                    secretKeyRef:
+                                        expandObjectName: false
+                                        name: '{{ printf "%s-%s" .Release.Name "rediscreds" }}'
+                                        key: url
 
-                REDIS_URL:
-                  secretKeyRef:
-                    expandObjectName: false
-                    name: '{{ printf "%s-%s" .Release.Name "rediscreds" }}'
-                    key: url
+            timescale:
+                enabled: true
+                type: StatefulSet
+                podSpec:
+                    securityContext:
+                        fsGroup: 1000
+                    containers:
+                        timescale:
+                            enabled: true
+                            primary: true
+                            imageSelector: timescaleImage
+                            args:
+                                - postgres
+                                - -c
+                                - timescaledb.license=timescale
+                                - -c
+                                - timescaledb.max_tuples_decompressed_per_dml_transaction=100000
+                                - -c
+                                - max_locks_per_transaction=4096
+                                - -c
+                                - timescaledb.telemetry_level=off
+                                - -c
+                                - max_connections=150
+                            env:
+                                POSTGRES_USER: tracearr
+                                POSTGRES_DB: tracearr
+                                POSTGRES_PASSWORD: "{{ .Values.tracearr.dbPassword }}"
+                                PGDATA: /home/postgres/pgdata/data
+                            securityContext:
+                                runAsUser: 1000
+                                runAsGroup: 1000
+                            probes:
+                                liveness:
+                                    type: exec
+                                    command:
+                                        - pg_isready
+                                        - -U
+                                        - tracearr
+                                readiness:
+                                    type: exec
+                                    command:
+                                        - pg_isready
+                                        - -U
+                                        - tracearr
+                                startup:
+                                    type: exec
+                                    command:
+                                        - pg_isready
+                                        - -U
+                                        - tracearr
 
-    service:
-      main:
-        ports:
-          main:
-            port: 3000
-            protocol: http
+        service:
+            main:
+                ports:
+                    main:
+                        port: 3000
+                        protocol: http
 
-    redis:
-      enabled: true
-      redisUsername: default
+            timescale:
+                enabled: true
+                targetSelector: timescale
+                ports:
+                    postgresql:
+                        enabled: true
+                        targetSelector: timescale
+                        port: 5432
 
-    ingress:
-      main:
-        enabled: true
-        ingressClassName: internal
-
-        hosts:
-          - host: tracearr.${DOMAIN_0}
-            paths:
-              - path: /
-                pathType: Prefix
-
-        integrations:
-          homepage:
-            description: "Real-time monitoring for Plex, Jellyfin, and Emby servers."
+        redis:
             enabled: true
-            group: Stats
-            icon: tracearr
-            name: Tracearr
-            widget:
-              enabled: false
+            redisUsername: default
 
-    credentials:
-      s3:
-        accessKey: ${BACKUP_S3_ACCESS_KEY}
-        bucket: ${BACKUP_S3_BUCKET}
-        encrKey: ${BACKUP_RESTIC_PASSWORD}
-        secretKey: ${BACKUP_S3_SECRET_KEY}
-        type: s3
-        url: ${BACKUP_S3_ENDPOINT}
+        ingress:
+            main:
+                enabled: true
+                ingressClassName: internal
+                hosts:
+                    - host: tracearr.${DOMAIN_0}
+                      paths:
+                        - path: /
+                          pathType: Prefix
+                integrations:
+                    homepage:
+                        description: "Real-time monitoring for Plex, Jellyfin, and Emby servers."
+                        enabled: true
+                        group: Stats
+                        icon: tracearr
+                        name: Tracearr2
+                        widget:
+                            enabled: false
 
-    cnpg:
-      main:
-        enabled: true
-        primary: true
+        credentials:
+            s3:
+                accessKey: ${BACKUP_S3_ACCESS_KEY}
+                bucket: ${BACKUP_S3_BUCKET}
+                encrKey: ${BACKUP_RESTIC_PASSWORD}
+                secretKey: ${BACKUP_S3_SECRET_KEY}
+                type: s3
+                url: ${BACKUP_S3_ENDPOINT}
 
-        type: timescaledb
-        pgVersion: 16
+        persistence:
+            backup:
+                enabled: true
+                mountPath: /data/backup
+                #volsync:
+                #    - credentials: s3
+                #      type: restic
+                #      name: backup
+                #      dest:
+                #          enabled: true
+                #      src:
+                #          enabled: true
+                #          trigger:
+                #              schedule: 45 0 * * *
 
-        database: tracearr
-        user: tracearr
-        password: ${TRACEARR2_DB_PASSWORD}
+            image-cache:
+                enabled: true
+                mountPath: /data/tracearr/image-cache
 
-        mode: standalone
-
-        cluster:
-          instances: 1
-          singleNode: true
-
-          imageName: ghcr.io/imusmanmalik/timescaledb-postgis:16.15-3.6.4-system-trixie
-
-          postgresUID: 26
-          postgresGID: 26
-
-          postgresql:
-            max_connections: "150"
-            max_locks_per_transaction: "4096"
-            timescaledb.license: "timescale"
-            timescaledb.max_tuples_decompressed_per_dml_transaction: "100000"
-            timescaledb.telemetry_level: "off"
-
-        backups:
-          enabled: false
-          credentials: s3
-          revision: "1"
-        # recovery:
-        #   credentials: s3
-        #   revision: "1"
-
-    persistence:
-      backup:
-        enabled: true
-        mountPath: /data/backup
-        # volsync:
-        #   - credentials: s3
-        #     type: restic
-        #     name: backup
-        #     dest:
-        #       enabled: true
-        #     src:
-        #       enabled: true
-        #       trigger:
-        #         schedule: 45 0 * * *
-
-      image-cache:
-        enabled: true
-        mountPath: /data/tracearr/image-cache
+            timescale-data:
+                enabled: true
+                mountPath: /home/postgres/pgdata
+                targetSelector:
+                    timescale:
+                        timescale: {}

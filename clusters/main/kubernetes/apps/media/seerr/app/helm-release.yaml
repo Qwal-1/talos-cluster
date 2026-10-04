@@ -50,7 +50,7 @@ spec:
                       type: restic
                       name: config
                       dest:
-                        enabled: true
+                        enabled: false
                       src:
                         enabled: true
                         trigger:
@@ -59,8 +59,6 @@ spec:
             main:
                 password: ${CNPG_PASSWORD}
                 mode: standalone
-                cluster:
-                    singleNode: true
                 backups:
                     enabled: true
                     credentials: s3

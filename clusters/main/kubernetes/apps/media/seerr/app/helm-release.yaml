@@ -63,3 +63,7 @@ spec:
                     enabled: true
                     credentials: s3
                     revision: "1"
+                recovery:
+                    enabled: true
+                    credentials: s3
+                    revision: "1"

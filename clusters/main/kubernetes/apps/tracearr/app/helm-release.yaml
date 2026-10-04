@@ -1,62 +1,168 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-    name: tracearr
-    namespace: tracearr
+  name: tracarr
+  namespace: tracearr
 spec:
-    interval: 15m
-    chart:
-        spec:
-            chart: tracearr
-            version: 5.7.0
-            sourceRef:
-                kind: HelmRepository
-                name: truecharts
-                namespace: flux-system
-    releaseName: tracearr
-    values:
-        credentials:
-            s3:
-                accessKey: ${BACKUP_S3_ACCESS_KEY}
-                bucket: ${BACKUP_S3_BUCKET}
-                encrKey: ${BACKUP_RESTIC_PASSWORD}
-                secretKey: ${BACKUP_S3_SECRET_KEY}
-                type: s3
-                url: ${BACKUP_S3_ENDPOINT}
-        global:
-            stopAll: false
-        ingress:
-            main:
-                enabled: true
-                ingressClassName: internal
-                hosts:
-                    - host: tracearr.${DOMAIN_0}
-                      paths:
-                        - path: /
-                          pathType: Prefix
-                integrations:
-                    homepage:
-                        description: "Real-time monitoring for Plex, Jellyfin, and Emby servers."
-                        enabled: true
-                        group: Stats
-                        icon: "tracearr"
-                        name: "Tracearr"
-                        widget:
-                            enabled: false
-        cnpg:
-            main:
-                password: ${CNPG_PASSWORD}
-                mode: recovery
-                backups:
-                    enabled: true
-                    credentials: s3
-                    revision: "1"
-                recovery:
-                    credentials: s3
-                    revision: "1"
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 18.23.3
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+  releaseName: tracarr
 
-        persistence:
-            backup:
-                mountPath: "/data/backup"
-                enabled: true
-                readOnly: false
+  values:
+    image:
+      repository: ghcr.io/connorgallopo/tracearr
+      pullPolicy: IfNotPresent
+      tag: "2.5.1"
+
+    # TrueCharts common 29.20.0 expects this root-level image selector
+    # for cnpg.<name>.type: timescaledb.
+    #
+    # Keep TimescaleDB at 2.29.1 so it matches the currently working
+    # Tracearr deployment while only changing PostgreSQL from 18 -> 16.
+    postgresTimescaledb16Image:
+      repository: docker.io/timescale/timescaledb
+      pullPolicy: IfNotPresent
+      tag: "2.29.1-pg16"
+
+    securityContext:
+      container:
+        readOnlyRootFilesystem: false
+
+    tracearr:
+      jwtSecret: ${TRACEARR2_JWT_SECRET}
+      cookieSecret: ${TRACEARR2_COOKIE_SECRET}
+      dbPassword: ${TRACEARR2_DB_PASSWORD}
+
+    workload:
+      main:
+        strategy: Recreate
+        podSpec:
+          containers:
+            main:
+              env:
+                NODE_ENV: production
+                HOST: "0.0.0.0"
+                PORT: "3000"
+                CORS_ORIGIN: "*"
+                LOG_LEVEL: info
+                TRUST_PROXY: "true"
+                BETTER_AUTH_URL: "https://tracarr.${DOMAIN_0}"
+                JWT_SECRET: "{{ .Values.tracearr.jwtSecret }}"
+                COOKIE_SECRET: "{{ .Values.tracearr.cookieSecret }}"
+
+                # TrueCharts generates this Secret for cnpg.main.
+                # "std" is the standard postgres:// connection URL.
+                DATABASE_URL:
+                  secretKeyRef:
+                    name: cnpg-main-urls
+                    key: std
+
+                REDIS_URL:
+                  secretKeyRef:
+                    expandObjectName: false
+                    name: '{{ printf "%s-%s" .Release.Name "rediscreds" }}'
+                    key: url
+
+    service:
+      main:
+        ports:
+          main:
+            port: 3000
+            protocol: http
+
+    redis:
+      enabled: true
+      redisUsername: default
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: internal
+        hosts:
+          - host: tracarr.${DOMAIN_0}
+            paths:
+              - path: /
+                pathType: Prefix
+        integrations:
+          homepage:
+            description: "Real-time monitoring for Plex, Jellyfin, and Emby servers."
+            enabled: true
+            group: Stats
+            icon: tracearr
+            name: Tracearr
+            widget:
+              enabled: false
+
+    credentials:
+      s3:
+        accessKey: ${BACKUP_S3_ACCESS_KEY}
+        bucket: ${BACKUP_S3_BUCKET}
+        encrKey: ${BACKUP_RESTIC_PASSWORD}
+        secretKey: ${BACKUP_S3_SECRET_KEY}
+        type: s3
+        url: ${BACKUP_S3_ENDPOINT}
+
+    cnpg:
+      main:
+        enabled: true
+        primary: true
+        type: timescaledb
+        pgVersion: 16
+
+        database: tracearr
+        user: tracearr
+        password: "{{ .Values.tracearr.dbPassword }}"
+
+        mode: standalone
+
+        cluster:
+          # This is a single Talos node, so one database instance avoids
+          # pretending that two pods on the same VM provide real HA.
+          instances: 1
+          singleNode: true
+
+          # The official timescale/timescaledb image is Alpine/Postgres based.
+          # Its postgres user/group are UID/GID 70.
+          postgresUID: 70
+          postgresGID: 70
+
+          postgresql:
+            max_connections: "150"
+            max_locks_per_transaction: "4096"
+            timescaledb.license: "timescale"
+            timescaledb.max_tuples_decompressed_per_dml_transaction: "100000"
+            timescaledb.telemetry_level: "off"
+
+        backups:
+          enabled: false
+          credentials: s3
+          revision: "1"
+        # recovery:
+        #   credentials: s3
+        #   revision: "1"
+
+    persistence:
+      backup:
+        enabled: true
+        mountPath: /data/backup
+        # volsync:
+        #   - credentials: s3
+        #     type: restic
+        #     name: backup
+        #     dest:
+        #       enabled: true
+        #     src:
+        #       enabled: true
+        #       trigger:
+        #         schedule: 45 0 * * *
+
+      image-cache:
+        enabled: true
+        mountPath: /data/tracearr/image-cache

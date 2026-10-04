@@ -46,13 +46,7 @@ spec:
                 BETTER_AUTH_URL: "https://tracearr.${DOMAIN_0}"
                 JWT_SECRET: "{{ .Values.tracearr.jwtSecret }}"
                 COOKIE_SECRET: "{{ .Values.tracearr.cookieSecret }}"
-
-                # TrueCharts generates this Secret for cnpg.main.
-                # "std" is the standard postgres:// connection URL.
-                DATABASE_URL:
-                  secretKeyRef:
-                    name: cnpg-main-urls
-                    key: std
+                DATABASE_URL: "{{ .Values.cnpg.main.creds.std }}"
 
                 REDIS_URL:
                   secretKeyRef:

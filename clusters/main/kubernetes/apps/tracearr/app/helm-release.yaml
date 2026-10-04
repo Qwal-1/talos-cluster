@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: tracarr
+  name: tracearr
   namespace: tracearr
 spec:
   interval: 15m
@@ -13,7 +13,7 @@ spec:
         kind: HelmRepository
         name: truecharts
         namespace: flux-system
-  releaseName: tracarr
+  releaseName: tracearr
 
   values:
     image:
@@ -53,7 +53,7 @@ spec:
                 CORS_ORIGIN: "*"
                 LOG_LEVEL: info
                 TRUST_PROXY: "true"
-                BETTER_AUTH_URL: "https://tracarr.${DOMAIN_0}"
+                BETTER_AUTH_URL: "https://tracearr.${DOMAIN_0}"
                 JWT_SECRET: "{{ .Values.tracearr.jwtSecret }}"
                 COOKIE_SECRET: "{{ .Values.tracearr.cookieSecret }}"
 
@@ -86,7 +86,7 @@ spec:
         enabled: true
         ingressClassName: internal
         hosts:
-          - host: tracarr.${DOMAIN_0}
+          - host: tracearr.${DOMAIN_0}
             paths:
               - path: /
                 pathType: Prefix
@@ -118,7 +118,7 @@ spec:
 
         database: tracearr
         user: tracearr
-        password: "{{ .Values.tracearr.dbPassword }}"
+        password: ${TRACEARR_DB_PASSWORD}
 
         mode: standalone
 

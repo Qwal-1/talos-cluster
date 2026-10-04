@@ -1,0 +1,65 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: seerr
+    namespace: media
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: seerr
+            version: 16.7.1
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+    releaseName: seerr
+    values:
+        global:
+            stopAll: false
+        credentials:
+            s3:
+                accessKey: ${BACKUP_S3_ACCESS_KEY}
+                bucket: ${BACKUP_S3_BUCKET}
+                encrKey: ${BACKUP_RESTIC_PASSWORD}
+                secretKey: ${BACKUP_S3_SECRET_KEY}
+                type: s3
+                url: ${BACKUP_S3_ENDPOINT}
+        ingress:
+            main:
+                enabled: true
+                ingressClassName: internal
+                hosts:
+                    - host: seerr.${DOMAIN_0}
+                      paths:
+                        - path: /
+                          pathType: Prefix
+                integrations:
+                    homepage:
+                        description: "Media requests for Plex and Jellyfin"
+                        enabled: true
+                        group: Media Management
+                        icon: "seerr"
+                        name: "Seerr"
+                        widget:
+                            enabled: false
+        persistence:
+            config:
+                volsync:
+                    - credentials: s3
+                      type: restic
+                      name: config
+                      dest:
+                        enabled: false
+                      src:
+                        enabled: true
+                        trigger:
+                          schedule: 35 0 * * *
+        cnpg:
+            main:
+                password: ${CNPG_PASSWORD}
+                mode: standalone
+                backups:
+                    enabled: true
+                    credentials: s3
+                    revision: "1"

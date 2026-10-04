@@ -58,7 +58,7 @@ spec:
         cnpg:
             main:
                 password: ${CNPG_PASSWORD}
-                mode: standalone
+                mode: recovery
                 backups:
                     enabled: true
                     credentials: s3

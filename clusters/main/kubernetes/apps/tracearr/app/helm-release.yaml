@@ -159,16 +159,16 @@ spec:
             backup:
                 enabled: true
                 mountPath: /data/backup
-                #volsync:
-                #    - credentials: s3
-                #      type: restic
-                #      name: backup
-                #      dest:
-                #          enabled: true
-                #      src:
-                #          enabled: true
-                #          trigger:
-                #              schedule: 45 0 * * *
+                volsync:
+                    - credentials: s3
+                      type: restic
+                      name: backup
+                      dest:
+                          enabled: true
+                      src:
+                          enabled: true
+                          trigger:
+                              schedule: 45 0 * * *
 
             image-cache:
                 enabled: true

@@ -164,7 +164,7 @@ spec:
                       type: restic
                       name: backup
                       dest:
-                          enabled: true
+                          enabled: false
                       src:
                           enabled: true
                           trigger:

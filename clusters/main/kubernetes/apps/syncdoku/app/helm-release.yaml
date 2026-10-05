@@ -17,7 +17,7 @@ spec:
     values:
         image:
             repository: ghcr.io/qwal-1/syncdoku
-            tag: 0.1.3
+            tag: 0.1.4
         imagePullSecret:
             ghcr:
                 enabled: true

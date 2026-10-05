@@ -18,6 +18,15 @@ spec:
         image:
             repository: ghcr.io/qwal-1/syncdoku
             tag: v0.1.3
+        imagePullSecret:
+            ghcr:
+                enabled: true
+                targetSelectAll: true
+                data:
+                    registry: ghcr.io
+                    username: ${GITHUB_USER}
+                    password: ${GHCR_PULL_TOKEN}
+                    email: ${DOMAIN_0_EMAIL}
         ingress:
             main:
                 enabled: true

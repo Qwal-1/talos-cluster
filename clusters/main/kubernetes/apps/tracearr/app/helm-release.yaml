@@ -142,7 +142,7 @@ spec:
                         enabled: true
                         group: Stats
                         icon: tracearr
-                        name: Tracearr2
+                        name: Tracearr
                         widget:
                             enabled: false
 

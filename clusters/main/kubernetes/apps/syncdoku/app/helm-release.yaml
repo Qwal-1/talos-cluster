@@ -15,9 +15,10 @@ spec:
                 namespace: flux-system
     releaseName: syncdoku
     values:
+        TZ: Europe/Zurich
         image:
             repository: ghcr.io/qwal-1/syncdoku
-            tag: 0.1.7
+            tag: 0.1.8
         imagePullSecret:
             ghcr:
                 enabled: true

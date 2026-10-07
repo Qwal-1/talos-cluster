@@ -93,13 +93,17 @@ spec:
                                 - /bin/bash
                                 - -c
                             args:
-                                - |
-                                    sleep 60
+                                - | 
+
+                                    until curl -fsS http://127.0.0.1:32400/identity >/dev/null; do
+                                      sleep 5
+                                    done
+                                    
                                     while true; do
                                       "/config/Library/Application Support/Plex Media Server/Plug-ins/shoko-relay-venv/bin/python" \
                                         "/config/Library/Application Support/Plex Media Server/Plug-ins/ShokoRelay.bundle/Contents/Scripts/watched-sync.py" \
                                         1d
-
+                                    
                                       sleep 21600
                                     done
                             probes:
@@ -111,7 +115,7 @@ spec:
                                     enabled: false
         addons:
             codeserver:
-                enabled: yes
+                enabled: false
                 ingress:
                     enabled: true
                     ingressClassName: internal

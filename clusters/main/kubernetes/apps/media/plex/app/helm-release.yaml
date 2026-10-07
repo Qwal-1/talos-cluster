@@ -53,6 +53,12 @@ spec:
         persistence:
             config:
                 mountPath: /config
+                targetSelector:
+                    main:
+                        main:
+                            mountPath: /config
+                        watched-sync:
+                            mountPath: /config
                 volsync:
                     - credentials: s3
                       type: restic
@@ -79,6 +85,22 @@ spec:
                         main:
                             env:
                                 PLEX_CLAIM: ${PLEX_CLAIM_TOKEN}
+                        watched-sync:
+                            enabled: true
+                            primary: false
+                            imageSelector: image
+                            command:
+                                - /bin/bash
+                                - -c
+                            args:
+                                - |
+                                    while true; do
+                                      "/config/Library/Application Support/Plex Media Server/Plug-ins/shoko-relay-venv/bin/python" \
+                                        "/config/Library/Application Support/Plex Media Server/Plug-ins/ShokoRelay.bundle/Contents/Scripts/watched-sync.py" \
+                                        1d
+
+                                      sleep 21600
+                                    done
         addons:
             codeserver:
                 enabled: yes

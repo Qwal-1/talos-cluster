@@ -17,6 +17,7 @@ spec:
     values:
         global:
             stopAll: false
+        hostNetwork: true
         tailscale:
             authkey: ${TAILSCALE_AUTHKEY}
             routes: ${SUBNET}

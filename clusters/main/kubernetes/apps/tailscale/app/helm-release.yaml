@@ -22,3 +22,4 @@ spec:
             routes: ${SUBNET}
             advertise_as_exit_node: true
             accept_dns: false
+            daemon_extra_args: "--port=41641"

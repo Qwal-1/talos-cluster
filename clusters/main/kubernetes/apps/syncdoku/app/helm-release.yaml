@@ -18,7 +18,7 @@ spec:
         TZ: Europe/Zurich
         image:
             repository: ghcr.io/qwal-1/syncdoku
-            tag: 0.2.0
+            tag: 0.2.1
         imagePullSecret:
             ghcr:
                 enabled: true

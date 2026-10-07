@@ -101,6 +101,13 @@ spec:
 
                                       sleep 21600
                                     done
+                            probes:
+                                liveness:
+                                    enabled: false
+                                readiness:
+                                    enabled: false
+                                startup:
+                                    enabled: false
         addons:
             codeserver:
                 enabled: yes

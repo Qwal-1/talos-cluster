@@ -17,7 +17,8 @@ spec:
     values:
         global:
             stopAll: false
-        hostNetwork: true
+        podOptions:
+            hostNetwork: true
         tailscale:
             authkey: ${TAILSCALE_AUTHKEY}
             routes: ${SUBNET}

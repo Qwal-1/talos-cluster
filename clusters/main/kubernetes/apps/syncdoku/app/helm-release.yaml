@@ -18,7 +18,7 @@ spec:
         TZ: Europe/Zurich
         image:
             repository: ghcr.io/qwal-1/syncdoku
-            tag: 0.1.8
+            tag: 0.1.9
         imagePullSecret:
             ghcr:
                 enabled: true
@@ -51,3 +51,11 @@ spec:
             data:
                 enabled: true
                 mountPath: /app/data
+        workload:
+            main:
+                podSpec:
+                    containers:
+                        main:
+                            env:
+                                LOGIC_MASTERS_USERNAME: ${LOGIC_MASTERS_USERNAME}
+                                LOGIC_MASTERS_PASSWORD: ${LOGIC_MASTERS_PASSWORD}

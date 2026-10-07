@@ -94,6 +94,7 @@ spec:
                                 - -c
                             args:
                                 - |
+                                    sleep 60
                                     while true; do
                                       "/config/Library/Application Support/Plex Media Server/Plug-ins/shoko-relay-venv/bin/python" \
                                         "/config/Library/Application Support/Plex Media Server/Plug-ins/ShokoRelay.bundle/Contents/Scripts/watched-sync.py" \

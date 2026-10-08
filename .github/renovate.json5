@@ -3,5 +3,39 @@
   "extends": [
     "config:recommended",
     "github>trueforge-org/renovate-config"
+  ],
+  "packageRules": [
+    {
+      "description": "Dry-run label for routine updates except Talos/Kubernetes",
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "digest",
+        "pin",
+        "pinDigest",
+        "lockfile"
+      ],
+      "matchPackageNames": ["!/siderolabs|kubectl|kubelet|talos/"],
+      "matchFileNames": [
+        "!clusters/main/talos/**",
+        "!clusters/main/kubernetes/system/system-upgrade/**"
+      ],
+      "addLabels": ["test-automerge"]
+    },
+    {
+      "description": "Never Renovate-automerge Talos/Kubernetes packages",
+      "matchPackageNames": ["/siderolabs|kubectl|kubelet|talos/"],
+      "automerge": false,
+      "addLabels": ["system-upgrade"]
+    },
+    {
+      "description": "Never Renovate-automerge changes to system-upgrade configuration",
+      "matchFileNames": [
+        "clusters/main/talos/**",
+        "clusters/main/kubernetes/system/system-upgrade/**"
+      ],
+      "automerge": false,
+      "addLabels": ["system-upgrade"]
+    }
   ]
 }

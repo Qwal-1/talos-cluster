@@ -2,22 +2,80 @@ name: Automerge and Approve
 
 on:
   workflow_run:
-    workflows: ["Placeholder"]  # Name of the main CI workflow
+    workflows: ["Placeholder"]
     types:
       - completed
 
 jobs:
   automerge:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
     steps:
+      - id: guard
+        name: Check PR files before automerge
+        shell: bash
+        env:
+          GH_TOKEN: "${{ github.token }}"
+          RUN_EVENT: "${{ github.event.workflow_run.event }}"
+          RUN_REPO: "${{ github.event.workflow_run.head_repository.full_name }}"
+          RUN_BRANCH: "${{ github.event.workflow_run.head_branch }}"
+          RUN_SHA: "${{ github.event.workflow_run.head_sha }}"
+        run: |
+          set -euo pipefail
+
+          # Only act on the Renovate PR whose exact commit passed Placeholder.
+          [[ "$RUN_EVENT" == "pull_request" ]] || exit 0
+          [[ "$RUN_REPO" == "$GITHUB_REPOSITORY" ]] || exit 0
+          [[ "$RUN_BRANCH" == renovate/* ]] || exit 0
+          [[ -n "$RUN_SHA" ]] || exit 0
+
+          owner="${GITHUB_REPOSITORY%%/*}"
+          pulls="$(gh api "repos/${GITHUB_REPOSITORY}/pulls?state=open&head=${owner}:${RUN_BRANCH}&per_page=100")"
+          pr="$(jq -r --arg sha "$RUN_SHA" '
+            [.[] | select(
+              .head.sha == $sha
+              and .base.ref == "main"
+              and .user.login == "renovate[bot]"
+              and .draft == false
+            )] | if length == 1 then .[0].number else empty end
+          ' <<< "$pulls")"
+          [[ -n "$pr" ]] || exit 0
+
+          # Check all file paths (including renamed files) before handing the
+          # specific PR to the existing automerge action. If verification fails,
+          # do not merge it.
+          expected="$(gh api "repos/${GITHUB_REPOSITORY}/pulls/${pr}" --jq '.changed_files')"
+          files="$(gh api --paginate --slurp "repos/${GITHUB_REPOSITORY}/pulls/${pr}/files?per_page=100" --jq '
+            [.[][]] as $files |
+            {
+              count: ($files | length),
+              blocked: any($files[];
+                ([.filename, (.previous_filename // "")] | any(.[];
+                  test("^(clusters/main/talos/|clusters/main/kubernetes/system/system-upgrade/|\\.github/)")
+                ))
+              )
+            }
+          ')"
+          count="$(jq -r '.count' <<< "$files")"
+          blocked="$(jq -r '.blocked' <<< "$files")"
+          if [[ "$count" != "$expected" || "$blocked" != "false" ]]; then
+            echo "::notice::Skipping PR #${pr}: protected path or incomplete file list"
+            exit 0
+          fi
+
+          echo "pr=$pr" >> "$GITHUB_OUTPUT"
+
       - id: automerge
         name: automerge
+        if: ${{ steps.guard.outputs.pr != '' }}
         uses: "pascalgn/automerge-action@7961b8b5eec56cc088c140b56d864285eabd3f67" # v0.16.4
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          PULL_REQUEST: "${{ steps.guard.outputs.pr }}"
+          MERGE_LABELS: "automerge,!system-upgrade,!test-automerge"
           UPDATE_RETRIES: 24
           UPDATE_RETRY_SLEEP: 60000
           MERGE_METHOD: "squash"

@@ -3,5 +3,40 @@
   "extends": [
     "config:recommended",
     "github>trueforge-org/renovate-config"
+  ],
+  "packageRules": [
+    {
+      "description": "Mark routine updates for testing the additional GitHub Actions automerge",
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "digest",
+        "pin",
+        "pinDigest",
+        "lockfile"
+      ],
+      "matchPackageNames": ["!/siderolabs|kubectl|kubelet|talos/i"],
+      "matchFileNames": [
+        "!clusters/main/talos/**",
+        "!clusters/main/kubernetes/system/system-upgrade/**",
+        "!.github/**"
+      ],
+      "addLabels": ["test-automerge"]
+    },
+    {
+      "description": "Never automerge Talos/Kubernetes/kubectl package updates",
+      "matchPackageNames": ["/siderolabs|kubectl|kubelet|talos/i"],
+      "automerge": false,
+      "addLabels": ["system-upgrade"]
+    },
+    {
+      "description": "Never automerge Talos and Kubernetes upgrade configuration",
+      "matchFileNames": [
+        "clusters/main/talos/**",
+        "clusters/main/kubernetes/system/system-upgrade/**"
+      ],
+      "automerge": false,
+      "addLabels": ["system-upgrade"]
+    }
   ]
 }

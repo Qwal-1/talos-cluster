@@ -93,19 +93,23 @@ spec:
                                 - /bin/bash
                                 - -c
                             args:
-                                - | 
+                                - |
 
                                     until curl -fsS http://127.0.0.1:32400/identity >/dev/null; do
                                       sleep 5
                                     done
-                                    
+
                                     while true; do
                                       "/config/Library/Application Support/Plex Media Server/Plug-ins/shoko-relay-venv/bin/python" \
                                         "/config/Library/Application Support/Plex Media Server/Plug-ins/ShokoRelay.bundle/Contents/Scripts/watched-sync.py" \
                                         1d
-                                    
+
                                       sleep 21600
                                     done
+                            env:
+                                PLEXAPI_HEADER_IDENTIFIER: ${PLEX_SCRIPT_UUID}
+                                PLEXAPI_HEADER_DEVICE_NAME: "Shoko Watched Sync"
+                                PLEXAPI_HEADER_PRODUCT: "Shoko Relay Watched Sync"
                             probes:
                                 liveness:
                                     enabled: false

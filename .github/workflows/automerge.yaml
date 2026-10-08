@@ -44,21 +44,25 @@ jobs:
           ' <<< "$pulls")"
           [[ -n "$pr" ]] || exit 0
 
-          # Fail closed if file pagination is incomplete or a rename hides a path.
+          # Check all file paths (including renamed files) before handing the
+          # specific PR to the existing automerge action. If verification fails,
+          # do not merge it.
           expected="$(gh api "repos/${GITHUB_REPOSITORY}/pulls/${pr}" --jq '.changed_files')"
-          files="$(gh api --paginate "repos/${GITHUB_REPOSITORY}/pulls/${pr}/files?per_page=100" \
-            --jq '.[] | {filename, previous_filename} | @json')"
-          [[ -n "$files" ]] || exit 0
-          [[ "$(jq -s 'length' <<< "$files")" == "$expected" ]] || exit 0
-
-          # Do not merge Talos, Kubernetes upgrade, or GitHub workflow/config changes.
-          if jq -se '
-            any(.[];
-              (.filename | test("^(clusters/main/talos/|clusters/main/kubernetes/system/system-upgrade/|\\.github/)"))
-              or ((.previous_filename // "") | test("^(clusters/main/talos/|clusters/main/kubernetes/system/system-upgrade/|\\.github/)"))
-            )
-          ' <<< "$files" >/dev/null; then
-            echo "::notice::Skipping PR #${pr}: protected file path"
+          files="$(gh api --paginate --slurp "repos/${GITHUB_REPOSITORY}/pulls/${pr}/files?per_page=100" --jq '
+            [.[][]] as $files |
+            {
+              count: ($files | length),
+              blocked: any($files[];
+                ([.filename, (.previous_filename // "")] | any(.[];
+                  test("^(clusters/main/talos/|clusters/main/kubernetes/system/system-upgrade/|\\.github/)")
+                ))
+              )
+            }
+          ')"
+          count="$(jq -r '.count' <<< "$files")"
+          blocked="$(jq -r '.blocked' <<< "$files")"
+          if [[ "$count" != "$expected" || "$blocked" != "false" ]]; then
+            echo "::notice::Skipping PR #${pr}: protected path or incomplete file list"
             exit 0
           fi
 

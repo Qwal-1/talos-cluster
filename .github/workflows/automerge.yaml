@@ -2,22 +2,87 @@ name: Automerge and Approve
 
 on:
   workflow_run:
-    workflows: ["Placeholder"]  # Name of the main CI workflow
+    workflows: ["Placeholder"]
     types:
       - completed
 
 jobs:
   automerge:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
     steps:
-      - id: automerge
-        name: automerge
-        uses: "pascalgn/automerge-action@7961b8b5eec56cc088c140b56d864285eabd3f67" # v0.16.4
+      - name: Merge verified Renovate PR
+        shell: bash
         env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          UPDATE_RETRIES: 24
-          UPDATE_RETRY_SLEEP: 60000
-          MERGE_METHOD: "squash"
+          GH_TOKEN: "${{ github.token }}"
+          RUN_EVENT: "${{ github.event.workflow_run.event }}"
+          RUN_REPOSITORY: "${{ github.event.workflow_run.head_repository.full_name }}"
+          RUN_BRANCH: "${{ github.event.workflow_run.head_branch }}"
+          RUN_HEAD_SHA: "${{ github.event.workflow_run.head_sha }}"
+        run: |
+          set -euo pipefail
+
+          # Ignore events other than PR checks from this repository.
+          [[ "$RUN_EVENT" == "pull_request" ]] || exit 0
+          [[ "$RUN_REPOSITORY" == "$GITHUB_REPOSITORY" ]] || exit 0
+          [[ "$RUN_BRANCH" == renovate/* ]] || exit 0
+          [[ -n "$RUN_HEAD_SHA" ]] || exit 0
+
+          owner="${GITHUB_REPOSITORY%%/*}"
+          pulls="$(gh api "repos/${GITHUB_REPOSITORY}/pulls?state=open&head=${owner}:${RUN_BRANCH}&per_page=100")"
+
+          # Only the eventual production 'automerge' label enables a merge.
+          # 'test-automerge' never authorizes the fast path.
+          pr_numbers="$(jq -r --arg sha "$RUN_HEAD_SHA" --arg repo "$GITHUB_REPOSITORY" '
+            .[] | select(
+              .head.sha == $sha
+              and .head.repo.full_name == $repo
+              and .base.ref == "main"
+              and .user.login == "renovate[bot]"
+              and .draft == false
+              and any(.labels[]?; .name == "automerge")
+              and all(.labels[]?; .name != "system-upgrade" and .name != "test-automerge")
+            ) | .number
+          ' <<< "$pulls")"
+
+          [[ -n "$pr_numbers" ]] || exit 0
+          if [[ "$pr_numbers" == *$'\n'* ]]; then
+            echo "::warning::More than one matching PR; refusing to merge."
+            exit 0
+          fi
+          pr="$pr_numbers"
+
+          # The API can paginate PR files. Check every file, including rename
+          # origins; missing/truncated diffs fail closed.
+          details="$(gh api "repos/${GITHUB_REPOSITORY}/pulls/${pr}")"
+          changed_files="$(jq -r '.changed_files' <<< "$details")"
+          files="$(gh api --paginate "repos/${GITHUB_REPOSITORY}/pulls/${pr}/files?per_page=100" \
+            --jq '.[] | {filename, previous_filename, patch} | @json')"
+          [[ -n "$files" ]] || exit 0
+          file_count="$(printf '%s\n' "$files" | wc -l | tr -d ' ')"
+          if [[ "$changed_files" != "$file_count" ]]; then
+            echo "::warning::PR #${pr}: cannot verify all changed files. Skipping."
+            exit 0
+          fi
+
+          # Protect Talos, Kubernetes upgrades, and workflow configuration even
+          # if a PR accidentally gets the automerge label.
+          if jq -se '
+            any(.[]; 
+              (.filename | test("^(clusters/main/talos/|clusters/main/kubernetes/system/system-upgrade/|\\.github/)"))
+              or ((.previous_filename // "") | test("^(clusters/main/talos/|clusters/main/kubernetes/system/system-upgrade/|\\.github/)"))
+              or (.patch == null)
+              or ((.patch // "") | test("siderolabs|kubectl|kubelet|talosVersion|kubernetesVersion"; "i"))
+            )
+          ' <<< "$files" >/dev/null; then
+            echo "::warning::PR #${pr} contains protected content; no fast merge."
+            exit 0
+          fi
+
+          # The merge succeeds only if the exact SHA that passed Placeholder
+          # is still the PR head. A new push requires a new successful run.
+          gh pr merge "$pr" --repo "$GITHUB_REPOSITORY" \
+            --squash --match-head-commit "$RUN_HEAD_SHA"

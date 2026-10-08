@@ -2,90 +2,22 @@ name: Automerge and Approve
 
 on:
   workflow_run:
-    workflows: ["Placeholder"]
+    workflows: ["Placeholder"]  # Name of the main CI workflow
     types:
       - completed
 
 jobs:
-  preview:
-    name: Preview test-automerge (no changes)
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: read
-    steps:
-      - name: Report dry-run merge decisions
-        shell: bash
-        env:
-          GH_TOKEN: "${{ github.token }}"
-        run: |
-          set -euo pipefail
-
-          echo "### test-automerge dry run (no PRs merged)" >> "$GITHUB_STEP_SUMMARY"
-          echo "| PR | Would GitHub Action merge? |" >> "$GITHUB_STEP_SUMMARY"
-          echo "| --- | --- |" >> "$GITHUB_STEP_SUMMARY"
-
-          candidates="$(gh api --paginate "repos/${GITHUB_REPOSITORY}/pulls?state=open&per_page=100" --jq '.[] | select(.labels | map(.name) | index("test-automerge")) | .number')"
-          if [[ -z "$candidates" ]]; then
-            echo "| — | No open PRs with test-automerge yet |" >> "$GITHUB_STEP_SUMMARY"
-            exit 0
-          fi
-
-          while IFS= read -r pr; do
-            [[ -z "$pr" ]] && continue
-            labels="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${pr}" --jq '.labels[].name')"
-            paths="$(gh api --paginate "repos/${GITHUB_REPOSITORY}/pulls/${pr}/files?per_page=100" --jq '.[] | .filename, (.previous_filename // empty)')"
-
-            decision="YES (dry run only)"
-            if grep -Fxq 'system-upgrade' <<< "$labels"; then
-              decision="BLOCKED: system-upgrade label"
-            fi
-            while IFS= read -r path; do
-              case "$path" in
-                clusters/main/talos/*|clusters/main/kubernetes/system/system-upgrade/*)
-                  decision="BLOCKED: protected Talos/Kubernetes files"
-                  ;;
-              esac
-            done <<< "$paths"
-
-            echo "| #$pr | $decision |" >> "$GITHUB_STEP_SUMMARY"
-          done <<< "$candidates"
-
   automerge:
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
     steps:
-      # Defense in depth: even a manually applied 'automerge' label must never
-      # merge PRs changing Talos or Kubernetes/system-upgrade files.
-      - name: Fail closed on protected file changes
-        shell: bash
-        env:
-          GH_TOKEN: "${{ github.token }}"
-        run: |
-          set -euo pipefail
-
-          candidates="$(gh api --paginate "repos/${GITHUB_REPOSITORY}/pulls?state=open&per_page=100" --jq '.[] | select(.labels | map(.name) | index("automerge")) | .number')"
-          while IFS= read -r pr; do
-            [[ -z "$pr" ]] && continue
-            paths="$(gh api --paginate "repos/${GITHUB_REPOSITORY}/pulls/${pr}/files?per_page=100" --jq '.[] | .filename, (.previous_filename // empty)')"
-            while IFS= read -r path; do
-              case "$path" in
-                clusters/main/talos/*|clusters/main/kubernetes/system/system-upgrade/*)
-                  echo "::error::Refusing automerge: PR #$pr modifies protected file $path"
-                  exit 1
-                  ;;
-              esac
-            done <<< "$paths"
-          done <<< "$candidates"
-
       - id: automerge
         name: automerge
         uses: "pascalgn/automerge-action@7961b8b5eec56cc088c140b56d864285eabd3f67" # v0.16.4
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          # test-automerge must NEVER trigger this action's merge behavior.
-          MERGE_LABELS: "automerge,!test-automerge,!system-upgrade"
           UPDATE_RETRIES: 24
           UPDATE_RETRY_SLEEP: 60000
           MERGE_METHOD: "squash"

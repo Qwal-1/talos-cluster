@@ -21,7 +21,7 @@
         "!clusters/main/kubernetes/system/system-upgrade/**",
         "!.github/**"
       ],
-      "addLabels": ["test-automerge"]
+      "addLabels": ["automerge"]
     },
     {
       "description": "Never automerge Talos/Kubernetes/kubectl package updates",
